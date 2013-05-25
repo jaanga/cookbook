@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8>
+</head>
+<body>
+
+<script src="http://mrdoob.github.com/three.js/build/three.min.js"></script>
+<!--
+<script src='../../../three.js/build/three.min.js'></script>
+-->
+<script>
+	var camera, scene, renderer;
+	var material, mesh;
+	var lineWidth = ( parent.$ !== undefined ) ? parent.$.elements.lineWidth : 5;
+	var scaleX = 1, scaleY = 1, scaleZ = 1;
+
+	init();
+	animate();
+
+	function init() {
+	
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { margin: 0; overflow: hidden; }';
+		
+		camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.z = 500;
+
+		scene = new THREE.Scene();
+
+		var geometry = new THREE.IcosahedronGeometry( 200, 1 );
+		material = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, wireframeLinewidth: lineWidth } );
+
+		mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
+
+		renderer = new THREE.CanvasRenderer();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+	}
+
+	function animate() {
+		requestAnimationFrame( animate );
+		
+		if ( parent.$ !== undefined ) {
+			var e = parent.$.elements;		
+			material.wireframeLinewidth = 0.2 * e.lineWidth;
+			mesh.scale.set( e.scaleX, e.scaleY, e.scaleZ );
+			parent.$("#status" ).text( mesh.rotation.x.toFixed(3) );
+		}
+
+		mesh.rotation.x += 0.002;
+		mesh.rotation.y += 0.001;
+
+		renderer.render( scene, camera );
+	}
+</script>
+</body>
+</html>

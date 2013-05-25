@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>j3qUE minimum</title>
+<meta charset=utf-8 />
+<script src=http://code.jquery.com/jquery-1.9.1.js ></script>
+<script src=http://code.jquery.com/ui/1.10.2/jquery-ui.js ></script>
+<link rel=stylesheet href=http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css />
+</head>
+<body>
+<script>
+	$(function() {
+		$( "body" ).css( { 'margin':'0', 'overflow':'hidden' } );
+		
+		$('<div />', {
+			id: 'dialog',
+			text: "Howdy",
+			title: 'Test',
+		 }).appendTo('body');
+		 $( "#dialog" ).dialog();
+
+        $('<iframe />', {
+			css: { 'height': window.innerHeight + 'px', 'position':'absolute', 'width': window.innerWidth + 'px' },
+            src: 'threejs-demo.html',
+        }).appendTo('body');
+		
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>j3qUE interactive</title>
+<meta charset=utf-8 />
+<script src=http://code.jquery.com/jquery-1.9.1.js ></script>
+<script src=http://code.jquery.com/ui/1.10.2/jquery-ui.js ></script>
+<link rel=stylesheet href=http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css />
+</head>
+<body>
+<script>
+	$(function() {
+	
+		var e = $.elements = {};
+		e.lineWidth = 5;
+		e.scaleX = e.scaleY = e.scaleZ = 1;
+		
+		$( "body" ).css( { "margin":"0", "overflow":"hidden" } );
+		
+	    $("<iframe />", {
+			css: { "height": window.innerHeight + "px", "position":"absolute", "width": window.innerWidth + "px" },
+			id: "ifr",
+            src: "threejs-demo.html",
+        }).appendTo("body");		
+		
+		$("<div id='dialog' title='j3qUE interactive' ></div").appendTo("body");
+		$( "#dialog" ).dialog({
+			position: {
+				my: "right top",
+				at: "right-" + 30 + " top+" + 20,
+				of: window
+			},
+		});
+		
+		$("<p title='data sent by Three.js' >Rotation: <span id='status' ></span></p>").appendTo("#dialog");
+		
+		$("<p title='jQuery getting latest woidth from Three.js'>Line width: <span id='width' ></span></p>").appendTo("#dialog");
+
+		$("<div id='slider1' title='jQuery setting values in Three.js'></div>").appendTo("#dialog");		 
+		$( "#slider1" ).slider( {
+			slide: function( event, ui ) {
+				e.lineWidth = ui.value;
+				$("#width" ).text( $("#ifr")[0].contentWindow.scene.children[0].material.wireframeLinewidth.toFixed(1) );
+			},
+			value: e.lineWidth
+		});	
+
+		$("<p>Scale X:</p><div id='slider2' ></div>").appendTo("#dialog");		 
+		$( "#slider2" ).slider( {
+			max: 2,
+			min: 0.1,
+			slide: function( event, ui ) {
+				e.scaleX = ui.value;
+			},
+			step: 0.05,
+			value: e.scaleX
+		});			
+		
+		$("<p>Scale Y:</p><div id='slider3' ></div>").appendTo("#dialog");		 
+		$( "#slider3" ).slider( {
+			max: 2,
+			min: 0.1,
+			slide: function( event, ui ) {
+				e.scaleY = ui.value;
+			},
+			step: 0.05,
+			value: e.scaleY
+		});			
+
+		$("<p>Scale Z:</p><div id='slider4' ></div>").appendTo("#dialog");		 
+		$( "#slider4" ).slider( {
+			max: 2,
+			min: 0.1,
+			slide: function( event, ui ) {
+				e.scaleZ = ui.value;
+			},
+			step: 0.05,
+			value: e.scaleZ
+		});	
+	});
+</script>
+</body>
+</html>
