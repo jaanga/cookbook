@@ -12,7 +12,7 @@
 		<h3>Overview</h3>
 			<div>
 				
-				<p>This Jaanga cookbook section contains the demo for building a 3D Globe using Three.js and Open Street Maps data. 
+				<p>This Jaanga cookbook section contains the demo for building a 3D Globe using Three.js and Open Street Map data. 
 					Currently the app supports fourteen levels of zoom. The tooltips for the '+' and '-" buttons display the current zoom level.</p>
 				
 				<p>The source code for the demo is available at: <a href='https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe' target='_blank'>github.com/jaanga/cookbook/</a></p>
@@ -53,7 +53,7 @@
 					<p><a href="http://stackoverflow.com" target='_blank'>Stack Overflow</a></p>
 					<p>The JavaScript DOM</p>
 					
-					<p>See also and in paricular <a href="http://fgx.github.io" target="_blank">FGx on GitHub</a> which has been the cause and the impetus for this globe.</p>
+					<p>See also and in particular <a href="http://fgx.github.io" target="_blank">FGx on GitHub</a> which has been the cause and the impetus for this globe.</p>
 	
 					<h4>Notes</h4>
 						<p>All coding and testing is on currently carried out on Google Chrome only. Other browsers may have even more issues.</p>	
@@ -67,6 +67,7 @@
 				
 				<p>Sample 3D objects placed on selected levels. For example: Eiffel tower in Paris, Golden Gate Bridge in San Francisco and Opera House in Sydney.</p>
 			
+				<p>These features need the reverse Mercator projection distortion issues to be fixed first. See 'To Be Done'.</p>
 			</div>
 		<h3>Change jQuery UI Theme</h3>
 			<div>
@@ -122,6 +123,8 @@
 			<div>
 				<p>Correct for reverse Mercator projection. *</p>
 				<p>Fix quadrant issues with southern hemisphere level changes. *</p>
+				<p>Add windows</p>
+				<p>Add camera movement after 30 seconds no mouse movement.</p>
 				<p>Add home button that resets zoom, camera, level, etc to defaults</p>
 				<p>Don't remove then recall currently loaded bitmaps when panning</p>
 				<p>preload adjacent bitmaps</p>
@@ -136,7 +139,7 @@
 <script>
 	$(function() {
 		var e = $.elements = {};
-		e.theme = "ui-darkness";
+		e.theme = "pepper-grinder";
 		e.groupScaleX = e.groupScaleY = e.groupScaleZ = 1;
 		e.groupRotationY = -0.005;
 		
