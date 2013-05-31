@@ -150,7 +150,11 @@
 		camera.position.set( scale * b.x, scale * b.y, scale * b.z  );
 
 		b = camera.position.clone();
-		camTheta = b.angleTo( v(b.x, 0, b.z) );
+		if ( b.y > 0 ) {
+			camTheta = b.angleTo( v(b.x, 0, b.z) );
+		} else {
+			camTheta = - b.angleTo( v(b.x, 0, b.z) );
+		}
 		// camPhi = b.angleTo( v( b.x, b.y, 0) );
 
 		var c = v( 1, 0, 0 );
