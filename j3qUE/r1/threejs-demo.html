@@ -1,8 +1,8 @@
 ﻿<!doctype html>
-<html lang='en'>
+<html lang=en>
 <head>
 <title></title>
-<meta charset='utf-8'>
+<meta charset=utf-8>
 <meta name='viewport' content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
 <body>
@@ -67,7 +67,6 @@
 		light.color.setHSL( 0.1, 0.5, 0.3 );
 		scene.add( light );		
 		
-
 		light = new THREE.SpotLight( 0xffffff, 1.5 );
 		light.position.set( 200, 400, 200 );
 		light.castShadow = true;
@@ -82,9 +81,6 @@ light.shadowCameraVisible = true;
 
 		var css = document.body.appendChild( document.createElement('style') );
 		css.innerHTML = 'body {background-color: transparent; font: 600 12pt monospace; margin: 0; overflow: hidden; text-align: center; }' ;
-			//'a { color: #f00; text-decoration: none;}  ' +
-			//'button, input[type=range] { -webkit-appearance: none; background-color: silver; height:20px; opacity: 0.5; width: 80px;}' +
-			//'input[type="range"]::-webkit-slider-thumb {-webkit-appearance: none; background-color: #666; opacity: 0.5; width: 10px; height: 26px; }' ;
 
 		material = new THREE.MeshBasicMaterial( {color: Math.random() * 0xffffff, side: THREE.DoubleSide } );
 		geometry = new THREE.PlaneGeometry( 100, 100, 1, 1 );
@@ -105,10 +101,6 @@ light.shadowCameraVisible = true;
 		colorful( colors, 100);
 
 		for ( i = 0; i < 100; i++) {
-			// color = Math.random() * 0xffffff ;
-			// color = colors[i] * 0xffffff ;
-			// color = '#'+(0xFFFFFFFF-Math.random()*0xFFFFFFFF).toString(16).substr(0, 6);
-			// material = new THREE.MeshPhongMaterial( {color: color, ambient: 0xffffff } );
 			material = new THREE.MeshPhongMaterial( {color: 0xffffff, ambient: 0xffffff, specular: 0x888888, shininess: 200, } );
 			material.color.setHSL( colors[i], 0.8, 0.5 );
 			cube = new THREE.Mesh( geometry, material );
@@ -118,18 +110,7 @@ light.shadowCameraVisible = true;
 			cube.castShadow = true;
 			group.add( cube );		
 		}		
-		scene.add( group );
-/*		
-		info = document.createElement( 'div' );
-		document.body.appendChild( info );
-		info.style.cssText = 'margin 0 0 0 100px: auto; position: absolute; top: 0px; width: 100% ';
-		info.innerHTML = '<p>boilerplate<br>' +
-			'x:<input type="range" id="spin" min="-50" max="50" onchange="group.position.x=this.value;" step="5" value="' + group.position.x + '" > ' +
-			'y:<input type="range" id="spin" min="0" max="50" onchange="group.position.y=this.value;" step="5" value="' + group.position.y + '" > ' +
-			'z:<input type="range" id="spin" min="-50" max="50" onchange="group.position.z=this.value;" step="5" value="' + group.position.z + '" > ' +
-			'<button onclick="console.log( scene );" >test</button> ' +
-			'</p>';   
-*/			
+		scene.add( group );		
 	}
 
 	function animate() {

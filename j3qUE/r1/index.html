@@ -14,25 +14,37 @@
 	<div id="accordion">
 		<h3>Overview</h3>
 			<div>
-				<p>Can jQuery and Three.js play nice together?</p>
-
-				<p>j3qUE = jQuery + Three.js + User Experience</p>
+				<p>Can <a href="http://jquery.com" target="_blank">jQuery</a> and <a href="http://threejs.org" target="_blank">Three.js</a> play nice together?</p>
 				
-				<p>This cookbook section contains examples for combining code built using jQuery and Three.js.</p>
+				<p>This Jaanga cookbook section contains sample examples for building code based on using jQuery and Three.js.</p>
 				
-				<p>See also post on <a href="http://jaang.com" target="_blank">jaanga.com</a></p>
+				<p>The source code for the examples is available at: <a href='https://github.com/jaanga/cookbook/tree/gh-pages/j3qUE/r1/' target='_blank'>github.com/jaanga/cookbook/j3qUE/r1/</a></p>
+	
+				<p>Derivation of the name: j3qUE = jQuery + Three.js + User Experience</p>
+				
+				<p>See also the related post on <a href="http://jaang.com" target="_blank">jaanga.com</a></p>
 				
 			</div>
 			
 		<h3>Sample Files</h3>
 			<div>
-			<p><a href="./minimum/index.html" target="_blank">j3qUE minimum</a> is the most minimum code that gets both working together
-			<p><a href="./interactive/index.html" target="_blank">j3qUE interactive</a> is the minimum code plus sliders plus communication/interaction between jQuery and Three.js</p>
+				<p><a href="./minimum/index.html" target="_blank">j3qUE minimum</a> is the most minimum code that gets both working together
+				
+				<p><a href="./interactive/index.html" target="_blank">j3qUE interactive</a> is the minimum code plus sliders plus communication/interaction between jQuery and Three.js</p>
 			</div>
+			
+		<h3>Coding Tips</h3>
+			<div>
+				<p>Accessing jQuery code from within Three.js, use: <a href="http://api.jquery.com/parent/" target="_blank">#.parent.</a></p>
+			
+				<p>Accessing Three.js code from within jQuery, use: <a href="http://msdn.microsoft.com/en-us/library/ie/ms533692(v=vs.85).aspx" target="_blank">.contentWindow</a></p>
+			</div>
+			
 		<h3>Updating Three.js</h3>
 			<div id = "updating" >
 				Conceptualizing random endpoints in a access matrix provides reach extensions enterprise wide. Respective divisions historically insignificant, upscale trend lines in a management inventory analysis survivability format.
 			</div>
+			
 		<h3>Change jQuery UI Themes</h3>
 			<div>
 				<p>Select a different <a href="http://jqueryui.com/themeroller/" target="_blank">jQuery UI theme</a>.</p>
@@ -75,14 +87,38 @@
 				
 				<p>Jaanga oSome Globe uses both these libraries to create the user experience components of the app.</p>
 				
-				<p>In particular, Jaanga oSome Globe provids access to 25 sample themes hosted on the jQuery UI web site.</p>
+				<p>In particular, Jaanga oSome Globe provides access to 25 sample themes hosted on the jQuery UI web site.</p>
 				
 				<p>Each time the theme is updated, a fresh URL is created which can be used as a permalink to save the theme selection for future use.
-					Further revisions of Jaanga oSome Globe will provide further features that may be saved as part of the permalnk feature.
+					Further revisions of Jaanga oSome Globe will provide further features that may be saved as part of the permalink feature.
 				</p>
 				
-				<p>A nice benefit of the permalink concept is that your choices may be saved and shared wiithot cookies being saved to your computer.</p>
+				<p>A nice benefit of the permalink concept is that your choices may be saved and shared without cookies being saved to your computer.</p>
 			</div>	
+			
+		<h3>Copyright, License, Credits & Notes</h3>
+			<div>
+				<h4>Copyright</h4>
+					<p>Copyright &copy; 2013 Jaanga authors</p>
+					
+				<h4>License</h4>	
+					<p>All software and documentation in this repository is available under the MIT license.</p>
+					
+					<p>The <a href="http://en.wikipedia.org/wiki/MIT_License" target"_blank">MIT License</a></p>
+				
+				<h4>Credits</h4>
+
+					<p><a href="http://jquery.com" target="_blank">jQuery</a></p>
+					<p><a href="http://jqueryui.com" target="_blank">jQuery UI</a></p>
+					<p><a href="http://mrdoob.github.io" target='_blank'>Three.js</a></p>
+					<p><a href='http://github.com' target='_blank'>GitHub</a></p>
+					<p><a href="http://stackoverflow.com" target='_blank'>Stack Overflow</a></p>
+					<p>The JavaScript DOM</p>
+
+				<h4>Notes</h4>
+					<p>All coding and testing is on currently carried out on Google Chrome only. Other browsers may have even more issues.</p>	
+			
+			</div>
 	</div>
 </div>
 <script>
@@ -121,7 +157,7 @@
 			width: "25%"
 		});
 		
-		$( ".ui-dialog" ).css( { opacity: 0.70 } );
+		$( ".ui-dialog" ).css( { opacity: 0.80 } );
 				
 		$( "#accordion" ).accordion( {
 			heightStyle: "fill"
