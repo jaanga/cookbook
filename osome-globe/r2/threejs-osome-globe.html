@@ -23,12 +23,17 @@
 
 	var group;
 	var camTheta, camPhi, camDistance;
+	
+
 
 	var pi = Math.PI, pi2 = 0.5 * Math.PI;
 	var d2r = pi / 180, r2d = 180 / pi;
 	function v(x,y,z){ return new THREE.Vector3(x,y,z); }
 	function cos(a){return Math.cos(a);} function sin(a){return Math.sin(a);}
-
+	var camThetaS = 28 * d2r; // 28 37.6166666;
+	var camPhiS = 2.37 * -d2r; //2.37 -122.3666666;
+	
+	
 	init();
 	animate();
 
@@ -52,6 +57,7 @@
 		info.style.cssText = 'position: absolute; top: 0px; width: 100% ';
 		info.innerHTML = '<span id="zIn" title="Zoom in. Level 3" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomIn()">+</a></span> ' +
 			'<span id="zOut" title="Zoom out. Level 3" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomOut()" >-</a></span> ' +
+			'<span title="Rturn to home position and zoom" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomHome()" >&#x2302</a></span> ' +
 			'<span title="Refresh. Click here if you get to edge of map and need more" style="background-color: #ccc; padding: 5px"><a href=# onclick="resetCamera()" >&#x27f3</a></span> ' +
 			'<span title="Reset camera so north/south of globe is vertical" style="background-color: #ccc; padding: 5px"><a href=# onclick="resetCamera()" >&uArr;</a></span>' +
 		'';
@@ -100,8 +106,8 @@
 		mesh.position = calcPosition( 85.0511 * d2r, 0, 6371 );
 // scene.add( mesh );
 
-		var camThetaS = 28 * d2r; // 28 37.6166666;
-		var camPhiS = 2.37 * -d2r; //2.37 -122.3666666;
+		//var camThetaS = 28 * d2r; // 28 37.6166666;
+		// var camPhiS = 2.37 * -d2r; //2.37 -122.3666666;
 
 		camDistance = [ 28000, 28000, 24000, 15000, 11000, 9000, 7500, 7000, 6600, 6500, 6450, 6430, 6395, 6380, 6378 ];
 		camera.position = calcPosition( camThetaS, camPhiS,  camDistance[ zoomLevel ] );
@@ -114,13 +120,26 @@
 			zoomLevel = 14;
 		}	
 		zIn.title = "Zoom in. Current level: " + zoomLevel;
+		zOut.title = "Zoom out. Current level: " + zoomLevel;
 		setZoomLevel ( zoomLevel );
 	}
 	
 	function zoomOut() {
 		zoomLevel--;
 		if ( zoomLevel < 1 ) zoomLevel = 1;
+		zIn.title = "Zoom in. Current level: " + zoomLevel;
 		zOut.title = "Zoom out. Current level: " + zoomLevel;
+		setZoomLevel ( zoomLevel );
+	}	
+	
+	function zoomHome() {
+		zoomLevel = 3;
+		camera.position = calcPosition( camThetaS, camPhiS,  camDistance[ zoomLevel ] );
+		camera.up = v( 0, 1, 0 );
+		camera.lookAt( v( 0, 0, 0 ) );		
+		zIn.title = "Zoom in. Current level: " + zoomLevel;
+		zOut.title = "Zoom out. Current level: " + zoomLevel;
+		
 		setZoomLevel ( zoomLevel );
 	}	
 
