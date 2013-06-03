@@ -12,10 +12,11 @@
 		<h3>Overview</h3>
 			<div>
 				
-				<p>This Jaanga cookbook section contains the demo for building a 3D Globe using Three.js and Open Street Map data. 
-					Currently the app supports fourteen levels of zoom. The tooltips for the '+' and '-" buttons display the current zoom level.</p>
+				<p>This Jaanga cookbook section contains the demo for building a 3D Globe using <a href="threejs.org" target="_blank">Three.js</a> and 
+					<a href="http://openstreetmap.org" target="_blank">Open Street Map</a> data. 
+					The app supports the full 18 levels of zoom provided by OSM. The tooltips for the '+' and '-" buttons display the current zoom level.</p>
 				
-				<p>The source code for the demo is available at: <a href='https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe' target='_blank'>github.com/jaanga/cookbook/</a></p>
+				<p>The source code for the demo is available at: <a href='https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/r2' target='_blank'>github.com/jaanga/cookbook/</a></p>
 				
 				<p>Derivation of the name oSome Globe: oSome = OSM + awesome + "That's some Globe!"</p>
 				
@@ -29,45 +30,29 @@
 					</ul>
 				</p>
 				
-				<p>Very much needed: Access to open-source on-demand 3D geographic data! Got any good ideas?</p>
+				<p>Coming up next: 3D topography<br />[ With a bit of luck ;-]</p>
 				
 			</div>
 			
-		<h3>Credits, Copyright & License</h3>
-			<div>
-				<h4>Copyright</h4>
-				
-					<p>Copyright &copy; 2013 Jaanga authors</p>
-				<h4>License</h4>	
-				
-					<p>All software and documentation in this repository is available under the MIT license.</p>
-					
-					<p>The <a href="http://en.wikipedia.org/wiki/MIT_License" target"_blank">MIT License</a></p>
-				
-				<h4>Credits</h4>
-					<p><a href="http://openstreetmap.org/" target="_blank">Open Street Map</a></p>
-					<p><a href="http://jquery.com" target="_blank">jQuery</a></p>
-					<p><a href="http://jqueryui.com" target="_blank">jQuery UI</a></p>
-					<p><a href="http://mrdoob.github.io" target='_blank'>Three.js</a></p>
-					<p><a href='http://github.com' target='_blank'>GitHub</a></p>
-					<p><a href="http://stackoverflow.com" target='_blank'>Stack Overflow</a></p>
-					<p>The JavaScript DOM</p>
-					
-					<p>See also and in particular <a href="http://fgx.github.io" target="_blank">FGx on GitHub</a> which has been the cause and the impetus for this globe.</p>
-	
-					<h4>Notes</h4>
-						<p>All coding and testing is on currently carried out on Google Chrome only. Other browsers may have even more issues.</p>	
-			
-			</div>
+
 		<h3>Update Three.js Globe</h3>
 			<div id = "updating" >
+			
+				<p><select id="" onchange="setZoomPreset( this.selectedIndex );">
+					<option>Select a location</option>
+					<option>Antony</option>
+					<option>Australia</option>
+					<option>Hong Kong</option>
+					<option>Paris</option>
+					<option>San Francisco</option>
+					<option>Switzerland</option>
+					<option>Wales</option>
+					</select>
+				</p>
 				<p>Coming soon:</p>
-				
-				<p>List of cities and areas with preset zoom and levels.</p>
 				
 				<p>Sample 3D objects placed on selected levels. For example: Eiffel tower in Paris, Golden Gate Bridge in San Francisco and Opera House in Sydney.</p>
 			
-				<p>These features need the reverse Mercator projection distortion issues to be fixed first. See 'To Be Done'.</p>
 			</div>
 		<h3>Change jQuery UI Theme</h3>
 			<div>
@@ -119,17 +104,49 @@
 				
 				<p>A nice benefit of the permalink concept is that your choices may be saved and shared without cookies being saved to your computer.</p>
 			</div>	
-		<h3>To Be Done</h3>	
+		<h3>Credits, Copyright & License</h3>
 			<div>
-				<p>Correct for reverse Mercator projection. *</p>
+				<h4>Copyright</h4>
+				
+					<p>Copyright &copy; 2013 Jaanga contributors</p>
+				<h4>License</h4>	
+				
+					<p>All software and documentation in this repository is available under the MIT license.</p>
+					
+					<p>The <a href="http://en.wikipedia.org/wiki/MIT_License" target"_blank">MIT License</a></p>
+				
+				<h4>Credits & Thanks</h4>
+					<p><a href="http://openstreetmap.org/copyright" target="_blank">Open Street Map</a><br />copyright &copy; OpenStreetMap contributors</p>
+					<p><a href="http://jquery.org/license" target="_blank">jQuery<br /></a>copyright &copy; The jQuery Foundation</p>
+					<p><a href="https://github.com/jquery/jquery-ui/blob/master/MIT-LICENSE.txt" target="_blank">jQuery UI</a><br />Copyright &copy; 2013 jQuery Foundation and other contributors</p>
+					<p><a href="http://mrdoob.github.io" target='_blank'>Three.js</a><br>Copyright &copy; 2010-2013 three.js authors</p>
+					<p>And many thanks to:</p>
+					<p><a href='http://github.com' target='_blank'>GitHub</a></p>
+					<p><a href="http://stackoverflow.com" target='_blank'>Stack Overflow</a></p>
+					<p>The JavaScript DOM</p>
+					
+					<p>See also and in particular <a href="http://fgx.github.io" target="_blank">FGx on GitHub</a> which has been the cause and the impetus for this globe.</p>
+	
+					<h4>Notes</h4>
+						<p>All coding and testing is on currently carried out on Google Chrome only. Other browsers may have even more issues.</p>	
+			
+			</div>			
+		<h3>To Be Done / Roadmap</h3>	
+			<div>
+				<p><s>Correct for reverse Mercator projection. *</s> 2013-06-02</p>
 				<p><s>Fix quadrant issues with southern hemisphere level changes. *</s> 2013-05-31</p>
-				<p>Fix issues where display does cross the date line.</p>
+				<p>Adjust smoothness of globe automatically.</p>
+				<p>Adjust the color correction of the globe.</p>
+				<p><s>Add location and level navigation.</s> 2013-06-03</p>
+				<p>Add 3D topology.</p>
+				<p>Add permalinks.</p>
+				<p>Fix issues where displayed date does not cross the date line.</p>
 				<p>Ability to add data and code to particular locations and levels.</p>
 				<p>Add windows - each with its own view of the globe, camera location and settings.</p>
 				<p>Add camera movement after 30 seconds no mouse movement.</p>
 				<p><s>Add home button that resets zoom, camera, level, etc to defaults.</s> 2013-05-31</p>
 				<p>Don't remove then recall currently loaded bitmaps when panning</p>
-				<p>preload adjacent bitmaps</p>
+				<p>Preload adjacent bitmaps</p>
 				<p>Add level slider widget??</p>
 				<p>Keep on tweaking camera zoom, pan and rotate settings.</p>
 				<p>Better way of displaying current level.</p>
@@ -174,11 +191,13 @@
 			width: "25%"
 		});
 		
-		$( ".ui-dialog" ).css( { opacity: 0.70 } );
+		$( ".ui-dialog" ).css( { opacity: 0.80 } );
 				
 		$( "#accordion" ).accordion( {
 			heightStyle: "fill"
 		});
+		
+		
 
 /*		
 		$("<p title='Data sent by Three.js' >Rotation: <span id='status' ></span></p>").appendTo("#updating");
@@ -245,6 +264,10 @@
 			window.history.pushState( "", "", window.location.hash);
 			location.reload();
 		}	
+		
+		function setZoomPreset( id ) {
+			$("#ifr")[0].contentWindow.zoomPreset( id );
+		}
 </script>
 </body>
 </html>

@@ -1,0 +1,311 @@
+﻿<!doctype html>
+<html lang=en>
+<head>
+<title>jaanga oSome globe r2</title>
+<meta charset=utf-8>
+</head>
+<body>
+
+<script src='http://mrdoob.github.com/three.js/build/three.min.js'></script>
+<script src='http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js'></script>
+<script src='http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js'></script>
+<!--
+<script src='../../../three.js/build/three.min.js'></script>
+<script src='../../../three.js/examples/js/controls/TrackballControls.js'></script>
+<script src='../../../three.js/examples/js/libs/stats.min.js'></script>
+-->
+<script>
+
+	var zoomLevel = 3;
+	var start =  (90 - 85.0511) * Math.PI / 180;
+	
+	var renderer, scene, camera, controls, stats;
+
+	var group;
+	var camTheta, camPhi, camDistance;
+	
+
+
+	var pi = Math.PI, pi2 = 0.5 * Math.PI;
+	var d2r = pi / 180, r2d = 180 / pi;
+	function v(x,y,z){ return new THREE.Vector3(x,y,z); }
+	function cos(a){return Math.cos(a);} function sin(a){return Math.sin(a);}
+	var camThetaS = 28 * d2r; // 28 37.6166666;
+	var camPhiS = 2.37 * -d2r; //2.37 -122.3666666;
+	
+	
+	init();
+	animate();
+
+	function init() {
+		var geometry, material, mesh, css, info;
+
+		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+		scene = new THREE.Scene();
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 40000 );
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0px; zIndex: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { font: 800 36pt monospace; margin: 0; overflow: hidden; text-align: center; } a {text-decoration: none;' ;
+
+		info = document.body.appendChild( document.createElement( 'div' ) );
+		info.style.cssText = 'position: absolute; top: 0px; width: 100% ';
+		info.innerHTML = '<span id="zIn" title="Zoom in. Level 3" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomIn()">+</a></span> ' +
+			'<span id="zOut" title="Zoom out. Level 3" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomOut()" >-</a></span> ' +
+			'<span title="Rturn to home position and zoom" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomHome()" >&#x2302</a></span> ' +
+			'<span title="Refresh. Click here if you get to edge of map and need more" style="background-color: #ccc; padding: 5px"><a href=# onclick="resetCamera()" >&#x27f3</a></span> ' +
+			'<span title="Reset camera so north/south of globe is vertical" style="background-color: #ccc; padding: 5px"><a href=# onclick="resetCamera()" >&uArr;</a></span>' +
+		// '';
+	
+		// info.innerHTML = '<p>Jaanga oSoMe Globe - ' +
+			' <select onchange="zoomLevel = 1 + this.selectedIndex; setZoomLevel( 1 + this.selectedIndex );">' +
+				// '<option>select zoom level</option>' +
+				'<option>zoom level 1</option>' +
+				'<option>zoom level 2</option>' +
+				'<option selected>zoom level 3</option>' +
+				'<option>zoom level 4</option>' +
+				'<option>zoom level 5</option>' +
+				'<option>zoom level 6</option>' +
+				'<option>zoom level 7</option>' +
+				'<option>zoom level 8</option>' +
+				'<option>zoom level 9</option>' +
+				'<option>zoom level 10</option>' +
+				'<option>zoom level 11</option>' +
+				'<option>zoom level 12</option>' +
+				'<option>zoom level 13</option>' +
+				'<option>zoom level 14</option>' +
+				//'<option>zoom level 15</option>' +
+				//'<option>zoom level 16</option>' +
+				//'<option>zoom level 17</option>' +
+				//'<option>zoom level 18</option>' +
+			'</select> ' +
+			//'<button onclick="setZoomLevel( zoomLevel );">refresh</button> ' +
+			//'<button onclick="resetCamera();">reset camera</button>' +
+			'</p>' +
+		'';
+
+		window.addEventListener( 'dblclick', zoomIn, false );
+		
+		geometry = new THREE.AxisHelper( 7000 );
+		scene.add( geometry );
+
+		geometry = new THREE.PlaneGeometry( 6371 * 2, 6371 * 2, 1, 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+		material = new THREE.MeshBasicMaterial( {color: Math.random() * 0xffffff, side: THREE.DoubleSide } );
+		mesh = new THREE.Mesh( geometry, material );
+//scene.add( mesh );
+
+		geometry = new THREE.CubeGeometry( 200, 200, 200 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position = calcPosition( 85.0511 * d2r, 0, 6371 );
+// scene.add( mesh );
+
+		//var camThetaS = 28 * d2r; // 28 37.6166666;
+		// var camPhiS = 2.37 * -d2r; //2.37 -122.3666666;
+
+		camDistance = [ 28000, 28000, 24000, 15000, 11000, 9000, 7500, 7000, 6600, 6500, 6450, 6430, 6395, 6380, 6378 ];
+		camera.position = calcPosition( camThetaS, camPhiS,  camDistance[ zoomLevel ] );
+		setZoomLevel ( zoomLevel );
+	}
+	
+	function zoomIn() {
+		zoomLevel++;
+		if ( zoomLevel > 14 ) { 
+			zoomLevel = 14;
+		}	
+		zIn.title = "Zoom in. Current level: " + zoomLevel;
+		zOut.title = "Zoom out. Current level: " + zoomLevel;
+		setZoomLevel ( zoomLevel );
+	}
+	
+	function zoomOut() {
+		zoomLevel--;
+		if ( zoomLevel < 1 ) zoomLevel = 1;
+		zIn.title = "Zoom in. Current level: " + zoomLevel;
+		zOut.title = "Zoom out. Current level: " + zoomLevel;
+		setZoomLevel ( zoomLevel );
+	}	
+	
+	function zoomHome() {
+		zoomLevel = 3;
+		camera.position = calcPosition( camThetaS, camPhiS,  camDistance[ zoomLevel ] );
+		camera.up = v( 0, 1, 0 );
+		camera.lookAt( v( 0, 0, 0 ) );		
+		zIn.title = "Zoom in. Current level: " + zoomLevel;
+		zOut.title = "Zoom out. Current level: " + zoomLevel;
+		
+		setZoomLevel ( zoomLevel );
+	}	
+
+	function resetCamera() {	
+		var b = camera.position.clone();
+		camera.position.set( b.x, b.y, b.z ); 
+		camera.up = v( 0, 1, 0 );
+		camera.lookAt( v( 0, 0, 0 ) );
+		// controls = new THREE.TrackballControls( camera, renderer.domElement );
+	}
+	
+	function setZoomLevel ( level ) {
+		var b;
+		var texture, cnt;
+		var lenI, lenJ;
+		var deltaPhi, deltaTheta;
+		var thetaStart, thetaLength;	
+		if ( group ) {
+			scene.remove( group );
+		}
+		//if ( level === 1 ) {
+		//	level = 1;
+		//}
+		camera.lookAt( v( 0, 0, 0 ) );
+		b = camera.position.clone();
+		var scale = camDistance[ level ] / camera.position.distanceTo( v( 0, 0, 0) );
+		camera.position.set( scale * b.x, scale * b.y, scale * b.z  );
+
+		b = camera.position.clone();
+		if ( b.y > 0 ) {
+			camTheta = b.angleTo( v(b.x, 0, b.z) );
+		} else {
+			camTheta = - b.angleTo( v(b.x, 0, b.z) );
+		}
+		// camPhi = b.angleTo( v( b.x, b.y, 0) );
+
+		var c = v( 1, 0, 0 );
+		var d = v( b.x, 0, b.z);
+		var cos_ang;
+		cos_ang = d.dot(c) / (d.length() * c.length());
+		camPhi = Math.acos( cos_ang);
+		if ( b.z < 0 ) {
+			camPhi = -camPhi;
+		}
+		
+// console.log( 'cos_ang ', cos_ang, Math.acos( cos_ang), Math.acos( cos_ang) * r2d );			
+// console.log( b.z, camera.position.distanceTo( v( 0, 0, 0) ), ' camTheta ', camTheta * r2d, 'camPhi', camPhi,  'phi' , camPhi * -r2d);
+
+		group = new THREE.Object3D();
+				
+		geometry = new THREE.CubeGeometry( 100 / (level * level), 500 / (level * level), 100 / (level*level) );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position = calcPosition( camTheta, camPhi, 6371.5 );
+// group.add( mesh );
+
+		controls = new THREE.TrackballControls( camera, renderer.domElement );
+		controls.minDistance = 6373;
+		
+		controls.maxDistance = camDistance[ level - 1 ];
+		var rotSpeed = [ 0, 0.3, 0.3, 0.5, 0.1, 0.1, 0.02, 0.15, 0.08, 0.03, 0.01, 0.005, 0.003, 0.0015, 0.001 ];
+		controls.rotateSpeed = rotSpeed[level] ;
+		controls.zoomSpeed = 1.0 / (level * level ) ;  // 1.2;;
+		controls.panSpeed = 0.05;
+		controls.noRotate = false;
+		controls.noZoom = false;
+		controls.noPan = false;
+
+		if ( level < 7 ) {
+			controls.staticMoving = false;
+			controls.dynamicDampingFactor = 0.1 * level ;   //0.2;
+		} else {
+			controls.staticMoving = true;
+			controls.dynamicDampingFactor = 0.5 * level ;   //0.2;
+		}
+
+		lenI = lenJ = Math.pow(2, level);
+
+		deltaTheta = pi / lenJ;
+		camThetaCnt = lenJ - Math.floor( lenJ * ( pi2 + camTheta ) / pi );
+
+		deltaPhi = 2.0 * pi / lenI;
+		camPhiCnt = Math.floor( ( pi + camPhi) / deltaPhi );	
+// console.log ( level,  'lenI', lenI, 'camThetaCnt', camThetaCnt, ' camPhiCnt', camPhiCnt);
+
+		geometry = new THREE.CubeGeometry( 100 / (level * level), 2000 /  (level * level), 100 /  (level * level) );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position = calcPosition(  pi2 + (camThetaCnt - 1) * deltaTheta , camPhiCnt * deltaPhi, 6371 );
+// console.log( camPhiCnt, mesh.position);
+// group.add( mesh );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position = calcPosition(  pi2 + (camThetaCnt - 0) * deltaTheta , camPhiCnt * deltaPhi, 6371 );
+// console.log( mesh.position);
+// group.add( mesh );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position = calcPosition(  pi2 + (camThetaCnt - 1) * deltaTheta , ( 1 + camPhiCnt) * deltaPhi, 6371 );
+// console.log( mesh.position);
+// group.add( mesh );
+
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position = calcPosition(  pi2 + (camThetaCnt - 0) * deltaTheta , ( 1 + camPhiCnt) * deltaPhi, 6371 );
+// console.log( mesh.position);
+// group.add( mesh );
+
+		var camThetaAdjust = [ 0, 2, 4, 8, 16, 6, 7, 8, 5, 5, 8, 5, 5, 6, 6 ];
+		var startJ = camThetaCnt - camThetaAdjust[level], stopJ = camThetaCnt + camThetaAdjust[level];
+		if ( startJ < 0 ) { startJ = 0; }
+		if ( stopJ > lenJ ) stopJ = lenJ;
+		
+		var camPhiCnt2;
+			if ( camPhi > 0) {
+				camPhiCnt2 = Math.floor( ( pi - camPhi) / deltaPhi );
+			} else {
+				camPhiCnt2 = Math.floor( ( - camPhi + pi) / deltaPhi );
+			}
+
+		var phiAdjust = [ 0, 2, 4, 8, 16, 8, 8, 5, 5, 5, 5, 6, 7, 6, 7 ];
+		var startI = camPhiCnt2 - phiAdjust[ level ], stopI = camPhiCnt2 + phiAdjust[ level ] + 1;
+		if ( startI < 0 ) { startI = 0; }
+		if ( stopI > lenI ) stopI = lenI;
+// console.log(  ' I/lon ', startI, stopI );		
+// console.log ( 'it', level,  'lenI', lenI, 'camThetaCnt2', camPhiCnt2);	
+
+// var startJ = 0;
+// var stopJ = lenJ;
+		texture = [];
+		cnt = 0;
+		var lod = [ 0, 30, 20, 5, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ];
+		var d = lod[level]
+		for (var i = startI; i < stopI; i++) {
+			for (var j = startJ; j < stopJ; j++) {
+				if ( j === 0 ) {
+					geometry = new THREE.SphereGeometry( 6371, d, d, i * deltaPhi, deltaPhi, start, deltaTheta - start );
+				} else if ( j === lenJ - 1 ) {
+					geometry = new THREE.SphereGeometry( 6371, d, d, i * deltaPhi, deltaPhi, deltaTheta * j, deltaTheta - start );
+				} else {
+					geometry = new THREE.SphereGeometry( 6371, d, d, i * deltaPhi, deltaPhi, deltaTheta * j, deltaTheta );
+				}
+				texture[cnt] = THREE.ImageUtils.loadTexture( "http://b.tile.openstreetmap.org/" + level + "/" + i + "/" + j + ".png" );
+				material = new THREE.MeshBasicMaterial( { color: 0xeeeeee, map: texture[cnt] } );
+				mesh = new THREE.Mesh( geometry, material );
+				group.add( mesh );
+				cnt++;
+			}
+		}
+		scene.add( group );
+	}
+
+	function calcPosition( lat, lon, radius ) {
+		var rc =  radius * cos( lat );
+		return  new THREE.Vector3(
+			rc * cos( lon),
+			radius * sin( lat ),
+			rc * sin( lon)
+		);
+	}
+
+	function animate() {
+		requestAnimationFrame( animate );
+		controls.update();
+		renderer.render( scene, camera );
+		stats.update();
+	}
+</script>
+</body>
+</html>
