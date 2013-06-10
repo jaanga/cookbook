@@ -7,22 +7,26 @@
 <script src=http://code.jquery.com/ui/1.10.3/jquery-ui.js ></script>
 </head>
 <body >
-<div id="dialog" title="Jaanga oSome Globe R3 ~ First 3D Top0logy" >
+<div id="dialog" title="Jaanga oSome Globe R3 ~ First 3D Topology" >
 	<div id="accordion" >
 		<h3>Overview ~ First 3D Topology</h3>
 			<div>
 				
-				<p>This revision introduces 3D topology capability - ridiculously exaggerated in this instance. 3D topology is currently only supported at zoom levels 1, 2 and 3.</p>
+				<p>This revision introduces 3D topology capability - ridiculously exaggerated in this instance. 
+					3D topology is currently only supported at zoom levels 1, 2 and 3.
+					Please ignore the extraneous debugging bits.</p>
+					
+				<p>Sea level is indicated by the blue-green-purple sphere.</p>	
 				
 				<p>This Jaanga cookbook section contains the demo for building a 3D Globe using <a href="http://threejs.org" target="_blank">Three.js</a> and 
-					<a href="http://openstreetmap.org" target="_blank">Open Street Map</a> data. 
+					<a href="http://openstreetmap.org" target="_blank">Open Street Map</a> (OSM) data. 
 					The app supports the full 18 levels of zoom provided by OSM. The tooltips for the '+' and '-" buttons display the current zoom level.</p>
 				
 				<p>The source code for the demo is available at: <a href='https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/r3' target='_blank'>github.com/jaanga/cookbook/</a></p>
 				
 				<p>Derivation of the name oSome Globe: oSome = OSM + awesome + "That's some Globe!"</p>
 				
-				<p>See also post on <a href="http://jaanga.com" target="_blank">jaanga.com</a></p>
+				<p>See also post on <a href="http://www.jaanga.com/2013/06/jaanga-osome-globe-full-3d-18-zoom.html" target="_blank">jaanga.com</a></p>
 				
 				<p>General controls:
 					<ul>
@@ -30,9 +34,15 @@
 						<li>Zoom in current level: Mousewheel / two fingers</li>
 						<li>Drag globe: Right mouse / press 2 fingers</li>
 					</ul>
+					
+					<ul>
+						<li>Click on the icons to zoom in and out, go home, refresh or straighten the view</li>
+						<li>Use the drop down menus to jump to a zoom level or to set the height exaggeration scale</li>
+						<li>zero = no scaling. negative numbers make the oceans go up and land masses go down. </li>
+					</ul>
 				</p>
 				
-				<!-- <p>Coming up next: 3D topography<br />[ With a bit of luck ;-]</p>  -->
+				<p>Coming up next: more detail for level 3 zoom.</p>
 				
 			</div>
 			
@@ -42,7 +52,7 @@
 			
 				<p><select id="" onchange="setZoomPreset( this.selectedIndex );">
 					<option>Select a location</option>
-					<option>Antony</option>
+					<option>Antony (near Paris)</option>
 					<option>Australia</option>
 					<option>Hong Kong</option>
 					<option>Paris</option>
@@ -52,6 +62,9 @@
 					<option>World View</option>
 					</select>
 				</p>
+				
+				<p>It may take twenty seconds or so for the map to appear. The background will turn black until the data starts coming in.</p>
+				
 				<p>Coming soon:</p>
 				
 				<p>Sample 3D objects placed on selected levels. For example: Eiffel tower in Paris, Golden Gate Bridge in San Francisco and Opera House in Sydney.</p>
@@ -62,7 +75,7 @@
 				<p>Select a different <a href="http://jqueryui.com/themeroller/" target="_blank">jQuery UI theme</a>.</p>
 				
 				<p>jQuery Theme: <select id="selectTheme" onchange="setTheme( this.value);" >
-						<option>base</option>
+						<!-- <option>base</option>  -->
 						<option>black-tie</option>
 						<option>blitzer</option>
 						<option>cupertino</option>
@@ -155,6 +168,10 @@
 			<div>
 				<p><s>Correct for reverse Mercator projection. *</s> 2013-06-02</p>
 				<p><s>Fix quadrant issues with southern hemisphere level changes. *</s> 2013-05-31</p>
+				<p><s>add exaggeration scale drop down menu.</s> 2013-06-09</p>
+				<p>Zoom level 3 to 32 vertices per tile (now 16)</p>
+				<p>Download elevation data for individual tiles at run-time.</p>
+				<p>Improve/refine lights and color schemes.</p>
 				<p>Adjust smoothness of globe automatically.</p>
 				<p>Adjust the color correction of the globe.</p>
 				<p><s>Add location and level navigation.</s> 2013-06-03</p>
@@ -216,8 +233,7 @@
 		$( "#accordion" ).accordion( {
 			heightStyle: "fill"
 		});
-		
-		
+
 
 /*		
 		$("<p title='Data sent by Three.js' >Rotation: <span id='status' ></span></p>").appendTo("#updating");
