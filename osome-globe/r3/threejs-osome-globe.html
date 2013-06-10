@@ -9,7 +9,7 @@
 <script src='http://mrdoob.github.com/three.js/build/three.min.js'></script>
 <script src='http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js'></script>
 <script src='http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js'></script>
-<script src='elevations-zoom-1-32.js'></script>
+<script src='elevations-zoom-1-64.js'></script>
 <script src='elevations-zoom-2-32.js'></script>
 <script src='elevations-zoom-3-16.js'></script>
 <!--
@@ -21,6 +21,7 @@
 -->
 <script>
 	var zoom = 2;  // OpenStreetMap level
+	var scale = 5;
 	var radius = 6371;  // earth
 	var cameraLatitude = 48.86; //37.616666;
 	var cameraLongitude = 2.34; //-122.36666666;
@@ -118,6 +119,7 @@ light.shadowCameraVisible = true;
 			'<span title="Return to home position and zoom" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomHome()" >&#x2302</a></span> ' +
 			'<span title="Refresh. Click here if you get to edge of map and need more" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomLevel( zoom );" >&#x27f3</a></span> ' +
 			'<span title="Reset camera so north/south of globe is vertical" style="background-color: #ccc; padding: 5px"><a href=# onclick="resetCamera()" >&uArr;</a></span> ' +
+			
 			'<select id="selZoom" onchange="zoom = 1 + this.selectedIndex; zoomLevel( zoom );">' +
 				'<option>zoom level 1</option>' +
 				'<option>zoom level 2</option>' +
@@ -138,10 +140,38 @@ light.shadowCameraVisible = true;
 				'<option>zoom level 17</option>' +
 				'<option>zoom level 18</option>' +
 			'</select> ' +
+			
+			'<select id="selScale" onchange="scale = this.selectedIndex - 10; zoomLevel( zoom );">' +
+				'<option>exaggeration scale -10</option>' +
+				'<option>exaggeration scale  -9</option>' +
+				'<option>exaggeration scale  -8</option>' +
+				'<option>exaggeration scale  -7</option>' +
+				'<option>exaggeration scale  -6</option>' +
+				'<option>exaggeration scale  -5</option>' +
+				'<option>exaggeration scale  -4</option>' +
+				'<option>exaggeration scale  -3</option>' +
+				'<option>exaggeration scale  -2</option>' +
+				'<option>exaggeration scale  -1</option>' +
+				'<option>exaggeration scale  0</option>' +
+				'<option>exaggeration scale  1</option>' +
+				'<option>exaggeration scale  2</option>' +
+				'<option>exaggeration scale  3</option>' +
+				'<option>exaggeration scale  4</option>' +
+				'<option>exaggeration scale  5</option>' +
+				'<option>exaggeration scale  6</option>' +
+				'<option>exaggeration scale  7</option>' +
+				'<option>exaggeration scale  8</option>' +
+				'<option>exaggeration scale  9</option>' +
+				'<option>exaggeration scale  10</option>' +
+				
+			'</select> ' +			
+			
 			'</p>' +
 		'';
 
 		selZoom.selectedIndex = zoom - 1;
+		
+		selScale.selectedIndex = scale + 11;
 
 		window.addEventListener( 'dblclick', zoomIn, false );
 
@@ -176,7 +206,7 @@ light.shadowCameraVisible = true;
 		group = new THREE.Object3D();
 
 		if ( zoom < 4 ) {
-			geometry = new THREE.SphereGeometry( 6371, 50, 30)
+			geometry = new THREE.SphereGeometry( 6370, 50, 30)
 			material = new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading, opacity: 0.5, transparent: true } );
 			mesh = new THREE.Mesh( geometry, material );
 			group.add( mesh );
@@ -210,25 +240,25 @@ light.shadowCameraVisible = true;
 				if ( zoom === 1 ) {
 					geometry = new THREE.SphereGeometry( radius, zoom1Steps[ tileCount], zoom1Steps[ tileCount], x * deltaPhi - pi, deltaPhi, theta, deltaTheta );
 					for (var k = 0, len = geometry.vertices.length; k < len; k++) {
-						var scale = 1  + 0.00002 * elevations1[ tileCount ] [ k  ];
+						var sscale = 1  + 0.00001 * scale * elevations1[ tileCount ] [ k  ];
 						var b = geometry.vertices[k];
-						geometry.vertices[k].set( scale * b.x, scale * b.y, scale * b.z  );
+						geometry.vertices[k].set( sscale * b.x, sscale * b.y, sscale * b.z  );
 					}
 					tileCount++;
 				} else if ( zoom === 2 ) {
 					geometry = new THREE.SphereGeometry( radius, zoom2Steps[ tileCount], zoom2Steps[ tileCount], x * deltaPhi - pi, deltaPhi, theta, deltaTheta );
 					for (var k = 0, len = geometry.vertices.length; k < len; k++) {
-						var scale = 1  + 0.00005 * elevations2[ tileCount ] [ k  ];
+						var sscale = 1 + 0.00001 * scale * elevations2[ tileCount ] [ k  ];
 						var b = geometry.vertices[k];
-						geometry.vertices[k].set( scale * b.x, scale * b.y, scale * b.z  );
+						geometry.vertices[k].set( sscale * b.x, sscale * b.y, sscale * b.z  );
 					}
 					tileCount++;
 				} else if ( zoom === 3 ) {
 					geometry = new THREE.SphereGeometry( radius, zoom3Steps[ tileCount], zoom3Steps[ tileCount], x * deltaPhi - pi, deltaPhi, theta, deltaTheta );
 					for (var k = 0, len = geometry.vertices.length; k < len; k++) {
-						var scale = 1  + 0.00005 * elevations3[ tileCount ] [ k  ];
+						var sscale = 1  + 0.00001 * scale * elevations3[ tileCount ] [ k  ];
 						var b = geometry.vertices[k];
-						geometry.vertices[k].set( scale * b.x, scale * b.y, scale * b.z  );
+						geometry.vertices[k].set( sscale * b.x, sscale * b.y, sscale * b.z  );
 					}
 					tileCount++;
 				} else  {
@@ -249,6 +279,7 @@ light.shadowCameraVisible = true;
 		var x=document.getElementById("selZoom").selectedIndex;
 		var y=document.getElementsByTagName("option");
 		y[ zoom - 1].selected = true;
+		
 		zoomLevel( zoom );
 	}
 	function zoomIn() {
