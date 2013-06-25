@@ -113,12 +113,12 @@
 		stats.domElement.style.cssText = 'position: absolute; top: 0px; zIndex: 100; ';
 		document.body.appendChild( stats.domElement );
 
-		pointLight = new THREE.DirectionalLight( 0xffffff, 0.25);
+		pointLight = new THREE.DirectionalLight( 0xffffff, 0.25 );
 		pointLight.position.set( 5000, 5000, 5000 ).normalize();
 		pointLight.castShadow = true;
 		scene.add( pointLight );
 
-		ambientLight = new THREE.AmbientLight( 0x888888);
+		ambientLight = new THREE.AmbientLight( 0x888888 );
 		ambientLight.color.setHSL( 0.1, 0.5, 0.5 );
 		scene.add( ambientLight );
 
@@ -144,12 +144,12 @@
 		mesh.position.y = -2;
 		scene.add( mesh );
 
-		initElevations( places[selPlace.selectedIndex][1], places[selPlace.selectedIndex][2] );
+		initElevations( places[ selPlace.selectedIndex ][ 1 ], places[ selPlace.selectedIndex ][ 2 ] );
 	}
 
 	function initElevations( lat, lng ) {
 		if ( elevationsImage === undefined ) {
-			elevationsImage = document.body.appendChild( document.createElement('img') );
+			elevationsImage = document.body.appendChild( document.createElement('img' ) );
 			elevationsImage.style.cssText = "height: 256px; left: 100px; position: absolute; top: 0; width: 256px;";
 			elevationsImage.title = "this is the larger (zoom level 4) base map with the elevation data";
 			elevationsImage.onload = initCanvas;
@@ -176,12 +176,12 @@
 
 		var deltaLats = Math.abs( ulLat - lrLat );
 		var deltaLngs = Math.abs( ulLng - lrLng );
-		var pixelsLat = parseInt(deltaLats * 120, 10);
-		var pixelsLng = parseInt(deltaLngs * 120, 10);
+		var pixelsLat = parseInt( deltaLats * 120, 10 );
+		var pixelsLng = parseInt( deltaLngs * 120, 10 );
 // console.log( 'deltaLats', deltaLats, 'deltaLngs', deltaLngs, 'pixelsLat', pixelsLat, 'pixelsLng', pixelsLng );
 
-		var elevUlLat = tile2lat( elevTileYLat, elevZoom);
-		var elevUlLng = tile2lng( elevTileXLng,elevZoom);
+		var elevUlLat = tile2lat( elevTileYLat, elevZoom );
+		var elevUlLng = tile2lng( elevTileXLng,elevZoom );
 // console.log( 'elevUlLat', elevUlLat, 'elevUlLng', elevUlLng );
 
 		var elevDeltaLats = elevUlLat - ulLat;
@@ -197,7 +197,20 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 // material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
 // material = new THREE.MeshBasicMaterial( { map: mapTexture, side: THREE.DoubleSide } );
-		var mapTexture = THREE.ImageUtils.loadTexture( "http://b.tile.openstreetmap.org/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
+		// var mapTexture = THREE.ImageUtils.loadTexture( "http://b.tile.openstreetmap.org/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
+		
+		// http://[abc].tile.opencyclemap.org/cycle/zoom/x/y.png
+		var mapTexture = THREE.ImageUtils.loadTexture( "http://c.tile.opencyclemap.org/cycle/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
+		
+		// http://otile[1234].mqcdn.com/tiles/1.0.0/osm/zoom/x/y.jpg
+		// var mapTexture = THREE.ImageUtils.loadTexture( "http://otile3.mqcdn.com/tiles/1.0.0/osm/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".jpg" );
+		
+		//http://otile[1234].mqcdn.com/tiles/1.0.0/sat/zoom/x/y.jpg
+		//var mapTexture = THREE.ImageUtils.loadTexture( "http://otile3.mqcdn.com/tiles/1.0.0/sat/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".jpg" );
+		
+		// http://tile.stamen.com/terrain-background/zoom/x/y.jpg
+		
+		
 		material = new THREE.MeshPhongMaterial( {map: mapTexture, side: THREE.DoubleSide, color: 0xffffff, ambient: 0xffffff, specular: 0x888888, shininess: 200, shading: THREE.SmoothShading} );
 		material.color.setHSL( 0.5, 0.8, 0.5 );
 
@@ -234,7 +247,6 @@
 		plane.geometry.computeVertexNormals();
 		plane.geometry.verticesNeedUpdate = true;
 		scene.add( plane );
-		
 	}
 
 	function animate() {

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>j3qUE cookbook overview R2</title>
+<meta charset=utf-8 />
+<script src=http://code.jquery.com/jquery-2.0.1.js ></script>
+<script src=http://code.jquery.com/ui/1.10.3/jquery-ui.js ></script>
+<script>
+
+</script>
+</head>
+<body >
+<div id="dialog" title="j3qUE cookbook overview R2" >
+	<div id="accordion">
+		<h3>Overview</h3>
+			<div>
+				
+				<p>Can <a href="http://jquery.com" target="_blank">jQuery</a> and <a href="http://threejs.org" target="_blank">Three.js</a> play nice together?</p>
+				
+				<p>This Jaanga cookbook section contains sample examples for building code based on using jQuery and Three.js.</p>
+				
+				<p>The source code for the examples is available at: <a href='https://github.com/jaanga/cookbook/tree/gh-pages/j3qUE/r1/' target='_blank'>github.com/jaanga/cookbook/j3qUE/r1/</a></p>
+	
+				<p>Derivation of the name: j3qUE = jQuery + Three.js + User Experience</p>
+				
+				<p>See also the related post on <a href="http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html" target="_blank">jaanga.com</a></p>
+				
+			</div>
+			
+		<h3>Sample Files</h3>
+			<div>
+				<p><a href="./minimum/index.html" target="_blank">j3qUE minimum</a> is the most minimum code that gets both working together
+				
+				<p><a href="./interactive/index.html" target="_blank">j3qUE interactive</a> is the minimum code plus sliders plus communication/interaction between jQuery and Three.js</p>
+			</div>
+			
+		<h3>Coding Tips</h3>
+			<div>
+				<p>Accessing jQuery code from within Three.js, use: <a href="http://api.jquery.com/parent/" target="_blank">#.parent.</a></p>
+			
+				<p>Accessing Three.js code from within jQuery, use: <a href="http://msdn.microsoft.com/en-us/library/ie/ms533692(v=vs.85).aspx" target="_blank">.contentWindow</a></p>
+			</div>
+			
+		<h3>Updating Three.js</h3>
+			<div id = "updating" >
+				Conceptualizing random endpoints in a access matrix provides reach extensions enterprise wide. Respective divisions historically insignificant, upscale trend lines in a management inventory analysis survivability format.
+			</div>
+			
+		<h3>Change jQuery UI Themes</h3>
+			<div>
+				<p>Select a different <a href="http://jqueryui.com/themeroller/" target="_blank">jQuery UI theme</a>.</p>
+				
+				<p>jQuery Theme: <select id="selectTheme" onchange="setTheme( this.value);" >
+						<option>base</option>
+						<option>black-tie</option>
+						<option>blitzer</option>
+						<option>cupertino</option>
+						<option>dark-hive</option>
+						<option>dot-luv</option>
+						<option>eggplant</option>
+						<option>excite-bike</option>
+						<option>flick</option>
+						<option>hot-sneaks</option>
+						<option>humanity</option>
+						<option>le-frog</option>
+						<option>mint-choc</option>
+						<option>overcast</option>
+						<option>pepper-grinder</option>
+						<option>redmond</option>
+						<option>smoothness</option>
+						<option>south-street</option>
+						<option>start</option>
+						<option>sunny</option>
+						<option>swanky-purse</option>
+						<option>trontastic</option>
+						<option>ui-darkness</option>
+						<option>ui-lightness</option>
+						<option>vader</option>	
+					</select>
+				</p>
+				
+				<p>jQuery is a multi-browser JavaScript library designed to simplify the client-side scripting of HTML. 
+					jQuery UI is a JavaScript library that provides abstractions for 
+					low-level interaction, animation, advanced effects, high-level themeable widgets, 
+					is built on top of the jQuery JavaScript library and is used to build interactive web applications.
+					Both libraries are free, open source software, licensed under the MIT License.
+				</p>
+				
+				<p>Jaanga oSome Globe uses both these libraries to create the user experience components of the app.</p>
+				
+				<p>In particular, Jaanga oSome Globe provides access to 25 sample themes hosted on the jQuery UI web site.</p>
+				
+				<p>Each time the theme is updated, a fresh URL is created which can be used as a permalink to save the theme selection for future use.
+					Further revisions of Jaanga oSome Globe will provide further features that may be saved as part of the permalink feature.
+				</p>
+				
+				<p>A nice benefit of the permalink concept is that your choices may be saved and shared without cookies being saved to your computer.</p>
+			</div>	
+			
+		<h3>Copyright, License, Credits & Notes</h3>
+			<div>
+				<h4>Copyright</h4>
+					<p>Copyright &copy; 2013 Jaanga authors</p>
+					
+				<h4>License</h4>	
+					<p>All software and documentation in this repository is available under the MIT license.</p>
+					
+					<p>The <a href="http://en.wikipedia.org/wiki/MIT_License" target"_blank">MIT License</a></p>
+				
+				<h4>Credits</h4>
+
+					<p><a href="http://jquery.com" target="_blank">jQuery</a></p>
+					<p><a href="http://jqueryui.com" target="_blank">jQuery UI</a></p>
+					<p><a href="http://mrdoob.github.io" target='_blank'>Three.js</a></p>
+					<p><a href='http://github.com' target='_blank'>GitHub</a></p>
+					<p><a href="http://stackoverflow.com" target='_blank'>Stack Overflow</a></p>
+					<p>The JavaScript DOM</p>
+
+				<h4>Notes</h4>
+					<p>All coding and testing is on currently carried out on Google Chrome only. Other browsers may have even more issues.</p>	
+			
+			</div>
+	</div>
+</div>
+<script>
+	$(function() {
+		var e = $.elements = {};
+		e.theme = "ui-darkness";
+		e.groupScaleX = e.groupScaleY = e.groupScaleZ = 1;
+		e.groupRotationY = -0.005;
+		
+// <link rel=stylesheet href=http://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css />	
+		var link = document.head.appendChild( document.createElement("link") );
+		link.setAttribute("rel", "stylesheet");
+		if ( location.hash === "" ) {
+			link.setAttribute("href", "http://code.jquery.com/ui/1.10.2/themes/" + e.theme + "/jquery-ui.css");
+		} else {
+			var hashes = location.hash.split("#");
+			e.theme = hashes[1].substr(6)
+			link.setAttribute("href", "http://code.jquery.com/ui/1.10.2/themes/" + e.theme + "/jquery-ui.css");
+		}	
+		
+		$( "body" ).css( { "font-size": "10pt", "margin":"0", "overflow":"hidden" } );
+		
+	    $("<iframe />", {
+			css: { "height": window.innerHeight + "px", "position":"absolute", "width": window.innerWidth + "px" },
+			id: "ifr",
+            src: "http://example.com",
+        }).appendTo("body");		
+	
+		$( "#dialog" ).dialog({
+			height:  window.innerHeight * 0.8,
+			position: {
+				my: "left top",
+				at: "left+" + 30 + " top+" + 20,
+				of: window
+			},
+			width: "25%"
+		});
+		
+		$( ".ui-dialog" ).css( { opacity: 0.80 } );
+				
+		$( "#accordion" ).accordion( {
+			heightStyle: "fill"
+		});
+		  
+		$("<p title='Data sent by Three.js' >Rotation: <span id='status' ></span></p>").appendTo("#updating");
+
+		$("<div id='slider1' title='jQuery setting values in Three.js'></div>").appendTo("#updating");		
+		
+		$( "#slider1" ).slider( {
+			max: 0.2,
+			min: -0.2,		
+			slide: function( event, ui ) {
+				e.groupRotationY = ui.value;
+			},
+			step: 0.01,
+			value: e.cameraRotationY
+		});	
+
+		$("<p>Scale X:</p><div id='slider2' ></div>").appendTo("#updating");		 
+		$( "#slider2" ).slider( {
+			max: 2,
+			min: 0.1,
+			slide: function( event, ui ) {
+				e.groupScaleX = ui.value;
+			},
+			step: 0.05,
+			value: e.groupScaleX
+		});			
+		
+		$("<p>Scale Y:</p><div id='slider3' ></div>").appendTo("#updating");		
+		
+		$( "#slider3" ).slider( {
+			max: 2,
+			min: 0.1,
+			slide: function( event, ui ) {
+				e.groupScaleY = ui.value;
+			},
+			step: 0.05,
+			value: e.groupScaleY
+		});			
+
+		$("<p>Scale Z:</p><div id='slider4' ></div>").appendTo("#updating");		 
+		$( "#slider4" ).slider( {
+			max: 2,
+			min: 0.1,
+			slide: function( event, ui ) {
+				e.groupScaleZ = ui.value;
+			},
+			step: 0.05,
+			value: e.groupScaleZ
+		});		
+		
+		for (var i = 0, len = selectTheme.options.length; i < len; i++) {
+			if ($.elements.theme == selectTheme.options[i].value ) {
+				selectTheme.selectedIndex = i;
+				break;
+			}
+		}
+	
+	});	
+	
+		function setTheme( theme ) {
+			console.log( theme );
+			location.hash = "theme=" + theme;
+			window.history.pushState( "", "", window.location.hash);
+			location.reload();
+		}	
+</script>
+</body>
+</html>
