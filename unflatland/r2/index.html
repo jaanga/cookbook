@@ -9,6 +9,9 @@
 <script src=http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js></script>
 <script src=http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js></script>
 <script>
+	var currentLat;
+	var currentLng;
+	
 	var tileZoom = 7; // 6;
 	var tileXLng; // 20;
 	var tileYLat; // 49;
@@ -16,6 +19,10 @@
 	var elevZoom = 4;
 	var elevTileXLng;
 	var elevTileYLat;
+	
+	var exaggeration = 5;
+	var mapType = 1;
+	var mapTypes;
 
 	var pi = Math.PI, pi2 = 0.5 * Math.PI;
 	var d2r = pi / 180, r2d = 180 / pi;  // degrees & radians
@@ -36,7 +43,7 @@
 
 // http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Tile_servers
 	function lat2tile( lat, zoom ) {
-		return ( Math.floor(( 1 - Math.log( Math.tan( lat * pi / 180) + 1 / cos( lat * pi / 180)) / pi )/2 * pow(2, zoom)));
+		return ( Math.floor(( 1 - Math.log( Math.tan( lat * pi / 180) + 1 / cos( lat * pi / 180)) / pi ) / 2 * pow(2, zoom)) );
 	}
 
 	function long2tile( lon, zoom ) {
@@ -61,7 +68,7 @@
 	];
 
 	var renderer, scene, camera, controls, stats, info;
-	var places, elevationsImage, plane;
+	var goodies, places, elevationsImage, plane;
 
 	init();
 	animate();
@@ -90,7 +97,9 @@
 			'lng: <input type="text" id="inpLng" value="-122.3" size=8 /> ' +
 			'<button onclick="initElevations( parseFloat(inpLat.value), parseFloat(inpLng.value) );">Go</button> || ' +
 			'<select id=selPlace onchange="initElevations( places[this.selectedIndex][1], places[this.selectedIndex][2] ); ' + 
-				'inpLat.value = places[this.selectedIndex][1]; inpLng.value = places[this.selectedIndex][2]; " length=' + places.length + '></select>' +
+				'inpLat.value = places[this.selectedIndex][1]; inpLng.value = places[this.selectedIndex][2]; " length=' + places.length + '></select> ~ ' +
+			'<select id=selExagg onchange="exaggeration = this.selectedIndex; initElevations( places[ exaggeration ][1], places[exaggeration][2] );"></select> ' +
+			'<select id=selMapType onchange="mapType = this.selectedIndex; initElevations( places[mapType + 10][1], places[mapType + 10][2] );"><select>' +
 		'</p>';
 
 		for (var option, i = 0; i < places.length; i++) {
@@ -99,7 +108,35 @@
 			option.innerText = places[i][0];
 		}
 		selPlace.selectedIndex = 19;
+		
+		var exaggerations = ['Exaggeration scale 1:1:', 'Exaggeration scale 2:1', 'Exaggeration scale 3:1', 'Exaggeration scale 4:1', 
+			'Exaggeration scale 5:1', 'Exaggeration scale 6:1', 'Exaggeration scale 7:1', 'Exaggeration scale 8:1', 'Exaggeration scale 9:1', 'Exaggeration scale 10:1'];
+		
+		for (var option, i = 0; i < exaggerations.length; i++) {
+			option = document.createElement( 'option' )
+			selExagg.appendChild( option );
+			option.innerText = exaggerations[i];
+		}
+		selExagg.selectedIndex = exaggeration;
+		
+		mapTypes = [ 
+			['Google Maps',''],
+			['Open Street Map','http://b.tile.openstreetmap.org/'], 
+			['Open Cycle Map', 'http://c.tile.opencyclemap.org/cycle/'],
+			['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'], 
+			['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'], 
+			['Stamen terrain background','http://tile.stamen.com/terrain-background/']
+			
+		];
 
+		for (var option, i = 0; i < mapTypes.length; i++) {
+			option = document.createElement( 'option' )
+			selMapType.appendChild( option );
+			option.innerText = mapTypes[i][0];
+		}
+
+		selMapType.selectedIndex = mapType;
+		
 		renderer = new THREE.WebGLRenderer( { antialias: true }  );
 		renderer.shadowMapEnabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -157,6 +194,8 @@
 			elevationsImage.onload = initCanvas;
 		}
 
+		currentLat = lat;
+		currentLng = lng;
 		tileYLat = lat2tile( lat, tileZoom );
 		tileXLng = long2tile( lng, tileZoom );
 		elevTileYLat = lat2tile( lat, elevZoom );
@@ -165,15 +204,16 @@
 		elevationsImage.src = "../unicam/topo-" + elevZoom + "-" + elevTileYLat + "-" + elevTileXLng + ".png";
 	}
 
+	var ulLat, lrLat, ulLng, lrLng;
 	function initCanvas() {
 		if ( plane != undefined ) {
 			scene.remove( plane );
 		}
 
-		var ulLat = tile2lat( tileYLat, tileZoom );
-		var lrLat = tile2lat( tileYLat + 1, tileZoom );
-		var ulLng = tile2lng( tileXLng, tileZoom );
-		var lrLng = tile2lng( tileXLng + 1, tileZoom );
+		ulLat = tile2lat( tileYLat, tileZoom );
+		lrLat = tile2lat( tileYLat + 1, tileZoom );
+		ulLng = tile2lng( tileXLng, tileZoom );
+		lrLng = tile2lng( tileXLng + 1, tileZoom );
 // console.log( 'tileZoom', tileZoom, 'lats', ulLat, lrLat, 'lngs', ulLng, lrLng  );
 
 		var deltaLats = Math.abs( ulLat - lrLat );
@@ -199,10 +239,11 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 // material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
 // material = new THREE.MeshBasicMaterial( { map: mapTexture, side: THREE.DoubleSide } );
+		
 		// var mapTexture = THREE.ImageUtils.loadTexture( "http://b.tile.openstreetmap.org/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
 		
 		// http://[abc].tile.opencyclemap.org/cycle/zoom/x/y.png
-		var mapTexture = THREE.ImageUtils.loadTexture( "http://c.tile.opencyclemap.org/cycle/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
+		//var mapTexture = THREE.ImageUtils.loadTexture( "http://c.tile.opencyclemap.org/cycle/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
 		
 		// http://otile[1234].mqcdn.com/tiles/1.0.0/osm/zoom/x/y.jpg
 		// var mapTexture = THREE.ImageUtils.loadTexture( "http://otile3.mqcdn.com/tiles/1.0.0/osm/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".jpg" );
@@ -211,7 +252,9 @@
 		//var mapTexture = THREE.ImageUtils.loadTexture( "http://otile3.mqcdn.com/tiles/1.0.0/sat/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".jpg" );
 		
 		// http://tile.stamen.com/terrain-background/zoom/x/y.jpg
+		// var mapTexture = THREE.ImageUtils.loadTexture( "http://tile.stamen.com/terrain-background/" + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
 		
+		var mapTexture = THREE.ImageUtils.loadTexture( mapTypes[ mapType ][1] + tileZoom + "/" + tileXLng + "/" + tileYLat + ".png" );
 		
 		material = new THREE.MeshPhongMaterial( {map: mapTexture, side: THREE.DoubleSide, color: 0xffffff, ambient: 0xffffff, specular: 0x888888, shininess: 200, shading: THREE.SmoothShading} );
 		material.color.setHSL( 0.5, 0.8, 0.5 );
@@ -234,13 +277,15 @@
 		zoomContext.putImageData( elevationsImgData, 0, 0 );
 		var zoomImgData = zoomContext.getImageData( 1, 0, pixelsLng, pixelsLat);
 		var color, id, len = zoomImgData.data.length / 4;
+		
+		var scale = 0.01 * exaggeration;
 
 		for (var i = 0; i < len; i++) {
 			color = zoomImgData.data[ 4 * i] + ' ' + zoomImgData.data[ 4 * i + 1] + ' '  + zoomImgData.data[ 4 * i + 2];
 			id =  uniColors.indexOf( color );
-			geometry.vertices[ i ].y = 0.05 * uniElevations[ id ];
+			geometry.vertices[ i ].y = scale * uniElevations[ id ];
 		}
-
+		
 		plane = new THREE.Mesh( geometry, material );
 		plane.receiveShadow = true;
 		plane.castShadow = true;
@@ -249,13 +294,58 @@
 		plane.geometry.computeVertexNormals();
 		plane.geometry.verticesNeedUpdate = true;
 		scene.add( plane );
+		
+		lookForAssets();
 	}
 
 	function animate() {
 		requestAnimationFrame( animate );
 		controls.update();
 		renderer.render( scene, camera );
+		if ( goodies ) {
+			doStuff();
+		}
 		stats.update();
+	}
+	
+	function lookForAssets() {
+
+		var fname = "https://spreadsheets.google.com/feeds/list/0Akg809SWki8tdGd2aHlaWERVTzhvM1RnOFZGbmtSalE/od5/public/values?alt=json&callback=callback&sq=lat>" + lrLat + "%20and%20lat<" + ulLat + "";
+
+		var js = document.createElement('script');
+		js.type = 'text/javascript';
+		// js.onload= helper;
+		js.src = fname;
+		document.body.appendChild( js );
+	}
+	
+	var entry, entries, title, text, script;
+	
+	function callback( root ) {
+		if ( goodies != undefined ) {
+			scene.remove( goodies );
+		}	
+		// console.log( data );
+		
+		var feed = root.feed;
+		var entries = feed.entry || [];
+		//var html = ['<ul>'];
+
+		for (var i = 0; i < entries.length; ++i) {
+			entry = entries[i];
+			title = entry.title.$t;
+			text = entry.content.$t
+			script = entry.gsx$asseturl.$t
+			//var start = (entry['gd$when']) ? entry['gd$when'][0].startTime : "";	
+
+			console.log('tit', title, ' - text: ', text, ' asseturl', script);
+			  
+			var js = document.createElement('script');
+			js.type = 'text/javascript';
+			js.src = script;
+			document.body.appendChild( js );
+		  
+		}
 	}
 </script>
 </body>
