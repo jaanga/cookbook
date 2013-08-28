@@ -15,5 +15,5 @@ Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-surf
 
 Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-surface-vtk-fail.html
  
-Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-surface-transcend.html
+Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-suface-transcend.html
 
