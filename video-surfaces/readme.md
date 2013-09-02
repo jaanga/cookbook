@@ -17,3 +17,8 @@ Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-surf
  
 Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-surface-transcend.html
 
+###Copyright and License
+Copyright &copy; 2013 Jaanga authors
+
+MIT License
+
