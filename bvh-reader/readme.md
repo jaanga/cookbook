@@ -1,9 +1,9 @@
 Jaanga BVH Reader
 =================
 
-Live demo - Saqoo's format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html
-Live Demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html
-Live demo - Truebones format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html
+Live demo - Saqoosha's format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html  
+Live Demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
+Live demo - Truebones format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
 
 ###About
 The [BVH](http://en.wikipedia.org/wiki/Biovision_Hierarchy) format is probably the most popular free, 
@@ -14,17 +14,28 @@ This means that the source code of this app can be used to replay BVH files as p
 
 There are issues. The organization that created the BVH format is no longer in existence. 
 And no other organization has stepped up to take charge. Thus numerous 'dialects' of BVH exist. 
-As you see above there are three apps in the demo. Each app can read a different BVH dialect.
+As you see above there are three apps in the demo. Each app reads a different BVH dialect.
 
+* bvh-reader-saqoosha.html reads the files that Saqoosh uses in his demoas
+* bvh-reader-saqoosha-cmu-daz.html reads riles prepareb at Carnagie Mellon University and updated by Bruce Hahne
+* bvh-reader-saqoosha-truebones.html reads Truebones files
+
+###Road Map
+* Priority: Save and replay data from [Leap Motion](http://leapmotion.com) devices in BVH format
+* Identify cusus of gimbal locking, occasional jumps and other display issues 
+* Adding skins to the animations
+* Ability to view animations frame by frame
+* Ability to add and remove frames 
 
 
 ### Copyright, License and Credits
 copyright &copy; 2013 Jaanga authors ~ MIT License
 
-See also [Copyright, License and Credits]()
+See also [Copyright, License and Credits](https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/copyright-license-credits.md)
 
 The Jaanga BVH Reader would not exist without the extraordinary work by [Saqoosha](http://saqoo.sh/a/) 
 and this [demo](http://saqoo.sh/a/labs/perfume/3/).  
+
 Have a look at the [source code](http://saqoo.sh/a/labs/perfume/3/scripts/parser.js).
 Saqoosha's methods for parsing the data using array.shift and his intricate for loops are coding gems.
 His use of jQuery means zero HTML and CSS and 100% JavaScript and DOM 
@@ -34,6 +45,25 @@ Having said that, Saqoosha's coding skills are way above the level of a normal c
 So in order to maintain sanity a good deal of the code in the Jaanga app is in old-school JavaScript function style.
 
 ###Links
+
+Papers  
+[Skeleton API Considerations for Leap Motion Devices](https://docs.google.com/document/d/1jVB3RP0Xnhp_py0hhbbZ8jZtHW-MSkxbGKEUPWwtMos/edit#heading=h.2cmd03se8bwk)  
+
+Code
+https://code.google.com/p/papervision3d/source/browse/trunk/as3/trunk/src/org/papervision3d/objects/parsers/mocap/BVH.as?spec=svn938&r=938
+https://github.com/sinisterchipmunk/bvh
+
+
+Apps  
+http://www.cgspeed.com/  
+http://www.bvhacker.com/  
+
+Sources  
+http://www.animstreet.com/animations/7106  
+http://www.mixamo.com/  
+http://freemocap.com/  
+http://www.truebones.com/store.html
+http://www.turbosquid.com/Search/Motion-Capture/hand/bvh  
 
 
 ###Change Log
