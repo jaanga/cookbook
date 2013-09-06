@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Read BVH</title>
+<meta charset=utf-8>
+</head>
+<body>
+<script src='http://mrdoob.github.com/three.js/examples/js/Detector.js'></script>
+<script src='http://mrdoob.github.com/three.js/build/three.min.js'></script>
+<script src='http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js'></script>
+<script src='http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js'></script>
+<script>
+	var renderer, scene, camera, controls, stats;
+	var reader = new FileReader();
+	var play, textarea;
+	var Bvh = {};
+	
+	init();
+	requestFile();
+	
+	function init() {
+		var geometry, material, mesh, css, info;
+		
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'input { font: 600 12pt monospace; }';
+		
+		var info = document.body.appendChild( document.createElement( 'div' ) );
+		info.innerHTML = '<h1>Read BVH</h1>' +
+			'<input type=file onchange=readText(this) /> <input type="checkbox" id="play" checked>Play';
+		
+		play = document.getElementById('play');
+
+		textarea = document.body.appendChild( document.createElement( 'textarea' ) );
+		textarea.style.cssText = 'height: ' + (window.innerHeight - 150) + 'px; width: ' +  0.45 * window.innerWidth + 'px; ';
+		textarea.value = 'text here...';		
+		
+		renderer = new THREE.WebGLRenderer( { antialias: true }  );	
+		renderer.setSize( 0.5 * window.innerWidth, window.innerHeight - 150 );
+
+		document.body.appendChild( renderer.domElement );
+		scene = new THREE.Scene();
+
+		camera = new THREE.PerspectiveCamera( 40, (0.45 * window.innerWidth) / (window.innerHeight - 150) , 1, 5000 );
+		camera.position.set( 100, 100, 100 );
+		controls = new THREE.TrackballControls( camera, renderer.domElement );
+		controls.target.set( -50, 0, 0 );
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0px; zIndex: 100; ';
+		document.body.appendChild( stats.domElement );    
+
+		geometry = new THREE.AxisHelper( 80 );
+		scene.add( geometry );
+
+		geometry = new THREE.PlaneGeometry( 600, 600, 1, 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+		material = new THREE.MeshBasicMaterial( {color: Math.random() * 0xffffff, side: THREE.DoubleSide } );
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( 0, -100, 0 );
+		scene.add( mesh );
+	}
+
+	function readText( that ){
+		if ( that.files && that.files[0] ){
+			var reader = new FileReader();
+			reader.onload = function (event) {
+				var data = event.target.result;
+				textarea.value = data;
+				Bvh.parseData( data );
+			};
+			reader.readAsText(that.files[0]);
+		}
+	}	
+	
+	var xmlhttp;
+	function requestFile() {
+		dataPlay = false;
+		xmlhttp = new XMLHttpRequest();
+		xmlhttp.open( 'GET', '../../../models/bvh/7106.bvh', true );
+		xmlhttp.onreadystatechange = callbackFile;
+// http://stackoverflow.com/questions/15561508/xmlhttprequest-206-partial-content
+// xmlhttp.setRequestHeader('Range', 'bytes=100-200');
+		xmlhttp.send( null );
+		callbackCount = 0;
+	}
+
+	function callbackFile() {
+		var data;
+		if ( xmlhttp.readyState == 4  ) {
+			data = xmlhttp.responseText;
+			textarea.value = data;
+			Bvh.parseData ( data );
+		} else {
+console.log('waiting...');
+		}
+	}	
+
+	Bvh.parseData = function ( data ) {
+		var _this = Bvh;
+		_this.data = data.split(/\s+/g);
+		_this.channels = [];
+		done = false;
+		while (!done) {
+			switch (_this.data.shift()) {
+			case 'ROOT':
+				_this.root = _this.parseNode(_this.data);
+				scene.add(_this.root);
+				break;
+			case 'MOTION':
+				_this.data.shift();
+				_this.numFrames = parseInt( _this.data.shift() );
+				_this.data.shift();
+				_this.data.shift();
+				_this.secsPerFrame = parseFloat(_this.data.shift());
+				done = true;
+			}
+		}
+		_this.root.material = new THREE.MeshBasicMaterial({ color: 0xff0000});
+		_this.startTime = Date.now();
+		animate();
+    }
+
+    Bvh.parseNode = function( data) {
+		var name, done, geometry, i, material, n, node, t;
+		name = data.shift();
+		
+		if ( name === 'Site' ) {
+			geometry = new THREE.SphereGeometry( 3 );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+/*			
+		} else if ( name === 'Head' ) {
+			geometry = new THREE.CubeGeometry( 12, 20, 15 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 8, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+		} else if ( name === 'Neck' ) {
+			geometry = new THREE.CubeGeometry( 10, 10, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 4, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else if ( name === 'LeftCollar' ) {
+			geometry = new THREE.CubeGeometry( 30, 10, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -10, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+		} else if ( name === 'RightCollar' ) {
+			geometry = new THREE.CubeGeometry( 30, 10, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 10, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else if ( name === 'LeftShoulder' ||  name === 'LeftElbow' ) {
+			geometry = new THREE.CubeGeometry( 35, 8, 8 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);		
+		} else if ( name === 'RightShoulder' || name === 'RightElbow' ) {
+			geometry = new THREE.CubeGeometry( 35, 8, 8 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else if ( name === 'LeftWrist' ) {
+			geometry = new THREE.CubeGeometry( 15, 12, 5 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);		
+		} else if ( name === 'RightWrist' ) {
+			geometry = new THREE.CubeGeometry( 15, 12, 5 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+			
+		} else if ( name === 'Chest' || name === 'Chest2' || name === 'Chest3' || name === 'Chest4' ) {
+			geometry = new THREE.CubeGeometry( 30, 10, 10 );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+			
+		} else if ( name === 'RightHip' ||  name === 'LeftHip') {
+			geometry = new THREE.CubeGeometry( 10, 50, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -18, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+
+		} else if ( name === 'LeftKnee' || name === 'RightKnee' ) {
+			geometry = new THREE.CubeGeometry( 10, 45, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -25, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);		
+			
+			
+		} else if ( name === 'LeftAnkle' || name === 'RightAnkle' ) {
+			geometry = new THREE.CubeGeometry( 8, 8, 8 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+		} else if ( name === 'LeftToe' || name === 'RightToe' ) {
+			geometry = new THREE.CubeGeometry( 10, 5, 20 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -10 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+*/				
+		} else {	
+	
+			geometry = new THREE.CubeGeometry( 3, 3, 3 );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);
+		}
+		node.name = name; // data.shift();
+console.log( node.name );		
+		node.rotation.order = 'YXZ';
+		done = false;
+		while ( !done ) {
+			switch (t = data.shift()) {
+				case 'OFFSET':
+					node.position.set( parseFloat(data.shift()), parseFloat(data.shift()), parseFloat(data.shift()) );
+					node.offset = node.position.clone();
+					break;
+				case 'CHANNELS':
+					n = parseInt( data.shift());
+					for ( i = 0;  0 <= n ? i < n : i > n;  0 <= n ? i++ : i-- ) {  // OMG
+						this.channels.push({
+							node: node,
+							prop: data.shift()
+						});
+					}
+					break;
+				case 'JOINT':
+				case 'End':
+					node.add( this.parseNode(data) );
+					break;
+				case '}':
+					done = true;
+			}
+		}
+		return node;
+    };	
+
+    Bvh.animate = function() {
+		var ch, frame, n, torad, _i, _len, _ref;
+		frame = ( (Date.now() - this.startTime ) / this.secsPerFrame / 1000) | 0; 
+		n = frame % this.numFrames * this.channels.length;
+		torad = Math.PI / 180;
+		_ref = this.channels;
+		
+		for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+			ch = _ref[_i];
+			switch (ch.prop) {
+				case 'Xrotation':
+					ch.node.rotation.x = (parseFloat(this.data[n])) * torad;
+					break;
+				case 'Yrotation':
+					ch.node.rotation.y = (parseFloat(this.data[n])) * torad;
+					break;
+				case 'Zrotation':
+					ch.node.rotation.z = (parseFloat(this.data[n])) * torad;
+					break;
+				case 'Xposition':
+					ch.node.position.x = ch.node.offset.x + parseFloat(this.data[n]);
+					break;
+				case 'Yposition':
+					ch.node.position.y = ch.node.offset.y + parseFloat(this.data[n]);
+					break;
+				case 'Zposition':
+					ch.node.position.z = ch.node.offset.z + parseFloat(this.data[n]);
+			}
+			if ( ch.node.children.length > 0 ){
+				// console.log( ch.node.children[0].name );
+				// ch.node.lookAt( ch.node.children[0].position );
+			}
+			n++;
+		}
+		if (++this.currentFrame >= this.numFrames) this.currentFrame = 0;
+	};	
+
+	function animate() {
+		requestAnimationFrame( animate );
+		controls.update();
+		renderer.render( scene, camera );
+		stats.update();
+		if ( play.checked ) { Bvh.animate(); }
+	}	
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Jaanga BVH Reader</title>
+<meta charset=utf-8>
+</head>
+<body>
+<script src='http://mrdoob.github.com/three.js/examples/js/Detector.js'></script>
+<script src='http://mrdoob.github.com/three.js/build/three.min.js'></script>
+<script src='http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js'></script>
+<script src='http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js'></script>
+<script src=bvh-read.js></script>
+<script>
+// copyright &copy; 2013 Jaanga authors ~ MIT License
+
+// Thank you, Saqoosha ~ http://saqoo.sh/a/
+
+	requestFile( '../bvh-saqoosha/nocchi.bvh' );
+	
+	Bvh.info.innerHTML = '<h1>Jaanga BVH Reader - Saqoosha files</h1>' +
+		'<select id=selBvh onchange=requestFile("../bvh-saqoosha/"+Bvh.files[this.selectedIndex]) ></select> ' +
+		'<input type=file onchange=readText(this) /> <input type="checkbox" id="play" checked>Play - ' +
+		'<button type=button onclick=Bvh.play.checked=false;Bvh.animate(0); >First frame</button>';
+
+	Bvh.files = [ 'nocchi.bvh', 'aachan.bvh', 'kashiyuka.bvh'   ];	
+	for (var len = Bvh.files.length, option, i = 0; i < len; i++) {
+		option = document.createElement( 'option' );
+		option.innerText = Bvh.files[i];
+		selBvh.appendChild( option );
+
+	}
+	Bvh.play = document.getElementById('play');
+	selBvh.selectedIndex = 0;
+	
+    Bvh.parseNode = function( data) {
+		var name, done, geometry, i, material, n, node, t;
+		name = data.shift();
+		if ( name === 'Site' ) {
+			geometry = new THREE.SphereGeometry( 3 );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else if ( name === 'Head' ) {
+			geometry = new THREE.CubeGeometry( 12, 20, 15 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 8, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+		} else if ( name === 'Neck' ) {
+			geometry = new THREE.CubeGeometry( 10, 10, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 4, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else if ( name === 'LeftCollar' ) {
+			geometry = new THREE.CubeGeometry( 30, 10, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -10, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+		} else if ( name === 'RightCollar' ) {
+			geometry = new THREE.CubeGeometry( 30, 10, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 10, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else if ( name === 'LeftShoulder' ||  name === 'LeftElbow' ) {
+			geometry = new THREE.CubeGeometry( 35, 8, 8 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);		
+		} else if ( name === 'RightShoulder' || name === 'RightElbow' ) {
+			geometry = new THREE.CubeGeometry( 35, 8, 8 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+	} else if ( name === 'LeftWrist' ) {
+			geometry = new THREE.CubeGeometry( 15, 12, 5 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);		
+		} else if ( name === 'RightWrist' ) {
+			geometry = new THREE.CubeGeometry( 15, 12, 5 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -20, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+			
+		} else if ( name === 'Chest' || name === 'Chest2' || name === 'Chest3' || name === 'Chest4' ) {
+			geometry = new THREE.CubeGeometry( 30, 10, 10 );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+			
+		} else if ( name === 'RightHip' ||  name === 'LeftHip') {
+			geometry = new THREE.CubeGeometry( 10, 50, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -18, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);				
+
+		} else if ( name === 'LeftKnee' || name === 'RightKnee' ) {
+			geometry = new THREE.CubeGeometry( 10, 45, 10 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -25, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);		
+			
+		} else if ( name === 'LeftAnkle' || name === 'RightAnkle' ) {
+			geometry = new THREE.CubeGeometry( 8, 8, 8 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, 0 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+		} else if ( name === 'LeftToe' || name === 'RightToe' ) {
+			geometry = new THREE.CubeGeometry( 10, 5, 20 );
+			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -10 ) );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);	
+			
+		} else {	
+			geometry = new THREE.CubeGeometry( 35, 12, 12 );
+			material = new THREE.MeshNormalMaterial();
+			node = new THREE.Mesh(geometry, material);
+		}
+		node.name = name; // data.shift();
+console.log( node.name );		
+		node.rotation.order = 'YXZ';
+		done = false;
+		while ( !done ) {
+			switch (t = data.shift()) {
+				case 'OFFSET':
+					node.position.set( parseFloat(data.shift()), parseFloat(data.shift()), parseFloat(data.shift()) );
+					node.offset = node.position.clone();
+					break;
+				case 'CHANNELS':
+					n = parseInt( data.shift());
+					for ( i = 0;  0 <= n ? i < n : i > n;  0 <= n ? i++ : i-- ) {  // OMG
+						this.channels.push({
+							node: node,
+							prop: data.shift()
+						});
+					}
+					break;
+				case 'JOINT':
+				case 'End':
+					node.add( this.parseNode(data) );
+					break;
+				case '}':
+					done = true;
+			}
+		}
+		return node;
+    };	
+	
+</script>
+</body>
+</html>
