@@ -31,7 +31,7 @@ As you see above there are three apps in the demo. Each app reads a different BV
 ### Copyright, License and Credits
 copyright &copy; 2013 Jaanga authors ~ MIT License
 
-See also [Copyright, License and Credits](https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/copyright-license-credits.md)
+See also [Copyright, License and Credits](https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/copyright-license-credits.md)  
 
 The Jaanga BVH Reader would not exist without the extraordinary work by [Saqoosha](http://saqoo.sh/a/) 
 and this [demo](http://saqoo.sh/a/labs/perfume/3/).  
@@ -49,8 +49,9 @@ So in order to maintain sanity a good deal of the code in the Jaanga app is in o
 Papers  
 [Skeleton API Considerations for Leap Motion Devices](https://docs.google.com/document/d/1jVB3RP0Xnhp_py0hhbbZ8jZtHW-MSkxbGKEUPWwtMos/edit#heading=h.2cmd03se8bwk)  
 
-Code
-https://code.google.com/p/papervision3d/source/browse/trunk/as3/trunk/src/org/papervision3d/objects/parsers/mocap/BVH.as?spec=svn938&r=938
+BVH Reader Code Samples
+It is amusing to compare the elegance of Saqoosha's code with these efforts:  
+https://code.google.com/p/papervision3d/source/browse/trunk/as3/trunk/src/org/papervision3d/objects/parsers/mocap/BVH.as?spec=svn938&r=938  
 https://github.com/sinisterchipmunk/bvh
 
 
