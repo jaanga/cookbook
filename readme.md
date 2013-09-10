@@ -1,0 +1,33 @@
+Jaanga Cookboo
+==============
+
+_3D Code that's fun and easy to play with_
+
+#BVH Reader
+Fast and simple motion capature data reader mkes your characters come elive 
+
+
+Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html  
+Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
+Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
+
+Blog post:
+
+
+#j3qUE
+Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file. The Three.js goes into its own file called in by an IFRAME into the main page. In the main file, you write in jQuery style. In the iframe, you write in Three.js style.
+
+Blog Post  
+http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html
+
+#oSome Globe
+The world like she has never been seen before.  
+
+Blog posts  
+Three of them - all from Jube 2013: http://www.jaanga.com/2013_06_01_archive.html
+
+#unflatland
+The map like she has never been seen before
+
+#Video Surfaces
+The TV like she has never been seen before

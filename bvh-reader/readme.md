@@ -2,7 +2,7 @@ Jaanga BVH Reader
 =================
 
 Live demo - Saqoosha's format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html  
-Live Demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
+Live demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
 Live demo - Truebones format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
 
 ###About

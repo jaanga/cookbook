@@ -1,5 +1,8 @@
 // copyright &copy; 2013 Jaanga authors ~ MIT License
 
+// Thank you, Saqoosha ~ http://saqoo.sh/a/
+
+
 	var renderer, scene, camera, controls, stats;
 	var reader = new FileReader();
 	var textarea;
