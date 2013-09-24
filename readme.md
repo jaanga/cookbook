@@ -1,5 +1,5 @@
-Jaanga Cookboo
-==============
+Jaanga Cookbook
+===============
 
 _3D Code that's fun and easy to play with_
 
@@ -21,13 +21,18 @@ Blog Post
 http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html
 
 #oSome Globe
+See WebGL Meet-Up: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introductions/The_Apps/unFlatland_R2
 The world like she has never been seen before.  
 
 Blog posts  
 Three of them - all from Jube 2013: http://www.jaanga.com/2013_06_01_archive.html
 
 #unflatland
-The map like she has never been seen before
+The map like she has never been seen before:
+R1: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introductions/The_Apps/unFlatLand_R1_with_Materials
+R2: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introductions/The_Apps/unFlatland_R2
 
 #Video Surfaces
-The TV like she has never been seen before
+Post: http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html
+Code: https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces
+- The TV like she has never been seen before
