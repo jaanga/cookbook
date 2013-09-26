@@ -12,7 +12,7 @@ http://jaanga.github.io/cookbook/osome-globe/r4/
 
 Derivation of the name oSome Globe: oSome = OSM + awesome + "That's some Globe!"
 
-See also post on (jaanga.com)[http://jaanga.com]
+See also post on [jaanga.com](http://jaanga.com)
 
 General controls:
 
