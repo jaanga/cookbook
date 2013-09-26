@@ -1,5 +1,10 @@
 Video Surfaces
 ==============
+###R2
+Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r2/threejs-video-surface-transcend.html  
+- two surfaces
+Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r2/video-select.html  
+- two surfaces + Leap Motion support
 
 ###R1
 Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r1/threejs-video-surface-texture.html
