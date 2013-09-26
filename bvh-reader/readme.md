@@ -4,6 +4,8 @@ Jaanga BVH Reader
 Live demo - Saqoosha's format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html  
 Live demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
 Live demo - Truebones format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
+Live demo - Procedure generated bot: http://jaanga.github.io/cookbook/bvh-reader/r1/procedure-bots.html  
+procedure-bots
 
 ###About
 The [BVH](http://en.wikipedia.org/wiki/Biovision_Hierarchy) format is probably the most popular free, 
