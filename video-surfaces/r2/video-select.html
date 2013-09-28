@@ -130,9 +130,9 @@
 		geometry = new THREE.PlaneGeometry( 1, 1, 100, 100  );
 		//geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
 		plane1 = new THREE.Mesh( geometry, material );
-		plane1.position.set( 0, 30, 0 );
+		plane1.position.set( 0, -500, 0 );
 		plane1.rotation.x = -pi05;
-		plane1.scale.set( 100, 100, 100 );
+		plane1.scale.set( 300, 300, 300 );
 		scene.add( plane1 );
 		
 		var num = parseInt( Math.floor(Math.random() * arr.length) );
@@ -157,9 +157,9 @@ console.log( select1.selectedIndex, num );
 		geometry = new THREE.PlaneGeometry( 1, 1, 100, 100 );
 		// geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
 		plane2 = new THREE.Mesh( geometry, material );
-		plane2.position.set( 0, 30, 0 );
+		plane2.position.set( 0, -500, 0 );
 		plane2.rotation.x = -pi05;
-		plane2.scale.set( 100, 100, 100 );
+		plane2.scale.set( 300, 300, 300 );
 		scene.add( plane2 );
 		
 		num = parseInt( Math.floor(Math.random() * arr.length) );
