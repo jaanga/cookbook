@@ -1,5 +1,8 @@
 Video Surfaces
 ==============
+
+See also blog post: http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html
+
 ###R2
 Live Demo: http://jaanga.github.io/cookbook/video-surfaces/r2/video-select.html  
 - two surfaces + Leap Motion support. Perhaps one of the most insane things I have ever made. 

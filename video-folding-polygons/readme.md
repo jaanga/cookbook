@@ -1,6 +1,8 @@
 folding polygons
 ================
 
+See also blog post: http://www.jaanga.com/2013/09/folding-polygons-naughty-way-in-3d-with.html
+
 The following demos arise from a conversation with ArtS, a resident of Menlo Park, CA, held over a lunch on 2013-09-01. 
 We talked of displaying video on folding polygons - which are things that look like the images in the link provide by Art to this book: http://graphics.berkeley.edu/papers/Iben-RPP-2006-06/.
 Basically, if you like origami then you like folding polygons. 
