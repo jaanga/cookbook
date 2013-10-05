@@ -1,10 +1,10 @@
 Jaanga Cookbook
 ===============
 
-_3D Code that's fun and easy to play with_
+_3D Code that's fun and easy to play with_  
 
-#BVH Reader
-Fast and simple motion capature data reader mkes your characters come elive 
+#BVH Reader   
+Fast and simple motion capature data reader mkes your characters come alive  
 
 
 Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html  
@@ -29,10 +29,11 @@ Three of them - all from Jube 2013: http://www.jaanga.com/2013_06_01_archive.htm
 
 #unflatland
 The map like she has never been seen before:
-R1: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introductions/The_Apps/unFlatLand_R1_with_Materials
-R2: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introductions/The_Apps/unFlatland_R2
+R2: http://jaanga.github.io/cookbook/un-flatland/r2/index.html  
+R1: http://jaanga.github.io/cookbook/un-flatland/r1/index.html  
+
 
 #Video Surfaces
-Post: http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html
-Code: https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces
+Post: http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html   
+Code: https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces  
 - The TV like she has never been seen before
