@@ -11,7 +11,7 @@ Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.ht
 Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
 Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
 
-Blog post:
+Blog post: http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html  
 
 
 #j3qUE
@@ -25,10 +25,10 @@ See WebGL Meet-Up: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introduct
 The world like she has never been seen before.  
 
 Blog posts  
-Three of them - all from Jube 2013: http://www.jaanga.com/2013_06_01_archive.html
+Three of them - all from June 2013: http://www.jaanga.com/2013_06_01_archive.html
 
-#unflatland
-The map like she has never been seen before:
+#unFlatland
+The map like she has never been seen before:  
 R2: http://jaanga.github.io/cookbook/un-flatland/r2/index.html  
 R1: http://jaanga.github.io/cookbook/un-flatland/r1/index.html  
 

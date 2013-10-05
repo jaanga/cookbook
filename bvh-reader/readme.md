@@ -6,6 +6,7 @@ Live demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-r
 Live demo - Truebones format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
 Live demo - Procedure generated bot: http://jaanga.github.io/cookbook/bvh-reader/r1/procedure-bots.html  
 
+Blog post: http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html  
 
 ###About
 The [BVH](http://en.wikipedia.org/wiki/Biovision_Hierarchy) format is probably the most popular free, 
