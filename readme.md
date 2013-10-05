@@ -11,14 +11,16 @@ Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.ht
 Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
 Live demo: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
 
+More details here: https://github.com/jaanga/cookbook/tree/gh-pages/bvh-reader  
 Blog post: http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html  
 
 
 #j3qUE
 Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file. The Three.js goes into its own file called in by an IFRAME into the main page. In the main file, you write in jQuery style. In the iframe, you write in Three.js style.
 
-Blog Post  
-http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html
+Live demo: http://jaanga.github.io/cookbook/j3dUE/r2/index.html  
+
+Blog Post: http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html  
 
 #oSome Globe
 See WebGL Meet-Up: http://jaanga.github.io/events/sf-webgl-2013-06-26/#Introductions/The_Apps/unFlatland_R2
