@@ -3,6 +3,10 @@ docTree Very Simple
 
 Live demo: http://jaanga.github.io/cookbook/doctree-very-simple/r1/index.html
 
+Minimal code that enables side-by-side menu and content panels with utmost flexibility for the cotent of both panels.  
+
+
+
 ### Copyright, License and Credits
 copyright &copy; 2013 Jaanga authors ~ MIT License
 
