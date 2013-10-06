@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en>
 <head>
-<title>Index</title>
+<title>docTree Very Simple</title>
 <meta charset=utf-8>
 <meta name=author content='Theo Armour'>
 </head>
@@ -9,27 +9,36 @@
 <script>
 
 	document.body.style.cssText = ' font: bold 12pt monospace; ';
+	
 	var info = document.body.appendChild( document.createElement( 'div' ) );
 	info.style.cssText = 'height: ' + (window.innerHeight - 50) + 'px; overflow: auto; width: 250px;';
-	info.innerHTML = '<h1>Index</h1>';
+	info.innerHTML = '<h1>Menu</h1>' +
+		'<p><i><small>If it doesn\'t taste good it doesn\'t go on the menu.</small></i></p>' +
+	'';
 	
-	var ifr = document.body.appendChild( document.createElement( 'iframe' ) );
-	ifr.style.cssText = 'height: ' + (window.innerHeight - 50) + 'px; left: 300px; position: absolute; top: 5px; width: ' + (window.innerWidth - 350) + 'px; ';
-	ifr.src = 'file1.html';
-	
-	info.innerHTML +='<a href=# onclick=ifr.src="file1.html"; >file 1</a><br>' +
-		'<a href=# onclick=ifr.src="file2.html"; >file 2</a><br>' +
-		'<a href=# onclick=ifr.src="file3.html"; >file 3</a><br>' +
-		'</p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
+	info.innerHTML +='<a href=# onclick=ifr.src="file1.html"; >Introduction</a><br>' +
+		'<a href=# onclick=ifr.src="file2.html"; >Specification</a><br>' +
+		'<a href=# onclick=ifr.src="file3.html"; >License & Credits</a><br>' +
+		'<br>' +
+		'<a href=# onclick=ifr.src="http://jaanga.github.io"; >jannga</a><br>' +
+		'<a href=# onclick=ifr.src="http://jaanga.github.io"; >source code</a><br>' +
+		'<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
 		
 		'<a href=# onclick=ifr.src="file1.html"; >file 1</a><br>' +
 		'<a href=# onclick=ifr.src="file2.html"; >file 2</a><br>' +
 		'<a href=# onclick=ifr.src="file3.html"; >file 3</a><br>' +
-		'</p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
+		'<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>' +
 
-
-		'';
-
+	'';
+	
+	var ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+	ifr.style.cssText = 'height: ' + (window.innerHeight - 50) + 'px; left: 300px; position: absolute; top: 5px; width: ' + (window.innerWidth - 350) + 'px; ';
+	
+	if ( !location.hash ) {
+		ifr.src = 'file1.html';
+	} else {
+		ifr.src = location.hash.substr(1);
+	}
 </script>
 </body>
 </html>
