@@ -1,6 +1,8 @@
 Chinary
 ========
 
+Live demo: http://jaanga.github.io/cookbook/chinary/r1/index.html  
+
 A Chinese Character Dictionary.  
 
 A tip of the hat to Paul Masson for getting the idea and he data.  
