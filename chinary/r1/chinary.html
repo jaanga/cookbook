@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Chinary</title>
+<meta charset=utf-8>
+<meta name=author content='Theo Armour'>
+</head>
+<body>
+<script>
+
+	var xmlhttp;
+	var chinary, keys;
+	
+	var css = document.body.appendChild( document.createElement('style') );
+	css.innerHTML = 'body { font: 600 12pt monospace; overflow: hidden; }' +
+		'h1 a {text-decoration: none;}' +
+		'input, button { font: 600 12pt monospace; }';
+			
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = info.txt = '<h1>Chinary ~ ' +
+		'<a href=# onclick=toggleInfo() ><large>&#x24D8;</large></a></h1>' +
+		'<div id=msg>Loading dictionary...</div>' + 
+		'<br>' +
+		'<div><input id=inp type=text value="\u3405"" > ' +
+		'<button onclick="getData();" size="400">Get Data</button></div>' +
+		'<br>' +
+		'<div id=stats></div>' +
+	'</p>';	
+	
+	requestFile();
+	
+	function toggleInfo() {
+		info.innerHTML = info.txt +
+			'<div onclick=window.location.reload() style=background-color:#ccc;opacity:0.7;padding:10px;text-align:left; >' +
+			'Chinary is based on the work of Paul Massson.<br><br>' +	
+			'This app presents traditional and simplified Asian characters grouped by phonetic component. ' +
+			'The components follow the standard reference <i>Ten Thousand Characters, Cantonese-Mandarin-English, An Analytic Dictionary</i>, ' +
+			'by G. Hugh Casey, S.J. Hong Kong: Kelley and Walsh, 1980 as compiled by the Unicode Consortium. <br><br>' +
+			'<a href="https://github.com/jaanga/cookbook/chinary" target="_blank">Source code.</a><br>' +
+			'<a href="http://jaanga.github.io" target="_blank">jaanga</a><br>' +	
+			'copyright &copy; 2013 jaanga authors ~ mit license</small<br>' + 	
+			'<br><br><i>Click anywhere in this message to hide...</i>' +
+		'</div>';
+	}	
+	
+	function requestFile() {
+		xmlhttp = new XMLHttpRequest();
+		xmlhttp.open( 'GET', 'dictionary.json', true );
+		xmlhttp.onreadystatechange = callbackJSON;
+// xmlhttp.setRequestHeader('Range', 'bytes=100-200');
+		xmlhttp.send( null );
+	}
+	
+	function callbackJSON() {
+		if ( xmlhttp.readyState == 4  ) {
+			chinary = JSON.parse(xmlhttp.responseText);
+			var keys = Object.keys(chinary);
+			var num = parseInt( Math.floor(Math.random() * keys.length));
+			msg.innerHTML = 'Characters loaded: ' + keys.length + ', Data displayed for random character, #' + num + '<br>';
+			inp.value = keys[parseInt( Math.random() * keys.length)];
+			getData();
+		} else {
+console.log('waiting...');
+		}
+	}
+
+	function getData() {
+		var chr = chinary[ JSON.parse('"' + inp.value + '"') ]
+console.log( inp.value, chr );
+		stats.innerHTML = '';
+		stats.innerHTML += 	
+			'kPhonetic:  &nbsp  &nbsp' + chr['kPhonetic'] + '<br>' +
+			'kFrequency  &nbsp; &nbsp' + chr['kFrequency'] + '<br>' +
+			'kTotalStrokes:' + chr['kTotalStrokes'] + '<br>' +
+			'kRSKangXi:  &nbsp; &nbsp' + chr['kRSKangXi'] + '<br>' +
+			'kRSUnicode:  &nbsp; ' + chr['kRSUnicode'] + '<br>' +
+			'kCantonese:  &nbsp; ' + chr['kCantonese'] + '<br>' +
+			'kDefinition:  &nbsp;' + chr['kDefinition'] + '<br>' +
+			'kHanyuPinyin: ' + chr['kHanyuPinyin'] + '<br>' +
+			'kMandarin: &nbsp; &nbsp;' + chr['kMandarin'] + '<br>' +
+			'kJapaneseKun: ' + chr['kJapaneseKun'] + '<br>' + 
+			'kJapaneseOn:  &nbsp;' + chr['kJapaneseOn'] + '<br>' +
+			'kKorean  &nbsp; &nbsp &nbsp ' + chr['kKorean'] + '<br>' +
+		'';
+		
+		for ( var x in chr) {
+			console.log( x );
+		}
+	}
+</script>
+</body>
+</html>
