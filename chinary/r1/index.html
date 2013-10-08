@@ -3,7 +3,7 @@
 <head>
 <title>Chinary</title>
 <meta charset=utf-8>
-<meta name=author content='Theo Armour'>
+<meta name='viewport' content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
 <body>
 <script>
@@ -34,7 +34,8 @@
 			'<div onclick=window.location.reload() style=background-color:#ccc;opacity:0.7;padding:10px;text-align:left; >' +
 			'Chinary is based on the work of Paul Massson.<br><br>' +	
 			'This app presents traditional and simplified Asian characters grouped by phonetic component. ' +
-			'The components follow the standard reference <i>Ten Thousand Characters, Cantonese-Mandarin-English, An Analytic Dictionary</i>, ' +
+			'The components follow the standard reference ' +
+			'<a href="http://books.google.com/books/about/Ten_Thousand_Characters.html?id=8jikPQAACAAJ" target="_blank"><i>Ten Thousand Characters, Cantonese-Mandarin-English, An Analytic Dictionary</i></a>, ' +
 			'by G. Hugh Casey, S.J. Hong Kong: Kelley and Walsh, 1980 as compiled by the Unicode Consortium. <br><br>' +
 			'<a href="https://github.com/jaanga/cookbook/chinary" target="_blank">Source code.</a><br>' +
 			'<a href="http://jaanga.github.io" target="_blank">jaanga</a><br>' +	
@@ -84,7 +85,7 @@ console.log( inp.value, chr );
 		'';
 		
 		for ( var x in chr) {
-			console.log( x );
+console.log( x );  //what types have I missed
 		}
 	}
 </script>
