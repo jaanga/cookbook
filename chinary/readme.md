@@ -19,13 +19,13 @@ It is yet another example of stuff that was incredibly hard to do a few years th
 #### Chinary
 copyright &copy; 2013 Jaanga authors ~ MIT License
 
-##Unicide and the Unihan data set
+###Unicide and the Unihan data set
 The data used here was original prepared by the Unicode organizatiion. 
 See the (Unicode Terms of Use)[http://www.unicode.org/copyright.html].
 
 A tip of the hat to Paul Masson for originating the idea and providing access to the data.  
 The dictionary used here is a subset of the full Unihan database as modified by Paul Masson. See also his app:
-(Asian Phonetics)[]https://itunes.apple.com/us/app/asian-phonetics/id701159884?mt=8
+(Asian Phonetics)[https://itunes.apple.com/us/app/asian-phonetics/id701159884?mt=8].
 
 
 ## Road Map
@@ -36,6 +36,9 @@ The dictionary used here is a subset of the full Unihan database as modified by 
 
 
 ##Change Log
+
+2013-10-08 ~ Theo
+* readme updated
 
 2013-10-07 ~ Theo
 * R1 created and uploaded
