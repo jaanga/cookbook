@@ -1,7 +1,7 @@
 ﻿<!doctype html>
 <html lang=en>
 <head>
-<title>gus 7</title>
+<title>skinned bvh</title>
 <meta charset=utf-8>
 <meta name=viewport content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
@@ -51,7 +51,7 @@ var css, light, geometry, material, mesh;
 		document.body.appendChild( info );
 		// info.style.cssText = 'margin 0 0 0 100px: auto; position: absolute; top: 0px; width: 100% ';
 		info.style.cssText = 'left: 5%; position: absolute; width: 65%; ';
-		info.innerHTML = info.txt = '<h1>Gus 7</h1>' +
+		info.innerHTML = info.txt = '<h1>skinned bvh r1</h1>' +
 			'<select id=selBvh onchange=requestFile("../../bvh-reader/bvh-cmu-daz/"+Bvh.files[this.selectedIndex]) ></select> ' +		
 			'<input type=file onchange=readText(this) /> ' +
 			'Select character <select id=selAppendages onchange=loadJSON(this.value); ></select> ' +
