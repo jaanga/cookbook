@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Three.js Screen Grabber</title>
+<meta charset=utf-8>
+<meta name=author content='Theo Armour'>
+</head>
+<body>
+<script src="http://jaanga.github.io/libs/Blob.js"></script>
+<script src="http://jaanga.github.io/libs/canvas-toBlob.js"></script>
+<script src="http://jaanga.github.io/libs/FileSaver.min.js"></script>
+<script>
+//  Add this to Three.js renderer: { preserveDrawingBuffer: true }
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+	
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<h1>Three.js Screen Grabber</h1>' +
+		'<p>' +
+		'<select id=selItem onchange="inp.value=this.value;loadIt();" >' +
+		'<option>Select file</option>' +
+		'<option>grab-test.html</option>' +
+		'<option>http://www.mrdoob.com/projects/htmleditor/</option>' +
+		'<option>http://mrdoob.github.io/three.js/examples/webgl_interactive_voxelpainter</option>' +
+		'<option>http://mrdoob.github.io/three.js/examples/webgl_trails</option>' +
+		'</select> ' +
+		'<input type="text" id="inp" placeholder="file name" size=50 /> ' +
+		'<a href=JavaScript:loadIt(); >Load It</a> ' +
+		'<a href=JavaScript:grabIt(); >Grab It</a> ' +
+		'<a href=JavaScript:saveIt(); >Save It</a> &nbsp; ' +
+		
+		'Frame size: <select id=selLeft onchange="changeFrame( this.selectedIndex );" >' +
+		'<option>512x512</option>' +
+		'<option>320x240</option>' +
+		'<option>200x150</option>' +
+		// '<option></option>' +
+		// '<option></option>' +
+		'</select> ' +		
+	'';
+
+	var ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+	// ifr.style.cssText = 'height: 512px; width: 512px;';
+	ifr.width = 512;
+	ifr.height = 512;
+	// ifr.onload = doIt;
+	ifr.src = 'grab-test.html';
+	
+	var canvas = document.body.appendChild( document.createElement( 'canvas' ) );
+	canvas.width = 512;
+	canvas.height = 512;
+	canvas.style.cssText = 'border: 2px #000 solid; margin: 0 50px;';
+	var context = canvas.getContext('2d');
+
+// doesn't work	
+	function doIt() {
+		ifr.contentWindow.renderer.preserveDrawingBuffer = true;		
+		console.log( ifr.contentWindow.scene,ifr.contentWindow.renderer.preserveDrawingBuffer );
+	}
+	
+	function loadIt() {
+		ifr.src = inp.value;
+	}
+	
+	var img, imgHeight = 512, imgWidth = 512;
+	function grabIt() { 
+		img = new Image();
+		img.onload = function() {
+			context.clearRect ( 0, 0, imgWidth, imgHeight);
+			context.drawImage( img, 0, 0 );			
+		};
+		img.src = ifr.contentWindow.renderer.domElement.toDataURL('image/png');
+	}
+	
+	function saveIt() {
+		canvas.toBlob( function(blob) {
+			saveAs( blob, "default.png");
+		});
+		console.log('saving ' ); 
+	}	
+	
+	function changeFrame( index ) {
+		if ( index === 0 )  {
+			ifr.width = imgWidth = canvas.width = 512;
+			ifr.height = imgHeight = canvas.height = 512;			
+		} else if ( index === 1 ) {
+			ifr.width = imgWidth = canvas.width = 320;
+			ifr.height = imgHeight = canvas.height = 240;		
+		} else if ( index === 2 ) {
+			ifr.width = imgWidth = canvas.width = 200;
+			ifr.height = imgHeight = canvas.height = 150;		
+		}
+	}
+	
+</script>
+</body>
+</html>
