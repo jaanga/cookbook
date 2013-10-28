@@ -19,7 +19,7 @@
 		'<p>' +
 		'<select id=selItem onchange="inp.value=this.value;loadIt();" >' +
 		'<option>Select file</option>' +
-		'<option>./grab-test.html</option>' +
+		'<option>../../grab-test.html</option>' +
 		'<option>http://www.mrdoob.com/projects/htmleditor/</option>' +
 		'<option>http://mrdoob.github.io/three.js/examples/webgl_interactive_voxelpainter</option>' +
 		'<option>http://mrdoob.github.io/three.js/examples/webgl_trails</option>' +
@@ -43,7 +43,7 @@
 	ifr.width = 512;
 	ifr.height = 512;
 	// ifr.onload = doIt;
-	ifr.src = './grab-test.html';
+	ifr.src = '../../grab-test.html';
 	
 	var canvas = document.body.appendChild( document.createElement( 'canvas' ) );
 	canvas.width = 512;
