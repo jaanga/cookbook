@@ -1,7 +1,7 @@
 Three.js Screen Grabber
 =======================
 
-Live demo: http://jaanga.github.io/cookbik/threejs-screen-grabber/
+Live demo: http://jaanga.github.io/cookbook/threejs-screen-grabber/
 
 
 ### Copyright, License and Credits
