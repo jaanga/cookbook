@@ -6,9 +6,9 @@
 <meta name=author content='Theo Armour'>
 </head>
 <body>
-<script src="http://jaanga.github.io/libs/Blob.js"></script>
-<script src="http://jaanga.github.io/libs/canvas-toBlob.js"></script>
-<script src="http://jaanga.github.io/libs/FileSaver.min.js"></script>
+<script src="http://jaanga.github.io/libs/fs/Blob.js"></script>
+<script src="http://jaanga.github.io/libs/fs/canvas-toBlob.js"></script>
+<script src="http://jaanga.github.io/libs/fs/FileSaver.min.js"></script>
 <script>
 //  Add this to Three.js renderer: { preserveDrawingBuffer: true }
 
@@ -16,10 +16,10 @@
 	
 	var info = document.body.appendChild( document.createElement( 'div' ) );
 	info.innerHTML = '<h1>Three.js Screen Grabber</h1>' +
-		'<p>' +
+		'<p>Add this to Three.js renderer: { preserveDrawingBuffer: true }<br>' +
 		'<select id=selItem onchange="inp.value=this.value;loadIt();" >' +
 		'<option>Select file</option>' +
-		'<option>http://jaanga.github.io/cookbook/threejs-screen-grabber/grab-test.html</option>' +
+		'<option>../grab-test.html</option>' +
 		'<option>http://mrdoob.com/projects/htmleditor/</option>' +
 		'<option>http://mrdoob.github.io/three.js/examples/webgl_interactive_voxelpainter</option>' +
 		'<option>http://mrdoob.github.io/three.js/examples/webgl_trails</option>' +
@@ -27,6 +27,7 @@
 		'<input type="text" id="inp" placeholder="file name" size=50 /> ' +
 		'<a href=JavaScript:loadIt(); >Load It</a> ' +
 		'<a href=JavaScript:grabIt(); >Grab It</a> ' +
+		'<a href=JavaScript:seconds3grabIt(); >3 Seconds Grab It</a> ' +
 		'<a href=JavaScript:saveIt(); >Save It</a> &nbsp; ' +
 		
 		'Frame size: <select id=selLeft onchange="changeFrame( this.selectedIndex );" >' +
@@ -43,7 +44,7 @@
 	ifr.width = 512;
 	ifr.height = 512;
 	// ifr.onload = doIt;
-	ifr.src = 'http://jaanga.github.io/cookbook/threejs-screen-grabber/grab-test.html';
+	ifr.src = '../grab-test.html';
 	
 	var canvas = document.body.appendChild( document.createElement( 'canvas' ) );
 	canvas.width = 512;
@@ -62,6 +63,7 @@
 	}
 	
 	var img, imgHeight = 512, imgWidth = 512;
+	
 	function grabIt() { 
 		img = new Image();
 		img.onload = function() {
@@ -69,6 +71,19 @@
 			context.drawImage( img, 0, 0 );			
 		};
 		img.src = ifr.contentWindow.renderer.domElement.toDataURL('image/png');
+	}
+	
+	function seconds3grabIt() { 
+		img = new Image();
+		img.onload = function() {
+			context.clearRect ( 0, 0, imgWidth, imgHeight);
+			context.drawImage( img, 0, 0 );			
+		};
+		
+		setTimeout(function(){
+			img.src = ifr.contentWindow.renderer.domElement.toDataURL('image/png');
+			console.log( 'got it');
+		},3000);
 	}
 	
 	function saveIt() {

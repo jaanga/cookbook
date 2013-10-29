@@ -6,15 +6,16 @@
 <meta name=viewport content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
 <body>
-<script src = http://mrdoob.github.com/three.js/examples/js/Detector.js ></script>
-<script src = http://mrdoob.github.com/three.js/build/three.min.js ></script>
-<script src = http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js> </script>
-<script src = http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js ></script>
-
+<script src = http://mrdoob.github.io/three.js/examples/js/Detector.js ></script>
+<script src = http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src = http://mrdoob.github.io/three.js/examples/js/controls/TrackballControls.js> </script>
+<script src = http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+<!--
 <script src = ../../../../git-repos/three.js/examples/js/Detector.js ></script>
 <script src = ../../../../git-repos/three.js/build/three.min.js ></script>
 <script src = ../../../../git-repos/three.js/examples/js/controls/TrackballControls.js ></script>
 <script src = ../../../../git-repos/three.js/examples/js/libs/stats.min.js ></script>
+-->
 <script>
 	if ( ! Detector.webgl ) { Detector.addGetWebGLMessage(); }
 
@@ -122,10 +123,9 @@
 
 		geometry = new THREE.CubeGeometry( 10, 10, 10 );
 		colorful( colors, 100);
-		var texture = THREE.ImageUtils.loadTexture( "../../textures/cel-shade-64.png" );
 		for ( var i = 0; i < 100; i++) {
 			material = [
-				new THREE.MeshPhongMaterial( { map: texture, side: THREE.DoubleSide, transparent: true } ),
+				new THREE.MeshPhongMaterial( { side: THREE.DoubleSide, transparent: true } ),
 				new THREE.MeshPhongMaterial( { color: 0xffffff, ambient: 0x888888, opacity: 0.8, specular: 0x888888, shininess: 200, transparent: true } )
 			]
 			material[1].color.setHSL( colors[i], 0.7, 0.5 );
