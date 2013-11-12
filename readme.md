@@ -1,12 +1,12 @@
-Jaanga Cookbook
-===============
+Jaanga Cookbook Read Me
+=======================
 
 _3D Code that's fun and easy to play with_  
 
-# GitHub Pages view of this Read Me
+# View of this Read Me via GitHub Pages
 <http://jaanga.github.io/cookbook/>
 
-#BVH Reader   
+# BVH Reader   
 Fast amnd simple motion capature data reader makes your characters come alive  
 
 [Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/readme.md )
