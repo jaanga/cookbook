@@ -6,7 +6,7 @@ _3D Code that's fun and easy to play with_
 #BVH Reader   
 Fast amnd simple motion capature data reader makes your characters come alive  
 
-[Read Me](../../../jaanga/cookbook/bvh-reader/readme.md)
+[Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/readme.md )
 
 
 Live demo: [Jaanga BVH Reader - Saqoosha files]( http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html )
