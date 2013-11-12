@@ -3,6 +3,9 @@ Jaanga Cookbook
 
 _3D Code that's fun and easy to play with_  
 
+# GitHub Pages view of this Read Me
+<http://jaanga.github.io/cookbook/>
+
 #BVH Reader   
 Fast amnd simple motion capature data reader makes your characters come alive  
 
