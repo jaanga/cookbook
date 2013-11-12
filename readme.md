@@ -3,13 +3,17 @@ Jaanga Cookbook Read Me
 
 _3D Code that's fun and easy to play with_  
 
-# View of this Read Me via GitHub Pages
-<http://jaanga.github.io/cookbook/>
+## View this Read Me via GitHub
 
-# BVH Reader   
+GitHub Pages: <http://jaanga.github.io/cookbook/index.html>
+
+GitHub Source: <https://github.com/jaanga/cookbook>
+
+
+## BVH Reader   
 Fast amnd simple motion capature data reader makes your characters come alive  
 
-[Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/readme.md )
+[Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/readme.md )
 
 
 Live demo: [Jaanga BVH Reader - Saqoosha files]( http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html )
@@ -22,20 +26,20 @@ More details here: [Jaanga BVH Reader]( https://github.com/jaanga/cookbook/tree/
 
 Blog post: [BVH: A format to capture motion - simply, quickly and economically](http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html )
 
-#Chinary
+## Chinary
 
 This app is coding example of a simple Chinese character dictionary as a web app.  
 
 Details here: <https://github.com/jaanga/cookbook/tree/gh-pages/chinary>
 
-#docTree Very Simple
+## docTree Very Simple
 
 Minimal code that enables side-by-side menu and content panels with utmost flexibility for the cotent of both panels.
 
 Details here: <https://github.com/jaanga/cookbook/tree/gh-pages/doctree-very-simple>
 
 
-#j3qUE
+## j3qUE
 Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file. The Three.js goes into its own file called in by an IFRAME into the main page. In the main file, you write in jQuery style. In the iframe, you write in Three.js style.
 
 Live demo: <http://jaanga.github.io/cookbook/j3qUE/r2/index.html>
@@ -53,7 +57,7 @@ Blog posts
 
 Three of them - all from June 2013: <http://www.jaanga.com/2013_06_01_archive.html>
 
-#unFlatland
+## unFlatland
 The map like she has never been seen before:  
 
 R2: <http://jaanga.github.io/cookbook/un-flatland/r2/index.html>
@@ -62,7 +66,7 @@ R1: <http://jaanga.github.io/cookbook/un-flatland/r1/index.html>
 More details here: <https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland> 
 
 
-#Video Surfaces & Video Folding Polygons
+## Video Surfaces & Video Folding Polygons
 The TV like she has never been seen before:  
 Post: <http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html>   
 
