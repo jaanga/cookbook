@@ -11,7 +11,7 @@ GitHub Source: <https://github.com/jaanga/cookbook>
 
 
 ## BVH Reader   
-Fast amnd simple motion capature data reader makes your characters come alive  
+Fast and simple motion capture data reader makes your characters come alive  
 
 [Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/readme.md )
 
@@ -30,13 +30,16 @@ Blog post: [BVH: A format to capture motion - simply, quickly and economically](
 
 This app is coding example of a simple Chinese character dictionary as a web app.  
 
+To be moved Does not really belong in a 3D happy place.
+
 Details here: <https://github.com/jaanga/cookbook/tree/gh-pages/chinary>
 
-## docTree Very Simple
 
-Minimal code that enables side-by-side menu and content panels with utmost flexibility for the cotent of both panels.
+## docBrowser
 
-Details here: <https://github.com/jaanga/cookbook/tree/gh-pages/doctree-very-simple>
+Minimal code that enables side-by-side menu and content panels with utmost flexibility for the content of both panels.
+
+Details here: <https://github.com/jaanga/cookbook/tree/gh-pages/doc-browser/>
 
 
 ## j3qUE
@@ -68,6 +71,7 @@ More details here: <https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland
 
 ## Video Surfaces & Video Folding Polygons
 The TV like she has never been seen before:  
+
 Post: <http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html>   
 
 Code: <https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces>
