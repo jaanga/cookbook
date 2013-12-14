@@ -106,7 +106,7 @@
 				'<button onclick="initElevations( inpLat.value, inpLng.value );">Go</button> || ' +
 				'<select id=selPlace onchange="initElevations( UF.places[this.selectedIndex][1], UF.places[this.selectedIndex][2]);' +
 					'inpLat.value = UF.places[this.selectedIndex][1]; inpLng.value = UF.places[this.selectedIndex][2]; " ></select> ~ ' +
-				'<select id=selZoom onchange="UF.tileZoom=this.selectedIndex+7; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
+				'<select id=selZoom onchange="initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] ); UF.tileZoom=this.selectedIndex+7;"></select> ' +
 				'<select id=selExagg onchange="UF.exaggeration = this.selectedIndex; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
 				'<select id=selMapType onchange="UF.mapType=this.selectedIndex; initElevations( UF.places[selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex ][2] );"><select>' +
 				'<br>' +
