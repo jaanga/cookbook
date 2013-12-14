@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en>
 <head>
-<title>unFlatLand R2 > osm + unicom</title>
+<title>unFlatLand R3</title>
 <meta charset=utf-8>
 </head>
 <body>
@@ -93,12 +93,15 @@
 		info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'position: absolute; top: 0px; width: 100% ';
 		
-		info.innerHTML = '<p>unFlatLand R2 > osm + gstopo30 > ' +
-			'lat: <input type="text" id="inpLat" value="37.6" size=8 /> ' +
+		info.innerHTML = '<h1>unFlatLand R3</h1>' +
+			'<p>Camera lat: <input type="text" id="inpLat" value="37.6" size=8 /> ' +
 			'lng: <input type="text" id="inpLng" value="-122.3" size=8 /> ' +
 			'<button onclick="initElevations( parseFloat(inpLat.value), parseFloat(inpLng.value) );">Go</button> || ' +
-			'<select id=selPlace onchange="initElevations( places[this.selectedIndex][1], places[this.selectedIndex][2] ); ' + 
+			
+			'<select id=selPlace onchange="initElevations( places[this.selectedIndex][1], places[this.selectedIndex][2] );' + 
 				'inpLat.value = places[this.selectedIndex][1]; inpLng.value = places[this.selectedIndex][2]; " length=' + places.length + '></select> ~ ' +
+			'<select id=selAirport onchange="getAirportData( this.selectedIndex);" ></select>' + 
+				
 			'<select id=selExagg onchange="exaggeration = this.selectedIndex; initElevations( places[ exaggeration ][1], places[exaggeration][2] );"></select> ' +
 			'<select id=selMapType onchange="mapType = this.selectedIndex; initElevations( places[mapType + 10][1], places[mapType + 10][2] );"><select>' +
 		'</p>';
@@ -127,7 +130,6 @@
 			['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'], 
 			['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'], 
 			['Stamen terrain background','http://tile.stamen.com/terrain-background/']
-			
 		];
 
 		for (var option, i = 0; i < mapTypes.length; i++) {
@@ -189,7 +191,8 @@
 
 	function initElevations( lat, lng ) {
 		if ( elevationsImage === undefined ) {
-			elevationsImage = document.body.appendChild( document.createElement('img' ) );
+			elevationsImage = document.createElement('img' ) 
+//			elevationsImage = document.body.appendChild( elevationsImage );
 			elevationsImage.style.cssText = "height: 256px; left: 100px; position: absolute; top: 0; width: 256px;";
 			elevationsImage.title = "this is the larger (zoom level 4) base map with the elevation data";
 			elevationsImage.onload = initCanvas;
@@ -206,6 +209,7 @@
 	}
 
 	var ulLat, lrLat, ulLng, lrLng;
+	
 	function initCanvas() {
 		if ( plane != undefined ) {
 			scene.remove( plane );
@@ -296,6 +300,8 @@
 		plane.geometry.verticesNeedUpdate = true;
 		scene.add( plane );
 		
+		getAirports() 
+		
 		lookForAssets();
 	}
 
@@ -303,10 +309,33 @@
 		requestAnimationFrame( animate );
 		controls.update();
 		renderer.render( scene, camera );
+		stats.update();
 		if ( goodies ) {
 			doStuff();
 		}
-		stats.update();
+		
+	}
+	
+	function getAirports() {
+		//var airports = requestFile( 'https://gitorious.org/fgtools/map-test/blobs/raw/master/data.json' );
+		var text = requestFile( '../../apt1000/apt1000-icao.csv' );
+		var lines = text.split(/\r\n|\n/);
+		var length = lines.length - 1;
+		var airports = [];
+		var sep = ',';
+		var output = '';
+		for ( var i = 0; i < length; i++ ) {
+			airports.push( lines[i].split( sep ) );
+			output += airports[i][0] + ' - ';
+		}	
+	}
+	
+	function requestFile( fname ) {
+		var xmlHttp = null;
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', fname, false );
+		xmlHttp.send( null );
+		return xmlHttp.responseText;
 	}
 	
 	function lookForAssets() {
@@ -344,7 +373,6 @@
 			js.type = 'text/javascript';
 			js.src = script;
 			document.body.appendChild( js );
-		  
 		}
 	}
 </script>
