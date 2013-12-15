@@ -16,8 +16,8 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 * FOSS, built with less than 500 lines of code
 * Very small file size ~ you can easily open up and start hacking
 * Fast enough to be usable
-* Easy to build your own place lists
-* Supports large user-defined gazette
+* Easy to build your own place lists and toggle the display of their names
+* Supports large user-defined gazette 
 * Supports many 2D map overlays
 
 
@@ -25,7 +25,7 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 
 * ~~Works only in Chrome~~ fixed
 * ~~Dropdown list items only update when you change city~~ fixed
-* First person controller: Mouse actions only work when initiated from top of screen. Should work from anywhere
+* ~~First person controller: Mouse actions only work when initiated from top of screen. Should work from anywhere.~~ Fixed
 * ~~Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.~~ Fixed stupidly: reload page
 * Elevation drops to naught on one side
 * Go to lat/long then change scale: goes to previous location
@@ -93,7 +93,8 @@ copyright &copy; 2013 Jaanga authors ~ All work herein is under the [MIT License
 
 2013-12-15 ~ Theo
 
-* Added toggle to display placards with nearby place names
+* R4.1
+* Adds toggle to display placards with nearby place names
 
 2013-12-14 ~ Theo
 

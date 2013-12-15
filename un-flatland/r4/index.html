@@ -64,7 +64,7 @@
 	UF.places = [];
 	UF.startPlace = 1621; // San Francisco ~ but see below
 	UF.elevationsImage;
-	UF.mesh;
+	UF.terrain;
 
 	init();
 	animate();
@@ -234,19 +234,18 @@
 	}
 
 	function initCanvas() {
-		var mesh = UF.mesh, tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
+		var mesh = UF.terrain, tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
 		var tileXLng = UF.tileXLng, mapType = UF.mapType, tileYLat = UF.tileYLat;
-		var ulLat = UF.ulLat, lrLat = UF.lrLat, ulLng = UF.ulLng, lrLng = UF.lrLng;
 		var elevationsImage = UF.elevationsImage;
-		if ( UF.mesh ) {
-			UF.scene.remove( UF.mesh );
+		if ( UF.terrain ) {
+			UF.scene.remove( UF.terrain );
 		}
 
 		UF.ulLat = tile2lat( tileYLat, tileZoom );
 		UF.lrLat = tile2lat( tileYLat + 1, tileZoom );
 		UF.ulLng = tile2lng( tileXLng, tileZoom );
 		UF.lrLng = tile2lng( tileXLng + 1, tileZoom );
-// console.log( 'tileZoom', tileZoom, 'lats', ulLat, lrLat, 'lngs', ulLng, lrLng  );
+// console.log( 'tileZoom', tileZoom, 'lats', UF.ulLat, lrLat, 'lngs', ulLng, lrLng  );
 
 		var deltaLats = Math.abs( UF.ulLat - UF.lrLat );
 		var deltaLngs = Math.abs( UF.ulLng - UF.lrLng );
@@ -310,7 +309,7 @@
 			geometry.vertices[ i ].y = scale * UF.uniElevations[ id ];
 		}
 
-		UF.mesh = mesh = new THREE.Mesh( geometry, material );
+		UF.terrain = mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
 		mesh.castShadow = true;
 		mesh.geometry.computeFaceNormals();
@@ -337,7 +336,7 @@ console.log( 'Load time:', new Date() - UF.startTime );
 	}
 
 	function cos(a){ return Math.cos(a); }
-	// function sin(a){ return Math.sin(a); }
+//	function sin(a){ return Math.sin(a); }
 	function pow(a,b){ return Math.pow(a,b); }
 
 // http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Tile_servers
@@ -370,7 +369,6 @@ console.log( 'Load time:', new Date() - UF.startTime );
 		UF.controls = controls = new THREE.FirstPersonControls( camera );
 		controls.lookSpeedDefault = controls.lookSpeed = 0.025; // 0.0125;
 
-		// var controls = UF.controls;
 		controls.lookSpeedDefault = controls.lookSpeed = 0.025; // 0.0125;
 
 		controls.lookSpeedMin = 0.04;
@@ -401,10 +399,10 @@ console.log( 'Load time:', new Date() - UF.startTime );
 			return;
 		}
 	
-		var p, x, z;
+		var p, mesh, x, y, z;
 		var deltaLats = Math.abs( UF.ulLat - UF.lrLat );
 		var deltaLngs = Math.abs( UF.ulLng - UF.lrLng );
-		UF.mesh.geometry.computeBoundingBox();
+		UF.terrain.geometry.computeBoundingBox();
 		
 		UF.placards = new THREE.Object3D;
 		UF.scene.add( UF.placards );
@@ -413,11 +411,10 @@ console.log( 'Load time:', new Date() - UF.startTime );
 		for ( var i = 0, iLen = UF.places.length; i < iLen; i++ ) {
 			p = UF.places[i];
 			if ( p[1] < UF.ulLat && p[1] > UF.lrLat && p[2] > UF.ulLng  && p[2] < UF.lrLng ) {
-
 				mesh = new THREE.Mesh( geometry, material );
-				var x = 500 + 1000 * ( p[2] - UF.lrLng  ) / deltaLngs;
-				var z = -500 + 1000 * ( UF.ulLat - p[1] ) / deltaLats;
-				var y = 0.5 * (UF.mesh.geometry.boundingBox.max.y);
+				x = 500 + 1000 * ( p[2] - UF.lrLng  ) / deltaLngs;
+				z = -500 + 1000 * ( UF.ulLat - p[1] ) / deltaLats;
+				y = 0.5 * UF.terrain.geometry.boundingBox.max.y;
 				mesh.position.set( x, y, z );
 				mesh.scale.y = 1.5 * y;
 				UF.placards.add( mesh );
@@ -425,7 +422,7 @@ console.log( 'Load time:', new Date() - UF.startTime );
 				var texture = canvasText ( p[0] );
 				var spriteMaterial = new THREE.SpriteMaterial( { map: texture, useScreenCoordinates: false, opacity: 1 } );
 				sprite = new THREE.Sprite( spriteMaterial );
-				sprite.position.set(  x, UF.mesh.geometry.boundingBox.max.y, z );
+				sprite.position.set(  x, UF.terrain.geometry.boundingBox.max.y, z );
 				sprite.scale.set( 50, 10, 1 );
 				UF.placards.add( sprite );
 			}
