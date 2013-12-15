@@ -32,6 +32,7 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 ## Road Map
 
 * 3D placards that show place names
+* Add and remove tiles as needed
 * FGx edition: showing Crossfeed aircraft in 3D
 * FGx edition: First person controller displays selected aircraft in front of camera
 * FGX edition: places dropdown lists the airports. 
