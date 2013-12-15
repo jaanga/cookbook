@@ -4,19 +4,27 @@ unFlatland Read Me
 Live demo R4: http://jaanga.github.io/cookbook/un-flatland/r4/index.html  
 
 ## Concept
-The fastest, smallest sweetest 3D Map code you ever did see.
+The fastest, smallest, sweetest 3D Map code you ever did see.
 
 ## Features
 
-* Covers the world - matches [Slippy Map]( http://wiki.openstreetmap.org/wiki/Slippy_Map )
+* Covers every part of the world that [OSM]( http://www.openstreetmap.org/ ) covers - matches [Slippy Map]( http://wiki.openstreetmap.org/wiki/Slippy_Map )
+* Works in your browser  - no plugin required
 * Runs locally or from static file server
+* Supports real-time zoom, pan and rotate
 * Generic 3D library - can be used with other apps and libraries
+* FOSS, built with less than 500 lines of code
 * Very small file size ~ you can easily open up and start hacking
 * Fast enough to be usable
 * Easy to build your own place lists
+* Supports large user-defined gazette
+* Supports many 2D map overlays
+
 
 ## Issues Bugs
 
+Works only in Chrome (for now)
+Dropdown list items only update when you change city
 * First person controller: Mouse actions only work when initiated from top of screen. Should work from anywhere
 * Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.
 

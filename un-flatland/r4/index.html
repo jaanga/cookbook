@@ -143,28 +143,28 @@
 		for (var option, i = 0, len = UF.places.length; i < len; i++) {
 			option = document.createElement( 'option' )
 			selPlace.appendChild( option );
-			option.innerText = UF.places[i][0];
+			option.text = UF.places[i][0];
 		}
 		selPlace.selectedIndex = UF.startPlace;
 
 		for (var option, i = 7; i < 13; i++) {
 			option = document.createElement( 'option' )
 			selZoom.appendChild( option );
-			option.innerText = 'Zoom level ' + i;
+			option.text = 'Zoom level ' + i;
 		}
 		selZoom.selectedIndex = UF.tileZoom - 7;
 
 		for (var option, i = 0; i < 10; i++) {
 			option = document.createElement( 'option' )
 			selExagg.appendChild( option );
-			option.innerText ='Exaggeration scale ' + ( i + 1 ) + ':1';
+			option.text ='Exaggeration scale ' + ( i + 1 ) + ':1';
 		}
 		selExagg.selectedIndex = UF.exaggeration;
 
 		for (var option, i = 0, len = UF.mapTypes.length; i < len; i++) {
 			option = document.createElement( 'option' )
 			selMapType.appendChild( option );
-			option.innerText = UF.mapTypes[i][0];
+			option.text = UF.mapTypes[i][0];
 		}
 		selMapType.selectedIndex = UF.mapType;
 
