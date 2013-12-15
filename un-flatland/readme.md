@@ -23,10 +23,10 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 
 ## Issues Bugs
 
-* <s>Works only in Chrome</s> fixed
-* <s>Dropdown list items only update when you change city</s> fixed
+* ~~Works only in Chrome~~ fixed
+* ~~Dropdown list items only update when you change city~~ fixed
 * First person controller: Mouse actions only work when initiated from top of screen. Should work from anywhere
-* <s>Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.</s> Fixed stupidly: reload page
+* ~~Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.~~ Fixed stupidly: reload page
 * Elevation drops to naught on one side
 * Go to lat/long then change scale: goes to previous location
 
