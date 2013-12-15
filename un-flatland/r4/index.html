@@ -106,7 +106,7 @@
 				'<button onclick="initElevations( inpLat.value, inpLng.value );">Go</button> || ' +
 				'<select id=selPlace onchange="initElevations( UF.places[this.selectedIndex][1], UF.places[this.selectedIndex][2]);' +
 					'inpLat.value = UF.places[this.selectedIndex][1]; inpLng.value = UF.places[this.selectedIndex][2]; " ></select> ~ ' +
-				'<select id=selZoom onchange="initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] ); UF.tileZoom=this.selectedIndex+7;"></select> ' +
+				'<select id=selZoom onchange="UF.tileZoom=this.selectedIndex+7; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
 				'<select id=selExagg onchange="UF.exaggeration = this.selectedIndex; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
 				'<select id=selMapType onchange="UF.mapType=this.selectedIndex; initElevations( UF.places[selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex ][2] );"><select>' +
 				'<br>' +
@@ -115,8 +115,8 @@
 
 			'<div id=help onclick=help.style.display="none"; style=display:none;background-color:#ccc;opacity:0.7;left:0;margin:auto;padding:20px;position:absolute;right:0;top:200px;width:60%; >' +
 				'The smallest, fastest, most featured 3D map app ever.<br><br>' +
-				'<i>Huge bug #1: Works only in Google Chrome latest.</i>' +
-				'<i>Huge bug #2: Dropdowns only update after you change city.</i>' +
+				'<i>Note: Works only in Google Chrome and Firefox.</i><br>' +
+				'<i>Huge bug2: Chrome: Dropdowns only update after you change city.</i>' +
 				'<p>Trackball General Controls:<br>' +
 					'&bull; Rotate globe: Left mouse / press 1 finger<br>' +
 					'&bull; Zoom in current level: Mousewheel / two fingers<br>' +
@@ -128,7 +128,7 @@
 					'&bull; RF/Page Up PageDn: up / down<br>' +
 					'&bull; Spacebar/mousewheel click: pause<br>' +
 					'&bull; Mouse/trackpad: updata heading<br>' +
-					'<i>Huge bug #3: mouse operations must be initiated from above red line.</i>' +
+					'<i>Huge bug: mouse operations must be initiated from above red line.</i>' +
 				'</p>' +				
 				
 				'<a href="https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland" target="_blank">Source code</a><br>' +
@@ -141,30 +141,27 @@
 		'';
 
 		for (var option, i = 0, len = UF.places.length; i < len; i++) {
-			option = document.createElement( 'option' )
-			selPlace.appendChild( option );
-			option.text = UF.places[i][0];
+			//option = document.createElement( 'option' )
+			selPlace.appendChild( document.createElement( 'option' ) );
+			selPlace.children[i].text = UF.places[i][0];
 		}
 		selPlace.selectedIndex = UF.startPlace;
 
 		for (var option, i = 7; i < 13; i++) {
-			option = document.createElement( 'option' )
-			selZoom.appendChild( option );
-			option.text = 'Zoom level ' + i;
+			selZoom.appendChild( document.createElement( 'option' ) );
+			selZoom.children[i - 7].text = 'Zoom level ' + i;
 		}
 		selZoom.selectedIndex = UF.tileZoom - 7;
 
 		for (var option, i = 0; i < 10; i++) {
-			option = document.createElement( 'option' )
-			selExagg.appendChild( option );
-			option.text ='Exaggeration scale ' + ( i + 1 ) + ':1';
+			selExagg.appendChild( document.createElement( 'option' ) );
+			selExagg.children[i].text ='Exaggeration scale ' + ( i + 1 ) + ':1';
 		}
 		selExagg.selectedIndex = UF.exaggeration;
 
 		for (var option, i = 0, len = UF.mapTypes.length; i < len; i++) {
-			option = document.createElement( 'option' )
-			selMapType.appendChild( option );
-			option.text = UF.mapTypes[i][0];
+			selMapType.appendChild( option = document.createElement( 'option' ) );
+			selMapType.children[i].text = UF.mapTypes[i][0];
 		}
 		selMapType.selectedIndex = UF.mapType;
 
@@ -207,6 +204,7 @@
 	}
 
 	function initElevations( lat, lng ) {
+console.log('chrome test',lat,lng );	
 		UF.startTime = new Date();
 		var  tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
 		if ( !UF.elevationsImage ) {
