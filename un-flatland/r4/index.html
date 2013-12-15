@@ -116,7 +116,6 @@
 			'<div id=help onclick=help.style.display="none"; style=display:none;background-color:#ccc;opacity:0.7;left:0;margin:auto;padding:20px;position:absolute;right:0;top:200px;width:60%; >' +
 				'The smallest, fastest, most featured 3D map app ever.<br><br>' +
 				'<i>Note: Works only in Google Chrome and Firefox.</i><br>' +
-				'<i>Huge bug2: Chrome: Dropdowns only update after you change city.</i>' +
 				'<p>Trackball General Controls:<br>' +
 					'&bull; Rotate globe: Left mouse / press 1 finger<br>' +
 					'&bull; Zoom in current level: Mousewheel / two fingers<br>' +
@@ -204,7 +203,7 @@
 	}
 
 	function initElevations( lat, lng ) {
-console.log('chrome test',lat,lng );	
+//console.log('chrome test',lat,lng );	
 		UF.startTime = new Date();
 		var  tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
 		//if ( !UF.elevationsImage ) {
@@ -221,7 +220,7 @@ console.log('chrome test',lat,lng );
 		
 		UF.elevationsImage.onload = initCanvas;
 		UF.elevationsImage.src = "../unicam/topo-" + elevZoom + "-" + UF.elevTileYLat + "-" + UF.elevTileXLng + ".png";
-console.log( lng, lat, UF.tileXLng, UF.tileYLat, UF.elevTileXLng, UF.elevTileYLat )
+//console.log( lng, lat, UF.tileXLng, UF.tileYLat, UF.elevTileXLng, UF.elevTileYLat )
 	}
 
 	function initCanvas() {
@@ -238,7 +237,7 @@ console.log( lng, lat, UF.tileXLng, UF.tileYLat, UF.elevTileXLng, UF.elevTileYLa
 		lrLat = tile2lat( tileYLat + 1, tileZoom );
 		ulLng = tile2lng( tileXLng, tileZoom );
 		lrLng = tile2lng( tileXLng + 1, tileZoom );
-console.log( 'tileZoom', tileZoom, 'lats', ulLat, lrLat, 'lngs', ulLng, lrLng  );
+// console.log( 'tileZoom', tileZoom, 'lats', ulLat, lrLat, 'lngs', ulLng, lrLng  );
 
 		var deltaLats = Math.abs( ulLat - lrLat );
 		var deltaLngs = Math.abs( ulLng - lrLng );
