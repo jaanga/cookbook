@@ -26,7 +26,7 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 * <s>Works only in Chrome</s> fixed
 * <s>Dropdown list items only update when you change city</s> fixed
 * First person controller: Mouse actions only work when initiated from top of screen. Should work from anywhere
-* Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.
+* <s>Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.</s> Fixed stupidly: reload page
 * Elevation drops to naught on one side
 
 ## Road Map
@@ -82,8 +82,10 @@ Browser Support: The apps here may work with the FireFox or Opera browsers, but 
 The apps here are currently being and tested with the Google Chrome browser. 
 Bugs on browsers other than Chrome need not be reported until such as the work settles down and an effort to support more browsers is initiated.
 
+
 ## Copyright and License
 copyright &copy; 2013 Jaanga authors ~ All work herein is under the [MIT License](http://jaanga.github.io/libs/jaanga-copyright-and-mit-license.md)
+
 
 ## Change Log
 
@@ -92,6 +94,7 @@ copyright &copy; 2013 Jaanga authors ~ All work herein is under the [MIT License
 * Code clean up
 * Help info added to
 * Read me file added to
+* Numerous bug fixes: works in FF. Mouse OK
 
 
 2013-12-13 ~ Theo

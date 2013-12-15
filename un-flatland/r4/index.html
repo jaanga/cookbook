@@ -86,7 +86,7 @@
 
 
 		UF.info = info = document.body.appendChild( document.createElement( 'div' ) );
-		info.style.cssText = 'border: 1px solid red; position: absolute; top: 0px; width: 100% ';
+		info.style.cssText = 'border: 0px solid red; position: absolute; top: 0px; width: 100% ';
 
 		info.innerHTML = info.txt = '<h1>unFlatLand R4 ~ ' +
 			'<a href=# onclick=help.style.display="block"; ><large>&#x24D8;</large></a></h1>' +
@@ -101,7 +101,7 @@
 				'<br>' +
 				'<a href="JavaScript:getTrackballController();" >Trackball Controller</a> - <a href="JavaScript:getFirstPersonController();" >Updated First Person Controller</a><br>' +
 			'</div><br>' +
-
+			'<div id=touch style=display:none;height:' + window.innerHeight + 'px;width:100%; ></div>' +
 			'<div id=help onclick=help.style.display="none"; style=display:none;background-color:#ccc;opacity:0.7;left:0;margin:auto;padding:20px;position:absolute;right:0;top:200px;width:60%; >' +
 				'The smallest, fastest, most featured 3D map app ever.<br><br>' +
 				'<i>Note: Works only in Google Chrome and Firefox.</i><br>' +
@@ -126,6 +126,7 @@
 				'copyright &copy; 2013 jaanga authors ~ mit license</small><br><br>' +
 				'<i>Click anywhere in this message to hide...</i>' +
 			'</div>' +
+
 		'';
 
 		for (var option, i = 0, len = UF.places.length; i < len; i++) {
@@ -262,6 +263,7 @@
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 // material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
 
+// to be simplified...
 		if ( UF.mapType === 0 ) {
 			var mapTexture = THREE.ImageUtils.loadTexture( "http://mt1.google.com/vt/x=" + tileXLng + "&y="+ tileYLat + "&z=" + tileZoom );
 		} else if ( UF.mapType === 1 ) {
@@ -352,12 +354,18 @@ console.log( 'Load time:', new Date() - UF.startTime );
 	}
 	
 	function getTrackballController() {
+		window.location.reload( false );
+/*
 		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		UF.camera.position.set( 0, 600, 400 );
 		UF.controls = controls = new THREE.TrackballControls( UF.camera, UF.renderer.domElement );
+		initElevations( UF.places[ UF.startPlace ][ 1 ], UF.places[ UF.startPlace ][ 2 ] );
+*/
 	}
 
 	function getFirstPersonController() {
+		touch.style.display = 'block';
+		
 		var camera, controls;
 		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.position.set( 0, 100, 500 );
