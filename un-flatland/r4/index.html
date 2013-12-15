@@ -33,7 +33,6 @@
 	UF.elevTileXLng;
 	UF.elevTileYLat;
 
-	
 	UF.mapType = 4;
 	UF.mapTypes = [
 		['Google Maps',''],
@@ -84,7 +83,6 @@
 		}
 		// UF.startPlace = parseInt( Math.random() * UF.places.length, 10 );
 
-
 		UF.info = info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'border: 0px solid red; position: absolute; top: 0px; width: 100% ';
 
@@ -128,25 +126,25 @@
 			'</div>' +
 		'';
 
-		for (var option, i = 0, len = UF.places.length; i < len; i++) {
+		for ( var option, i = 0, len = UF.places.length; i < len; i++ ) {
 			selPlace.appendChild( document.createElement( 'option' ) );
 			selPlace.children[i].text = UF.places[i][0];
 		}
 		selPlace.selectedIndex = UF.startPlace;
 
-		for (var option, i = 7; i < 13; i++) {
+		for ( var option, i = 7; i < 13; i++ ) {
 			selZoom.appendChild( document.createElement( 'option' ) );
 			selZoom.children[i - 7].text = 'Zoom level ' + i;
 		}
 		selZoom.selectedIndex = UF.tileZoom - 7;
 
-		for (var option, i = 0; i < 10; i++) {
+		for ( var option, i = 0; i < 10; i++ ) {
 			selExagg.appendChild( document.createElement( 'option' ) );
 			selExagg.children[i].text ='Exaggeration scale ' + ( i + 1 ) + ':1';
 		}
 		selExagg.selectedIndex = UF.exaggeration;
 
-		for (var option, i = 0, len = UF.mapTypes.length; i < len; i++) {
+		for ( var option, i = 0, len = UF.mapTypes.length; i < len; i++ ) {
 			selMapType.appendChild( option = document.createElement( 'option' ) );
 			selMapType.children[i].text = UF.mapTypes[i][0];
 		}
@@ -295,7 +293,7 @@
 		var color, id, len = zoomImgData.data.length / 4;
 		var scale = 0.01 * UF.exaggeration;
 
-		for (var i = 0; i < len; i++) {
+		for ( var i = 0; i < len; i++ ) {
 			color = zoomImgData.data[ 4 * i] + ' ' + zoomImgData.data[ 4 * i + 1] + ' '  + zoomImgData.data[ 4 * i + 2];
 			id =  UF.uniColors.indexOf( color );
 			geometry.vertices[ i ].y = scale * UF.uniElevations[ id ];
