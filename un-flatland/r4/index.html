@@ -88,18 +88,18 @@
 		UF.info = info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'border: 0px solid red; position: absolute; top: 0px; width: 100% ';
 
-		info.innerHTML = info.txt = '<h1>unFlatLand R4 ~ ' +
-			'<a href=# onclick=help.style.display="block"; ><large>&#x24D8;</large></a></h1>' +
+		info.innerHTML = info.txt = '<h1 title="The fastest, smallest, sweetest 3D map you ever did see" >unFlatLand R4 ~ ' +
+			'<a href=# title="Get help and info" onclick=help.style.display="block"; ><large>&#x24D8;</large></a></h1>' +
 			'<div style=height{900px; >Camera lat: <input type="text" id="inpLat" value="' + UF.places[ UF.startPlace][1] +'" size=8 /> ' +
 				'lng: <input type="text" id="inpLng" value="' + UF.places[ UF.startPlace][2] +'" size=8 /> ' +
-				'<button onclick="initElevations( inpLat.value, inpLng.value );">Go</button> || ' +
-				'<select id=selPlace onchange="initElevations( UF.places[this.selectedIndex][1], UF.places[this.selectedIndex][2]);' +
+				'<button onclick="initElevations( inpLat.value, inpLng.value );" title="Click Go to update camera longitude and latitude" >Go</button> || ' +
+				'<select title="Choose one of ' + UF.places.length + ' locations" id=selPlace onchange="initElevations( UF.places[this.selectedIndex][1], UF.places[this.selectedIndex][2]);' +
 					'inpLat.value = UF.places[this.selectedIndex][1]; inpLng.value = UF.places[this.selectedIndex][2]; " ></select> ~ ' +
-				'<select id=selZoom onchange="UF.tileZoom=this.selectedIndex+7; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
-				'<select id=selExagg onchange="UF.exaggeration = this.selectedIndex; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
-				'<select id=selMapType onchange="UF.mapType=this.selectedIndex; initElevations( UF.places[selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex ][2] );"><select>' +
-				'<br>' +
-				'<a href="JavaScript:getTrackballController();" >Trackball Controller</a> - <a href="JavaScript:getFirstPersonController();" >Updated First Person Controller</a><br>' +
+				'<select title="Are we there yet?" id=selZoom onchange="UF.tileZoom=this.selectedIndex+7; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
+				'<select title="Select the amount of vertical distortion" id=selExagg onchange="UF.exaggeration = this.selectedIndex; initElevations( UF.places[ selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex][2] );"></select> ' +
+				'<select title="Select the 2D overlay" id=selMapType onchange="UF.mapType=this.selectedIndex; initElevations( UF.places[selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex ][2] );"><select>' +
+				'<br><br>' +
+				'<a href="" >Trackball Controller</a> &#10070; <a href="JavaScript:getFirstPersonController();" title="Happy flying!" >First Person Controller</a>' +
 			'</div><br>' +
 			'<div id=touch style=display:none;height:' + window.innerHeight + 'px;width:100%; ></div>' +
 			'<div id=help onclick=help.style.display="none"; style=display:none;background-color:#ccc;opacity:0.7;left:0;margin:auto;padding:20px;position:absolute;right:0;top:200px;width:60%; >' +
@@ -126,11 +126,9 @@
 				'copyright &copy; 2013 jaanga authors ~ mit license</small><br><br>' +
 				'<i>Click anywhere in this message to hide...</i>' +
 			'</div>' +
-
 		'';
 
 		for (var option, i = 0, len = UF.places.length; i < len; i++) {
-			//option = document.createElement( 'option' )
 			selPlace.appendChild( document.createElement( 'option' ) );
 			selPlace.children[i].text = UF.places[i][0];
 		}
@@ -351,16 +349,6 @@ console.log( 'Load time:', new Date() - UF.startTime );
 		var pi = Math.PI;
 		var n = pi - 2 * pi * y / pow( 2, z );
 		return ( 180 / pi * Math.atan( 0.5 * ( Math.exp(n) - Math.exp(-n))) );
-	}
-	
-	function getTrackballController() {
-		window.location.reload( false );
-/*
-		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-		UF.camera.position.set( 0, 600, 400 );
-		UF.controls = controls = new THREE.TrackballControls( UF.camera, UF.renderer.domElement );
-		initElevations( UF.places[ UF.startPlace ][ 1 ], UF.places[ UF.startPlace ][ 2 ] );
-*/
 	}
 
 	function getFirstPersonController() {
