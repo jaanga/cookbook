@@ -91,6 +91,10 @@ copyright &copy; 2013 Jaanga authors ~ All work herein is under the [MIT License
 
 ## Change Log
 
+2013-12-15 ~ Theo
+
+* Added toggle to display placards with nearby place names
+
 2013-12-14 ~ Theo
 
 * Code clean up

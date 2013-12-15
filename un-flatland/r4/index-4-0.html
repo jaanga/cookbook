@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang=en>
 <head>
-<title>unFlatLand R4.1</title>
+<title>unFlatLand R4</title>
 <meta charset=utf-8>
 </head>
 <body>
@@ -19,9 +19,9 @@
 -->
 <script src=first-person-controls-theo.js></script>
 <script>
-
+	
 	var UF = UF || {};
-
+	
 	UF.clock = new THREE.Clock();
 	UF.fileName = 'places-2000.csv';
 	UF.startTime = new Date();
@@ -32,12 +32,6 @@
 	UF.elevZoom = 4;
 	UF.elevTileXLng;
 	UF.elevTileYLat;
-
-//	just a reminder
-//	UF.ulLat
-//	UF.lrLat
-//	UF.ulLng
-//	UF.lrLng;
 
 	UF.mapType = 4;
 	UF.mapTypes = [
@@ -87,12 +81,12 @@
 			lines[i] = lines[i].replace(/["']/g, ""); // better to delete in original files
 			UF.places.push( lines[i].split( sep ) );
 		}
-//		UF.startPlace = parseInt( Math.random() * UF.places.length, 10 );
+		// UF.startPlace = parseInt( Math.random() * UF.places.length, 10 );
 
 		UF.info = info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'border: 0px solid red; position: absolute; top: 0px; width: 100% ';
 
-		info.innerHTML = info.txt = '<h1 title="The fastest, smallest, sweetest 3D map you ever did see" >unFlatLand R4.1 ~ ' +
+		info.innerHTML = info.txt = '<h1 title="The fastest, smallest, sweetest 3D map you ever did see" >unFlatLand R4 ~ ' +
 			'<a href=# title="Get help and info" onclick=help.style.display="block"; ><large>&#x24D8;</large></a></h1>' +
 			'<div style=height{900px; >Camera lat: <input type="text" id="inpLat" value="' + UF.places[ UF.startPlace][1] +'" size=8 /> ' +
 				'lng: <input type="text" id="inpLng" value="' + UF.places[ UF.startPlace][2] +'" size=8 /> ' +
@@ -104,7 +98,6 @@
 				'<select title="Select the 2D overlay" id=selMapType onchange="UF.mapType=this.selectedIndex; initElevations( UF.places[selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex ][2] );"><select>' +
 				'<br><br>' +
 				'<a href="" >Trackball Controller</a> &#10070; <a href="JavaScript:getFirstPersonController();" title="Happy flying!" >First Person Controller</a>' +
-				'  &#10070; <input id=chkPlacards type="checkbox" onchange=togglePlacards(); > Placards' +
 			'</div><br>' +
 			'<div id=touch style=display:none;height:' + window.innerHeight + 'px;width:100%; ></div>' +
 			'<div id=help onclick=help.style.display="none"; style=display:none;background-color:#ccc;opacity:0.7;left:0;margin:auto;padding:20px;position:absolute;right:0;top:200px;width:60%; >' +
@@ -122,8 +115,8 @@
 					'&bull; Mouse wheel only: speed up/slow down / down<br>' +
 					'&bull; Spacebar/mousewheel click: pause<br>' +
 					'&bull; Mouse/trackpad: update heading<br>' +
-				'</p>' +
-
+				'</p>' +				
+				
 				'<a href="https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland" target="_blank">Source code</a><br>' +
 				'<small>credits: <a href="http://threejs.org" target="_blank">three.js</a> - ' +
 				'<a href="http://khronos.org/webgl/" target="_blank">webgl</a> - ' +
@@ -156,7 +149,7 @@
 			selMapType.children[i].text = UF.mapTypes[i][0];
 		}
 		selMapType.selectedIndex = UF.mapType;
-
+		
 		UF.renderer = renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.shadowMapEnabled = true;
 
@@ -167,7 +160,7 @@
 
 		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.position.set( 0, 600, 400 );
-		UF.controls = controls = new THREE.TrackballControls( camera, renderer.domElement );
+		UF.controls = controls = new THREE.TrackballControls( camera, renderer.domElement );		
 
 		UF.stats = stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; top: 0px; zIndex: 100; ';
@@ -208,12 +201,7 @@
 	}
 
 	function initElevations( lat, lng ) {
-		if ( UF.placards && UF.placards.children.length > 0) { 
-			chkPlacards.checked = false;
-			UF.scene.remove( UF.placards );
-			UF.placards.children.length = 0;
-		}	
-//console.log('chrome test',lat,lng );
+//console.log('chrome test',lat,lng );	
 		UF.startTime = new Date();
 		var  tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
 		//if ( !UF.elevationsImage ) {
@@ -227,7 +215,7 @@
 
 		UF.elevTileYLat = lat2tile( lat, elevZoom );
 		UF.elevTileXLng = long2tile( lng, elevZoom );
-
+		
 		UF.elevationsImage.onload = initCanvas;
 		UF.elevationsImage.src = "../unicam/topo-" + elevZoom + "-" + UF.elevTileYLat + "-" + UF.elevTileXLng + ".png";
 //console.log( lng, lat, UF.tileXLng, UF.tileYLat, UF.elevTileXLng, UF.elevTileYLat )
@@ -236,20 +224,21 @@
 	function initCanvas() {
 		var mesh = UF.mesh, tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
 		var tileXLng = UF.tileXLng, mapType = UF.mapType, tileYLat = UF.tileYLat;
-		var ulLat = UF.ulLat, lrLat = UF.lrLat, ulLng = UF.ulLng, lrLng = UF.lrLng;
 		var elevationsImage = UF.elevationsImage;
+		var ulLat, lrLat, ulLng, lrLng;
+
 		if ( UF.mesh ) {
 			UF.scene.remove( UF.mesh );
 		}
 
-		UF.ulLat = tile2lat( tileYLat, tileZoom );
-		UF.lrLat = tile2lat( tileYLat + 1, tileZoom );
-		UF.ulLng = tile2lng( tileXLng, tileZoom );
-		UF.lrLng = tile2lng( tileXLng + 1, tileZoom );
+		ulLat = tile2lat( tileYLat, tileZoom );
+		lrLat = tile2lat( tileYLat + 1, tileZoom );
+		ulLng = tile2lng( tileXLng, tileZoom );
+		lrLng = tile2lng( tileXLng + 1, tileZoom );
 // console.log( 'tileZoom', tileZoom, 'lats', ulLat, lrLat, 'lngs', ulLng, lrLng  );
 
-		var deltaLats = Math.abs( UF.ulLat - UF.lrLat );
-		var deltaLngs = Math.abs( UF.ulLng - UF.lrLng );
+		var deltaLats = Math.abs( ulLat - lrLat );
+		var deltaLngs = Math.abs( ulLng - lrLng );
 		var pixelsLat = parseInt( deltaLats * 120, 10 );
 		var pixelsLng = parseInt( deltaLngs * 120, 10 );
 // console.log( 'deltaLats', deltaLats.toFixed(3), 'deltaLngs', deltaLngs, 'pixelsLat', pixelsLat, 'pixelsLng', pixelsLng );
@@ -258,8 +247,8 @@
 		var elevUlLng = tile2lng( UF.elevTileXLng, elevZoom );
 // console.log( 'elevUlLat', elevUlLat, 'elevUlLng', elevUlLng );
 
-		var elevDeltaLats = elevUlLat - UF.ulLat;
-		var elevDeltaLngs = elevUlLng - UF.ulLng;
+		var elevDeltaLats = elevUlLat - ulLat;
+		var elevDeltaLngs = elevUlLng - ulLng;
 // console.log( 'elevDeltaLats', elevDeltaLats, 'elevDeltaLngs', elevDeltaLngs);
 
 		var elevDeltaPixelsLat = Math.abs( elevDeltaLats * 120 );
@@ -362,7 +351,7 @@ console.log( 'Load time:', new Date() - UF.startTime );
 
 	function getFirstPersonController() {
 		touch.style.display = 'block';
-
+		
 		var camera, controls;
 		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.position.set( 0, 100, 500 );
@@ -392,59 +381,6 @@ console.log( 'Load time:', new Date() - UF.startTime );
 		controls.verticalMax = 2.0;
 		this.autoSpeedFactor = 0.0;
 		controls.lon = -40;
-	}
-
-	function togglePlacards() {
-		if ( UF.placards && UF.placards.children.length > 0) { 
-			UF.scene.remove( UF.placards );
-			UF.placards.children.length = 0;
-			return;
-		}
-	
-		var p, x, z;
-		var deltaLats = Math.abs( UF.ulLat - UF.lrLat );
-		var deltaLngs = Math.abs( UF.ulLng - UF.lrLng );
-		UF.mesh.geometry.computeBoundingBox();
-		
-		UF.placards = new THREE.Object3D;
-		UF.scene.add( UF.placards );
-		geometry = new THREE.CubeGeometry( 1, 1, 1 );
-		material = new THREE.MeshBasicMaterial( { color: 0xff0000, opacity: 0.5, transparent: true });
-		for ( var i = 0, iLen = UF.places.length; i < iLen; i++ ) {
-			p = UF.places[i];
-			if ( p[1] < UF.ulLat && p[1] > UF.lrLat && p[2] > UF.ulLng  && p[2] < UF.lrLng ) {
-
-				mesh = new THREE.Mesh( geometry, material );
-				var x = 500 + 1000 * ( p[2] - UF.lrLng  ) / deltaLngs;
-				var z = -500 + 1000 * ( UF.ulLat - p[1] ) / deltaLats;
-				var y = 0.5 * (UF.mesh.geometry.boundingBox.max.y);
-				mesh.position.set( x, y, z );
-				mesh.scale.y = 1.5 * y;
-				UF.placards.add( mesh );
-
-				var texture = canvasText ( p[0] );
-				var spriteMaterial = new THREE.SpriteMaterial( { map: texture, useScreenCoordinates: false, opacity: 1 } );
-				sprite = new THREE.Sprite( spriteMaterial );
-				sprite.position.set(  x, UF.mesh.geometry.boundingBox.max.y, z );
-				sprite.scale.set( 50, 10, 1 );
-				UF.placards.add( sprite );
-			}
-		}
-	}
-
-	function canvasText( text ) {
-		var image = document.createElement( 'canvas' );
-		image.width = 100; // 480
-		image.height = 20; //204
-		var imageContext = image.getContext( '2d' );
-		imageContext.lineWidth = 1 ;
-		imageContext.strokeStyle = '#000000';
-		imageContext.strokeRect(0, 0, 100, 20);
-		imageContext.font = '12px sans-serif';
-		imageContext.fillText( text, 5, 15 );
-		var texture = new THREE.Texture( image );
-		texture.needsUpdate = true;
-		return texture;
 	}
 </script>
 </body>
