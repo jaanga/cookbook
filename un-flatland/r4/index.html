@@ -209,7 +209,7 @@ console.log('chrome test',lat,lng );
 		var  tileZoom = UF.tileZoom, elevZoom = UF.elevZoom;
 		if ( !UF.elevationsImage ) {
 			UF.elevationsImage = document.createElement('img' )
-			UF.elevationsImage.onload = initCanvas;
+			
 		}
 		lat = parseFloat( lat );
 		lng = parseFloat ( lng );
@@ -219,7 +219,7 @@ console.log('chrome test',lat,lng );
 
 		UF.elevTileYLat = lat2tile( lat, elevZoom );
 		UF.elevTileXLng = long2tile( lng, elevZoom );
-
+		UF.elevationsImage.onload = initCanvas;
 		UF.elevationsImage.src = "../unicam/topo-" + elevZoom + "-" + UF.elevTileYLat + "-" + UF.elevTileXLng + ".png";
 console.log( lng, lat, UF.tileXLng, UF.tileYLat, UF.elevTileXLng, UF.elevTileYLat )
 	}
