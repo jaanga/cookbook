@@ -84,17 +84,6 @@
 		}
 		// UF.startPlace = parseInt( Math.random() * UF.places.length, 10 );
 
-		UF.renderer = renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
-		renderer.shadowMapEnabled = true;
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		document.body.appendChild( renderer.domElement );
-		UF.scene = scene = new THREE.Scene();
-
-		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-		camera.position.set( 0, 600, 400 );
-		UF.controls = controls = new THREE.TrackballControls( camera, renderer.domElement );
 
 		UF.info = info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'border: 1px solid red; position: absolute; top: 0px; width: 100% ';
@@ -163,6 +152,18 @@
 			selMapType.children[i].text = UF.mapTypes[i][0];
 		}
 		selMapType.selectedIndex = UF.mapType;
+		
+		UF.renderer = renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.shadowMapEnabled = true;
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		document.body.appendChild( renderer.domElement );
+		UF.scene = scene = new THREE.Scene();
+
+		UF.camera = camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+		camera.position.set( 0, 600, 400 );
+		UF.controls = controls = new THREE.TrackballControls( camera, renderer.domElement );		
 
 		UF.stats = stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; top: 0px; zIndex: 100; ';

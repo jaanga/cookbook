@@ -204,7 +204,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 		}
 
-		camera.updateProjectionMatrix();
+		UF.camera.updateProjectionMatrix();
 
 	}
 

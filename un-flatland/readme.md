@@ -27,6 +27,7 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 * <s>Dropdown list items only update when you change city</s> fixed
 * First person controller: Mouse actions only work when initiated from top of screen. Should work from anywhere
 * Trackball controller: after you return from first person controller drop downs no longer work. Must reload page to make changes.
+* Elevation drops to naught on one side
 
 ## Road Map
 
