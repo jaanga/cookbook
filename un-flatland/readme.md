@@ -14,7 +14,7 @@ The fastest, smallest, sweetest 3D Map code you ever did see.
 
 You have two ways of viewing the FGx Plane Spotter files:
 
-* Code hosted on GitHub: [jaanga.github.io]( http://jaanga.github.io/un-flatland/ "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
+* Code hosted on GitHub: [jaanga.github.io]( http://jaanga.github.io/cookbook/un-flatland/ "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
 * Source code on GitHub: [github.com/jaanga]( https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
 
 
