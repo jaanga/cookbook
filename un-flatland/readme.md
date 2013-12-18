@@ -70,11 +70,25 @@ For Revision 1 there are only 64 bitmaps corresponding to Slippy Map zoom level 
 To make matters even worse, there is so much data on each of these bitmaps that, if you attempt to display zoom level 4 (or 5 or 6) that you will bring your computer to a halt.
 Currently, unFlatland is set to interpolate elevation data between zoom levels 7 to 12.
 
+The 256x256 bitmap for OSM zoom level 0: <http://b.tile.openstreetmap.org/0/0/0.png>
+
+Elevation data is likely to be sourced from one of the following locations:
+
+* <http://dds.cr.usgs.gov/srtm/>
+* <http://www.viewfinderpanoramas.org/dem3.html#hgt>
+* <http://srtm.csi.cgiar.org/Index.asp>
+
 Learning how to reprocess the zoom level 4 bitmaps so they cover levels 1 through 6 should take not much more than a few days.
 Sourcing the data so that elevations work well between zoom levels, say, 10 to 14 or higher is going to take some research, collaboration and scheming.
-Obtaining and making available to the world terrain elevation bitmaps that work well down to zoom level 14 or so is very doable even by a group of amateurs.
+Obtaining and making available to the world terrain elevation bitmaps that work well down to zoom level 14 (requires 4,096 bitmaps) or so is very doable even by a group of amateurs.
 
 Even such moderately detailed terrain elevation bitmap data, if readily available in locations such as GitHub, will change cartography forever - because it will make it easier than ever before for even beginning programmers to create 3D mapping apps.
+
+**
+
+Once the data is collected it should be kept and maintained in its own GitHub gh-pages repository
+
+Any thoughts, suggestions or guidance on preparing these terrain elevation bitmaps using simple tools will be greatly appreciated. 
 
 
 ## Links
