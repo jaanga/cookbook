@@ -18,7 +18,7 @@ You have two ways of viewing the FGx Plane Spotter files:
 * Source code on GitHub: [github.com/jaanga]( https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
 
 
-## Features
+## <a name="features"></a>Features
 
 * Covers every part of the world that [OSM]( http://www.openstreetmap.org/ ) covers - matches [Slippy Map]( http://wiki.openstreetmap.org/wiki/Slippy_Map )
 * Works in your browser  - no plugin required
@@ -35,7 +35,7 @@ You have two ways of viewing the FGx Plane Spotter files:
 * Fast enough to be usable
 
 
-## Issues Bugs
+## Issues and Bugs
 
 * <s>~~Works only in Chrome~~</s> fixed
 * <s>~~Dropdown list items only update when you change city~~</s> fixed
@@ -51,8 +51,12 @@ You have two ways of viewing the FGx Plane Spotter files:
 * Can we get this down to 50 metre detail?  
 
 
-## <a name="tib"></a>Terrain Elevation Bitmaps
+## <a name="terrain"></a>Terrain Elevation Bitmaps
+Mission: to develop the database of online 3D terrain elevation bitmaps so that you can zoom in and out of OSM-style maps while the state-of-the-art resolution of the terrain in 3D.
 
+Vision: Make available to the world - for a wide variety of cartography uses - an easily accessible and readily usable terrain data set of the entire earth.
+
+### Overview
 unFlatland uses bitmaps to store terrain vertical elevation data. The color of the pixel is linked to a table that list the altitude indicated for each color.
 The X and Y position of the pixel in the bitmap corresponds to the longitude and latitude of the indicated location.
 Further background on this technique may be found at Jaume Sánchez's  "[Blocky Earth](http://www.clicktorelease.com/code/blocky_earth/)" and Bjørn Sandvik's tutorial at [Textural terrains with three.js](http://blog.thematicmapping.org/2013/10/textural-terrains-with-threejs.html).
@@ -61,16 +65,34 @@ This techniques creates actual 3D geometry that can cast shadows and things can 
 It should nor be confused with [bump mapping]( http://en.wikipedia.org/wiki/Bump_mapping ) - a process that simulates 3D user shaders.
 
 Apart from the 3D data is is useful to overlay the terrain with geographical features such as road maps and satellite photos.
-The intention is that unFlatland follows all [Slippy Map tile conventions]( http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames).
+The intention is that unFlatland follows all [Slippy Map tile conventions]( http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames ).
 Wherever Slippy Map has a tile with its 2D data, unFlatland should supply a corresponding tile with terrain elevation data.
 Of course, neither the Slippy Map providers nor the terrain bitmaps can supply data for ever square nanometer of the world, so interpolation is required.
 
+### Current State
 Given that unFlatland is new and the dataset is very rudimentary, it has to much interpolating.
 For Revision 1 there are only 64 bitmaps corresponding to Slippy Map zoom level 4.
 To make matters even worse, there is so much data on each of these bitmaps that, if you attempt to display zoom level 4 (or 5 or 6) that you will bring your computer to a halt.
 Currently, unFlatland is set to interpolate elevation data between zoom levels 7 to 12.
 
-The 256x256 bitmap for OSM zoom level 0: <http://b.tile.openstreetmap.org/0/0/0.png>
+The following sections begin to identify the work that need to be done in order to have the 3D data match the quality of the 2D data.
+
+
+### Tile Sources
+
+A great source for the Slippy Map tiles is [Open Street Map]( http://openstreetmap.org ).
+
+* Tiles are 256 × 256 pixel PNG files
+* Each zoom level is a directory, each column is a subdirectory, and each tile in that column is a file
+* Filename(url) format is /zoom/x/y.png
+
+Examples:
+
+* The world: 256x256 bitmap for OSM zoom level 0: <http://b.tile.openstreetmap.org/0/0/0.png>
+* San Francisco Airport (KSFO) for OSM zoom level 12: <http://b.tile.openstreetmap.org/12/655/1585.png>
+* Handy calculator: <http://oms.wff.ch/calc.htm>
+
+### Terrain Data Sources
 
 Elevation data is likely to be sourced from one of the following locations:
 
@@ -78,17 +100,26 @@ Elevation data is likely to be sourced from one of the following locations:
 * <http://www.viewfinderpanoramas.org/dem3.html#hgt>
 * <http://srtm.csi.cgiar.org/Index.asp>
 
+### Conversion Process
 Learning how to reprocess the zoom level 4 bitmaps so they cover levels 1 through 6 should take not much more than a few days.
 Sourcing the data so that elevations work well between zoom levels, say, 10 to 14 or higher is going to take some research, collaboration and scheming.
-Obtaining and making available to the world terrain elevation bitmaps that work well down to zoom level 14 (requires 4,096 bitmaps) or so is very doable even by a group of amateurs.
 
-Even such moderately detailed terrain elevation bitmap data, if readily available in locations such as GitHub, will change cartography forever - because it will make it easier than ever before for even beginning programmers to create 3D mapping apps.
+At zoom level 18, the number of tiles required is over 68 trillion. 
+For the purposes of an amateur project, the upper limit may be zoom level 6 (4096 tiles) or 7 (16384 tiles).
+This number of files may be processed and stored at no charge on GitHub. 
+For the higher zoom levels, data will be interpolated. 
+These higher zoom levels would obtain data from a special set of zoom level 6 or 7 bitmaps that have much higher resolutions than 256x256 - perhaps as high as 1024x1024 or 2048x2048.
+The size limit of the special bitmaps would be determined by assessing acceptable download limes.
+Obtaining and making available to the world terrain elevation bitmaps that work well down to zoom level 14 or so appears very doable even by a group of amateurs.
 
-**
+### Further Notes
 
-Once the data is collected it should be kept and maintained in its own GitHub gh-pages repository
+Once the data is collected it should be kept in its own GitHub gh-pages repository and then maintained at, say, quarterly intervals
 
 Any thoughts, suggestions or guidance on preparing these terrain elevation bitmaps using simple tools will be greatly appreciated. 
+
+### Benefits
+Even such moderately detailed terrain elevation bitmap data, if readily available in locations such as GitHub, will change cartography forever - because it will make it easier than ever before for even beginning programmers to create 3D mapping apps.
 
 
 ## Links
@@ -165,6 +196,11 @@ See also and in particular <a href="http://fgx.github.io" target="_blank">FGx on
 
 
 ## Change Log
+
+2013-12-18 ~ Theo
+
+* Expanding the read me
+
 
 2013-12-17 ~ Theo
 
