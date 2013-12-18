@@ -5,7 +5,7 @@ Live demo: [UnFlatland]( http://jaanga.github.io/cookbook/un-flatland/latest.htm
 
 For an amusing applied use of this technology see: [FGx Plane Spotter]( http://fgx.github.io/fgx-plane-spotter/latest.html )
 
-For Leap Motion device enabled and earlier versions see: [Flying Leap 3D]( https://github.com/jaanga/gestification/tree/gh-pages/projects/flying-leap-3d )
+For [Leap Motion]( https://www.leapmotion.com/ ) device enabled and earlier versions see: [Flying Leap 3D]( https://github.com/jaanga/gestification/tree/gh-pages/projects/flying-leap-3d )
 
 ## Concept
 The fastest, smallest, sweetest 3D Map code you ever did see.
