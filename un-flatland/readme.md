@@ -51,7 +51,7 @@ You have two ways of viewing the FGx Plane Spotter files:
 * Can we get this down to 50 metre detail?  
 
 
-## Terrain Elevation Bitmaps
+## <a name="tib"></a>Terrain Elevation Bitmaps
 
 unFlatland uses bitmaps to store terrain vertical elevation data. The color of the pixel is linked to a table that list the altitude indicated for each color.
 The X and Y position of the pixel in the bitmap corresponds to the longitude and latitude of the indicated location.
