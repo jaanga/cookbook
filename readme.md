@@ -26,6 +26,9 @@ More details here: [Jaanga BVH Reader]( https://github.com/jaanga/cookbook/tree/
 
 Blog post: [BVH: A format to capture motion - simply, quickly and economically](http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html )
 
+## BVH Skinned
+
+Live demo: [Jaanga BVH Skinned R1]( http://jaanga.github.io/cookbook/bvh-skinned/r1/index.html )
 
 ## j3qUE
 Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file. The Three.js goes into its own file called in by an IFRAME into the main page. In the main file, you write in jQuery style. In the iframe, you write in Three.js style.

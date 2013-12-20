@@ -1,12 +1,12 @@
 Jaanga BVH Reader
 =================
 
-Live demo - Saqoosha's format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html  
-Live demo - CMU Daz format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html  
-Live demo - Truebones format: http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html  
-Live demo - Procedure generated bot: http://jaanga.github.io/cookbook/bvh-reader/r1/procedure-bots.html  
+Live demo - Saqoosha's format: <http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html>  
+Live demo - CMU Daz format: <http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-cmu-daz.html>  
+Live demo - Truebones format: <http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha-truebones.html>  
+Live demo - Procedure generated bot: <http://jaanga.github.io/cookbook/bvh-reader/r1/procedure-bots.html>  
 
-Blog post: http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html  
+Blog post: <http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html>  
 
 ###About
 The [BVH](http://en.wikipedia.org/wiki/Biovision_Hierarchy) format is probably the most popular free, 
@@ -54,8 +54,8 @@ Papers
 
 BVH Reader Code Samples
 It is amusing to compare the elegance of Saqoosha's code with these efforts:  
-https://code.google.com/p/papervision3d/source/browse/trunk/as3/trunk/src/org/papervision3d/objects/parsers/mocap/BVH.as?spec=svn938&r=938  
-https://github.com/sinisterchipmunk/bvh
+<https://code.google.com/p/papervision3d/source/browse/trunk/as3/trunk/src/org/papervision3d/objects/parsers/mocap/BVH.as?spec=svn938&r=938>  
+<https://github.com/sinisterchipmunk/bvh>
 
 
 Apps  
