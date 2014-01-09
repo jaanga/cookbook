@@ -1,9 +1,9 @@
 unFlatland Read Me
 ==================
 
-Live demo: [UnFlatland]( http://jaanga.github.io/cookbook/un-flatland/latest.html )
+Live demo: [UnFlatland]( http://jaanga.github.io/cookbook/un-flatland/index.html )
 
-For an amusing applied use of this technology see: [FGx Plane Spotter]( http://fgx.github.io/fgx-plane-spotter/latest.html )
+For an amusing applied use of this technology see: [FGx Plane Spotter]( http://fgx.github.io/fgx-plane-spotter/inde.html )
 
 For [Leap Motion]( https://www.leapmotion.com/ ) device enabled and earlier versions see: [Flying Leap 3D]( https://github.com/jaanga/gestification/tree/gh-pages/projects/flying-leap-3d )
 
