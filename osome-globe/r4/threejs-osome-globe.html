@@ -73,7 +73,7 @@
 	function init() {
 		var geometry, material, mesh, css, info;
 
-		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.shadowMapEnabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
@@ -116,7 +116,7 @@ light.shadowCameraVisible = true;
 		info.innerHTML = '<span id="zIn" title="Zoom in. Level 3" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomIn()">+</a></span> ' +
 			'<span id="zOut" title="Zoom out. Level 3" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomOut()" >-</a></span> ' +
 			'<span title="Return to home position and zoom" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomHome()" >&#x2302</a></span> ' +
-			'<span title="Refresh. Click here if you get to edge of map and need more" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomLevel( zoom );" >&#x27f3</a></span> ' +
+			'<span title="Refresh. Click here if you get to edge of map and need more" style="background-color: #ccc; padding: 5px"><a href=# onclick="zoomLevel( zoom );" > &#x21BB; </a></span> ' +
 			'<span title="Reset camera so north/south of globe is vertical" style="background-color: #ccc; padding: 5px"><a href=# onclick="resetCamera()" >&uArr;</a></span> ' +
 
 			'<select id="selZoom" onchange="zoom = 1 + this.selectedIndex; zoomLevel( zoom );">' +

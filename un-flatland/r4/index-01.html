@@ -141,8 +141,11 @@
 		}
 
 		selMapType.selectedIndex = mapType;
-		
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		if ( ! Detector.webgl ) {
+			FGx.renderer = renderer = new THREE.CanvasRenderer();
+		} else {
+			FGx.renderer = renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		}
 		renderer.shadowMapEnabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 

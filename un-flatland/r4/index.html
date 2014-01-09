@@ -5,7 +5,7 @@
 <meta charset=utf-8>
 </head>
 <body>
-
+<script src='http://mrdoob.github.io/three.js/examples/js/Detector.js'></script>
 <script src=http://mrdoob.github.com/three.js/build/three.min.js></script>
 <script src=http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js></script>
 <script src=http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js></script>
@@ -104,7 +104,8 @@
 				'<select title="Select the 2D overlay" id=selMapType onchange="UF.mapType=this.selectedIndex; initElevations( UF.places[selPlace.selectedIndex ][1], UF.places[selPlace.selectedIndex ][2] );"><select>' +
 				'<br><br>' +
 				'<a href="" >Trackball Controller</a> &#10070; <a href="JavaScript:getFirstPersonController();" title="Happy flying!" >First Person Controller</a>' +
-				'  &#10070; <input id=chkPlacards type="checkbox" onchange=togglePlacards(); > Placards' +
+				'  &#10070; <input id=chkPlacards type="checkbox" onchange=togglePlacards(); > Placards &#10070;  ' +
+				'<a href=JavaScript:findAltitude(); >Altitude</a>' +
 			'</div><br>' +
 			'<div id=touch style=display:none;height:' + window.innerHeight + 'px;width:100%; ></div>' +
 			'<div id=help onclick=help.style.display="none"; style=display:none;background-color:#ccc;opacity:0.7;left:0;margin:auto;padding:20px;position:absolute;right:0;top:200px;width:60%; >' +
@@ -157,7 +158,11 @@
 		}
 		selMapType.selectedIndex = UF.mapType;
 
-		UF.renderer = renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		if ( ! Detector.webgl ) {
+			UF.renderer = renderer = new THREE.CanvasRenderer();
+		} else {
+			UF.renderer = renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		}
 		renderer.shadowMapEnabled = true;
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -442,6 +447,34 @@ console.log( 'Load time:', new Date() - UF.startTime );
 		var texture = new THREE.Texture( image );
 		texture.needsUpdate = true;
 		return texture;
+	}
+	
+	function findAltitude() {
+		var lng = inpLng.value;	
+		var lat = inpLat.value;
+		var diffLng = lng - UF.ulLng;
+		var diffLat = lat - UF.lrLat;
+		
+		var diffPixelsLng = parseInt( diffLng * 120, 10 );
+		var diffPixelsLat = parseInt( diffLat * 120, 10 );
+		
+console.log( lng, lat, diffLng, diffLat, diffPixelsLng, diffPixelsLat );		
+
+		var deltaLngs = Math.abs( UF.ulLng - UF.lrLng );
+		var deltaLats = Math.abs( UF.ulLat - UF.lrLat );
+		
+		var pixelsLng = parseInt( deltaLngs * 120, 10 );	
+		var pixelsLat = parseInt( deltaLats * 120, 10 );
+
+console.log( 'deltaLats', deltaLats.toFixed(3), 'deltaLngs', deltaLngs, 'pixelsLat', pixelsLat, 'pixelsLng', pixelsLng );		
+console.log( pixelsLat * pixelsLng, UF.terrain.geometry.vertices.length);
+		var theVertex = pixelsLng * (diffPixelsLat - 1) - diffPixelsLng;
+		theVertex = UF.terrain.geometry.vertices.length - theVertex;
+		var altitude = UF.terrain.geometry.vertices[ theVertex ].y;
+console.log( 'vertex', theVertex, 'alt', altitude );	
+		UF.terrain.geometry.vertices[ theVertex ].y = 500; // scale * UF.uniElevations[ id ];
+		UF.terrain.geometry.verticesNeedUpdate = true;
+		
 	}
 </script>
 </body>
