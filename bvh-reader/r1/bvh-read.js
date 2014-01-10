@@ -45,7 +45,7 @@
 		textarea.style.cssText = 'height: ' + (window.innerHeight - 150) + 'px; width: ' +  0.45 * window.innerWidth + 'px; ';
 		textarea.value = 'text here...';
 
-		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff } );
 		renderer.setSize( 0.5 * window.innerWidth, window.innerHeight - 150 );
 
 		document.body.appendChild( renderer.domElement );
