@@ -75,7 +75,9 @@
 		scene = new THREE.Scene();
 		
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 40000 );
-		camera.position = latlon2xyz( cameraLatitude * d2r, pi - cameraLongitude * d2r,  cameraDistance[ zoom ] );		
+		camera.position = latlon2xyz( cameraLatitude * d2r, pi - cameraLongitude * d2r,  cameraDistance[ zoom ] );
+
+		THREE.ImageUtils.crossOrigin = 'anonymous';
 
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0px; zIndex: 100; ';

@@ -151,6 +151,8 @@
 		camera.position.set( 0, 600, 400 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
+		THREE.ImageUtils.crossOrigin = 'anonymous';
+
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; top: 0px; zIndex: 100; ';
 		document.body.appendChild( stats.domElement );
@@ -300,7 +302,7 @@
 		plane.geometry.verticesNeedUpdate = true;
 		scene.add( plane );
 		
-		getAirports() 
+		// getAirports() 
 		
 		lookForAssets();
 	}

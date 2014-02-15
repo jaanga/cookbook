@@ -82,6 +82,8 @@
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 40000 );
 		camera.position = latlon2xyz( cameraLatitude * d2r, pi - cameraLongitude * d2r,  cameraDistance[ zoom ] );
 
+		THREE.ImageUtils.crossOrigin = 'anonymous';
+
 		light = new THREE.DirectionalLight( 0xffffff, 0.5);
 		light.position.set( 1, 1, 1 ).normalize();
 		light.castShadow = true;
