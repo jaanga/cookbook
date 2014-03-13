@@ -32,7 +32,7 @@
 	Bvh.play = document.getElementById('play');
 	selBvh.selectedIndex = 0;
 	
-    Bvh.parseNode = function( data) {
+    Bvh.parseNode = function( data ) {
 		var name, done, geometry, i, material, n, node, t;
 		name = data.shift();
 		if ( name === 'Site' ) {
