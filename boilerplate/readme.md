@@ -13,18 +13,29 @@ See Also
 <https://github.com/jaanga/gestification/tree/gh-pages/cookbook/boilerplate>
 
 ## Concept
-Provide sample boilerplate files for a variety of Three.js script types
 
 ### Mission
+Provide sample boilerplate files for a variety of Three.js script types
 
 ###Vision
 
 
 ## Features
 
+Some of the goals:
+
+* Trying to make the most amazing effects with the fewest, simplest lines of code
+* Building code that is fun and easy to read
+* Organizing the code and naming variables in such a familiar way so that comments are not needed
+
+Style
+
+* Spacing style is greedy vertically but generous horizontally - because monitors have lots width but never enough height
+
 
 ## Road Map
 
+There are many more boilerplate files available. It's just a question of time before they get here
 
 ## Issues /Bugs
 
