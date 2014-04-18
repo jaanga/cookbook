@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>shader boilerplate</title>
+<meta charset=utf-8 >
+<meta name=viewport content=width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0 >
+</head>
+<body>
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/TrackballControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+<script type=x-shader/x-vertex id=vertexshader >
+	attribute float displacement;
+	uniform float amplitude;
+
+	varying vec3 vNormal;
+	varying vec2 vUv;
+
+	void main() {
+		vNormal = normal;
+		vUv = ( 0.5 + amplitude ) * uv + vec2( amplitude );
+		vec3 newPosition = position + amplitude * normal * vec3( displacement );
+		gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+	}
+</script>
+<script type=x-shader/x-fragment id=fragmentshader >
+	varying vec3 vNormal;
+	varying vec2 vUv;
+
+	uniform vec3 color;
+	uniform sampler2D texture;
+
+	void main() {
+		vec3 light = vec3( 0.5, 0.2, 1.0 );
+		light = normalize( light );
+		float dProd = 0.5 * dot( vNormal, light ) + 0.5;
+		vec4 tcolor = texture2D( texture, vUv );
+		vec4 gray = vec4( vec3( 0.3 * tcolor.r + 0.59 * tcolor.g + 0.11 * tcolor.b ), 1.0 );
+		gl_FragColor = gray * vec4( vec3( dProd ) * vec3( color ), 1.0 );
+	}
+</script>
+<script>
+// Theo Armour ~ 2014-04-17 ~ MIT license
+
+	var renderer, scene, camera, stats;
+	var mesh, uniforms, attributes;
+	var noise = [];
+
+	init();
+	animate();
+
+	function init() {
+// attributes always in alphabetical order
+		document.body.style.cssText = 'color: #ccc; font: normal 12pt monospace; margin: 0; overflow: hidden; ' ;
+
+		var info = document.body.appendChild( document.createElement( 'div' ) );
+
+		info.style.cssText = 'left: 20px; position: absolute; ';
+		info.innerHTML = '<h1>' + document.title + '<h1>' +
+			'<div id=msg ></div>';
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer();
+		renderer.setClearColor( 0x050505, 1 );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 100, 100, 100 );
+		controls = new THREE.TrackballControls( camera, renderer.domElement );
+
+		scene = new THREE.Scene();
+
+//		var geometry = new THREE.SphereGeometry( 50, 128, 64);
+		var geometry = new THREE.PlaneGeometry( 100, 100, 100, 100);
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI / 2 ) );
+		geometry.dynamic = true;  // is ths needed?
+
+		attributes = {
+			displacement: { type: 'f', value: [] }
+		};
+
+		uniforms = {
+			amplitude: { type: 'f', value: 1.0 },
+			color: { type: 'c', value: new THREE.Color( 0xff2200 ) },
+			texture: { type: 't', value: THREE.ImageUtils.loadTexture( '../../../textures/water.jpg' ) },
+		};
+		uniforms.texture.value.wrapS = uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+
+		var shaderMaterial = new THREE.ShaderMaterial( {
+			attributes: attributes,
+			fragmentShader: fragmentshader.textContent,
+			side: THREE.DoubleSide,
+			uniforms: uniforms,
+			vertexShader: vertexshader.textContent
+		});
+
+		mesh = new THREE.Mesh( geometry, shaderMaterial );
+
+		var vertices = mesh.geometry.vertices;
+		var values = attributes.displacement.value;
+		for ( var i = 0; i < vertices.length; i++ ) {
+			values[ i ] = 0;
+			noise[ i ] = 5 * Math.random();
+		}
+
+		scene.add( mesh );
+	}
+
+	function animate() {
+		requestAnimationFrame( animate );
+		var time = 0.01 * Date.now();
+		mesh.rotation.y  = 0.01 * time;
+
+		uniforms.amplitude.value = 2.5 * Math.sin( mesh.rotation.y * 0.125 );
+		uniforms.color.value.offsetHSL( 0.0005, 0, 0 );
+
+		for ( var i = 0; i < attributes.displacement.value.length; i ++ ) {
+			attributes.displacement.value[ i ] = Math.sin( 0.1 * i + time );
+			noise[ i ] += 0.5 * ( 0.5 - Math.random() );
+			noise[ i ] = THREE.Math.clamp( noise[ i ], -5, 5 );
+			attributes.displacement.value[ i ] += noise[ i ];
+		}
+		attributes.displacement.needsUpdate = true;
+		renderer.render( scene, camera );
+		controls.update();
+		stats.update();
+	}
+
+</script>
+</body>
+</html>
