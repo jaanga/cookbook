@@ -3,12 +3,18 @@ Jaanga Cookbook Read Me
 
 _3D Code that's fun and easy to play with_  
 
-## View this Read Me via GitHub
+## Project Files
 
-GitHub Pages: <http://jaanga.github.io/cookbook/index.html>
+You have two ways of viewing the Jaanga Cookbook files:
 
-GitHub Source: <https://github.com/jaanga/cookbook>
+* Web page hosted on GitHub: [jaanga.github.io]( http://jaanga.github.io/cookbook/index.html "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
+* Source code on GitHub: [github.com/jaanga]( https://github.com/jaanga/cookboo/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
 
+
+## Boilerplate
+Sample Three.js boilerplate
+
+[Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/boilerplate/ )
 
 ## BVH Reader   
 Fast and simple motion capture data reader makes your characters come alive  
