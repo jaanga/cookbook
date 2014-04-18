@@ -20,5 +20,5 @@
 
 ****
 
-[Source Code on GitHub]( https://github.com/jaanga/cookbook/boilerplate )  
+[Source Code on GitHub]( https://github.com/jaanga/cookbook/tree/gh-pages/boilerplate )  
 [Copyright and License]( https://github.com/jaanga/jaanga.github.io/blob/master/jaanga-copyright-and-mit-license.md )
