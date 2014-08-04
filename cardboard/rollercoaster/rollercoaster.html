@@ -73,12 +73,24 @@
         controls.connect();
       };
       window.addEventListener('deviceorientation', hasOrientation, false);
+// ground box
+
+for (var i = 0; i < 50; i++) {
+		geometry = new THREE.BoxGeometry( 20, 1000, 20 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( Math.random() * 5000 - 2500 , -10, Math.random() * 5000 - 2500 );
+		scene.add( mesh );
+} 
 
       // environment
 
       var geometry = new THREE.PlaneGeometry( 5000, 5000, 15, 15 );
       geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
       var material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
+
+
+
  /*   
       for ( var i = 0; i < geometry.vertices.length; i ++ ) {
 
@@ -278,12 +290,12 @@
 
         train.position.copy( position );
 
-        tangent.copy( curve.getTangentAt( progress ) );
+  //      tangent.copy( curve.getTangentAt( progress ) );
 
         velocity -= tangent.y * 0.0000015;
         velocity = Math.max( velocity, 0.00004 );
 
-        train.lookAt( lookAt.copy( position ).add( tangent ) );
+ //       train.lookAt( lookAt.copy( position ).add( tangent ) );
 
         //
 
@@ -297,16 +309,16 @@
 
         //
 
-        camera.matrixWorld.decompose( cameraPosition, cameraQuaternion, cameraScale );
+//        camera.matrixWorld.decompose( cameraPosition, cameraQuaternion, cameraScale );
 
-        cameraOrientation.set( 0, 0, -1 ).applyQuaternion( cameraQuaternion );
-        cameraVelocity.subVectors( cameraPosition, cameraPositionOld );
+//        cameraOrientation.set( 0, 0, -1 ).applyQuaternion( cameraQuaternion );
+ //       cameraVelocity.subVectors( cameraPosition, cameraPositionOld );
 
 //       context.listener.setPosition( cameraPosition.x, cameraPosition.y, cameraPosition.z );
 //        context.listener.setOrientation( cameraOrientation.x, cameraOrientation.y, cameraOrientation.z, camera.up.x, camera.up.y, camera.up.z );
 //        context.listener.setVelocity( cameraVelocity.x, cameraVelocity.y, cameraVelocity.z );
 
-        cameraPositionOld.copy( cameraPosition );
+//        cameraPositionOld.copy( cameraPosition );
 
         //
 
