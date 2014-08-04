@@ -1,19 +1,32 @@
-<!doctype html>
-<html lang=en >
-<head>
-<title>Cardboard R1</title>
-<meta charset=utf-8 >
- <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-</head>
-<body>
-<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
-<script src=http://mrdoob.github.io/three.js/examples/js/controls/TrackballControls.js ></script>
-<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
-<script src=../js/StereoEffect.js ></script>
-<script src=../js/DeviceOrientationControls.js ></script>
-<script src=../js/OrbitControls.js ></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cardboard Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+      body {
+        margin: 0px;
+        overflow: hidden;
+      }
+      #example {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="example"></div>
 
-<script>
+  <script src="../js/third-party/threejs/three.min.js"></script>
+  <script src="../js/third-party/threejs/StereoEffect.js"></script>
+  <script src="../js/third-party/threejs/DeviceOrientationControls.js"></script>
+  <script src="../js/third-party/threejs/OrbitControls.js"></script>
+
+  <script>
     var camera, scene, renderer;
     var effect, controls;
     var element, container;
@@ -24,112 +37,116 @@
     animate();
 
     function init() {
-		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
-		scene = new THREE.Scene();
+      renderer = new THREE.WebGLRenderer();
+      element = renderer.domElement;
+      container = document.getElementById('example');
+      container.appendChild(element);
 
-		effect = new THREE.StereoEffect(renderer);
-      effect.separation = 0.2;
-      effect.targetDistance = 50;
-      effect.setSize( window.innerWidth, window.innerHeight );
+      effect = new THREE.StereoEffect(renderer);
 
-		camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
-		camera.position.set(0, 10, 0);
-		scene.add(camera);  // needed?
+      scene = new THREE.Scene();
 
-		controls = new THREE.OrbitControls(camera, element);
-		controls.rotateUp(Math.PI / 4);
-		controls.target.set( camera.position.x + 0.1, camera.position.y, camera.position.z);
-		controls.noZoom = true;
-		controls.noPan = true;
-		controls.autoRotate = true;
+      camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
+      camera.position.set(0, 10, 0);
+      scene.add(camera);
 
-		function setOrientationControls(e) {
-			if (!e.alpha) { return; }
+      controls = new THREE.OrbitControls(camera, element);
+      controls.rotateUp(Math.PI / 4);
+      controls.target.set(
+        camera.position.x + 0.1,
+        camera.position.y,
+        camera.position.z
+      );
+      controls.noZoom = true;
+      controls.noPan = true;
+      controls.autoRotate = true;
 
-			controls = new THREE.DeviceOrientationControls(camera, true);
-			controls.connect();
-			controls.update();
+      function setOrientationControls(e) {
+        if (!e.alpha) {
+          return;
+        }
 
-			element.addEventListener('click', fullscreen, false);
+        controls = new THREE.DeviceOrientationControls(camera, true);
+        controls.connect();
+        controls.update();
 
-			window.removeEventListener('deviceorientation', setOrientationControls);
-		}
+        element.addEventListener('click', fullscreen, false);
 
-		window.addEventListener('deviceorientation', setOrientationControls, true);
+        window.removeEventListener('deviceorientation', setOrientationControls);
+      }
+      window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-		var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
-		scene.add(light);
+      var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
+      scene.add(light);
 
-		var texture = THREE.ImageUtils.loadTexture( '../textures/patterns/checker.png' );
-		texture.wrapS = THREE.RepeatWrapping;
-		texture.wrapT = THREE.RepeatWrapping;
-		texture.repeat = new THREE.Vector2(50, 50);
-		texture.anisotropy = renderer.getMaxAnisotropy();
+      var texture = THREE.ImageUtils.loadTexture(
+        '../textures/patterns/checker.png'
+      );
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat = new THREE.Vector2(50, 50);
+      texture.anisotropy = renderer.getMaxAnisotropy();
 
-		var material = new THREE.MeshPhongMaterial({
-			color: 0xffffff,
-			specular: 0xffffff,
-			shininess: 20,
-			shading: THREE.FlatShading,
-			map: texture
-		});
+      var material = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        specular: 0xffffff,
+        shininess: 20,
+        shading: THREE.FlatShading,
+        map: texture
+      });
 
-		var geometry = new THREE.PlaneGeometry(1000, 1000);
+      var geometry = new THREE.PlaneGeometry(1000, 1000);
 
-		var mesh = new THREE.Mesh(geometry, material);
-		mesh.rotation.x = -Math.PI / 2;
-		scene.add( mesh );
+      var mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.x = -Math.PI / 2;
+      scene.add(mesh);
 
-		window.addEventListener('resize', resize, false);
+      window.addEventListener('resize', resize, false);
+      setTimeout(resize, 1);
+    }
 
-		setTimeout( resize, 1 );
+    function resize() {
+      var width = container.offsetWidth;
+      var height = container.offsetHeight;
 
-	}
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
 
-	function resize() {
-		var width = renderer.domElement.width; //container.offsetWidth;
-		var height = renderer.domElement.height; // container.offsetHeight;
+      renderer.setSize(width, height);
+      effect.setSize(width, height);
+    }
 
-		camera.aspect = width / height;
-		camera.updateProjectionMatrix();
+    function update(dt) {
+      resize();
 
-		renderer.setSize(width, height);
-		effect.setSize(width, height);
-	}
+      camera.updateProjectionMatrix();
 
-	function update(dt) {
-		resize();
+      controls.update(dt);
+    }
 
-		camera.updateProjectionMatrix();
+    function render(dt) {
+      effect.render(scene, camera);
+    }
 
-		controls.update(dt);
-	}
+    function animate(t) {
+      requestAnimationFrame(animate);
 
-	function render(dt) {
-		effect.render(scene, camera);
-	}
+      update(clock.getDelta());
+      render(clock.getDelta());
+    }
 
-	function animate(t) {
-		requestAnimationFrame(animate);
-
-		update(clock.getDelta());
-		render(clock.getDelta());
-	}
-
-	function fullscreen() {
-		if (container.requestFullscreen) {
-			container.requestFullscreen();
-		} else if (container.msRequestFullscreen) {
-			container.msRequestFullscreen();
-		} else if (container.mozRequestFullScreen) {
-			container.mozRequestFullScreen();
-		} else if (container.webkitRequestFullscreen) {
-			container.webkitRequestFullscreen();
-		}
-	}
-</script>
-</body>
+    function fullscreen() {
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+      } else if (container.mozRequestFullScreen) {
+        container.mozRequestFullScreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      }
+    }
+  </script>
+  </body>
 </html>
