@@ -13,8 +13,8 @@ You have two ways of viewing the Jaanga Cookbook files:
 ## Cookbook
 
 
-[Demo 3rd Party](  http://jaanga.github.io/cookbook/cardboard/index.html )
-[Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )
+[Demo 3rd Party](  http://jaanga.github.io/cookbook/cardboard/index.html )  
+[Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
 
 ## Boilerplate
 Sample Three.js boilerplate
