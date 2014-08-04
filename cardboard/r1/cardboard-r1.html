@@ -30,6 +30,9 @@
 		scene = new THREE.Scene();
 
 		effect = new THREE.StereoEffect(renderer);
+      effect.separation = 0.2;
+      effect.targetDistance = 50;
+      effect.setSize( window.innerWidth, window.innerHeight );
 
 		camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
 		camera.position.set(0, 10, 0);
