@@ -60,8 +60,8 @@
       scene.add( train );
 
       var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
-      camera.rotation.y = Math.PI;
-      train.add( camera );
+ //     camera.rotation.y = Math.PI;
+      scene.add( camera );
       
       var controls = undefined;
       var hasOrientation = function(evt) {
