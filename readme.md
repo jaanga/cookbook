@@ -10,6 +10,11 @@ You have two ways of viewing the Jaanga Cookbook files:
 * Web page hosted on GitHub: [jaanga.github.io]( http://jaanga.github.io/cookbook/index.html "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
 * Source code on GitHub: [github.com/jaanga]( https://github.com/jaanga/cookboo/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
 
+## Cookbook
+
+
+[Demo 3rd Party](  http://jaanga.github.io/cookbook/cardboard/index.html )
+[Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )
 
 ## Boilerplate
 Sample Three.js boilerplate
