@@ -169,20 +169,14 @@ for (var i = 0; i < 50; i++) {
       var animate = function ( time ) {
 
         requestAnimationFrame( animate );
-        
+/*        
         for ( var i = 0; i < funfairs.length; i ++ ) {
 
           funfairs[ i ].rotation.y = time * 0.0002;
 
         }
 
-        //
-        
-//        progress += velocity;
-//        progress = progress % 1;
-        
- //       position.copy( curve.getPointAt( progress ) );
- //       position.y += 3;
+
 
         train.position.copy( position );
 
@@ -194,12 +188,14 @@ for (var i = 0; i < 50; i++) {
  //       train.lookAt( lookAt.copy( position ).add( tangent ) );
 
         //
+*/
 
         if ( controls !== undefined ) {
           controls.update();
         }
         effect.render( scene, camera );
       };
+
       requestAnimationFrame( animate );
 
 </script>
