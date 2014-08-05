@@ -1,30 +1,28 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Roller Coaster</title>
-    <style>
-      body {
-        margin: 0px;
-        color: #fff;
-        font-family: Monospace;
-        background-color: #444;
-        overflow: hidden;
-      }
-      a {
-        color: #fff;
-      }
-    </style>
-  </head>
-  <body>
-   
-    <!-- Alf <script> window.history.replaceState({},"","/"); </script> -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Roller Coaster</title>
+<style>
+body {
+margin: 0px;
+color: #fff;
+font-family: Monospace;
+background-color: #444;
+overflow: hidden;
+}
+a {
+color: #fff;
+}
+</style>
+</head>
+<body>
 
-    <script src="js/third-party/threejs/three.min.js"></script>
-    <script src="js/third-party/threejs/StereoEffect.js"></script>
-    <script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
+<script src="js/third-party/threejs/three.min.js"></script>
+<script src="js/third-party/threejs/StereoEffect.js"></script>
+<script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
 
-    <script src="js/DetectScreenSize.js"></script>
+<script src="js/DetectScreenSize.js"></script>
 
     <script>
 
@@ -78,37 +76,11 @@ for (var i = 0; i < 50; i++) {
       geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
       var material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 
-
-
- /*   
-      for ( var i = 0; i < geometry.vertices.length; i ++ ) {
-
-        var vertex = geometry.vertices[ i ];
-
-        var distance = ( vertex.distanceTo( scene.position ) / 5 ) - 250;
-
-        vertex.x += Math.random() * 100 - 50;
-        vertex.y = Math.random() * Math.max( 0, distance );
-        vertex.x += Math.random() * 100 - 50;
-
-      }
-*/
-
       geometry.computeFaceNormals();
 
       var mesh = new THREE.Mesh( geometry, material );
       scene.add( mesh );
-/*
-      var geometry = new THREE.Trees( mesh );
-      var material = new THREE.MeshBasicMaterial( { color: 0x407000, side: THREE.DoubleSide } );
-      var mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
 
-      var geometry = new THREE.Sky();
-      var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-      var mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
- */     
       //
 
       var PI2 = Math.PI * 2;
@@ -145,73 +117,8 @@ for (var i = 0; i < 50; i++) {
         };
 
       } )();
-/*
-      var geometry = new THREE.RollerCoaster( curve, 1500 );
-      var material = new THREE.MeshPhongMaterial( { color: 0xffff00, specular: 0x020202, shininess: 300 } );
-      var mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
-
-      var geometry = new THREE.RollerCoasterLifters( curve, 100 );
-      var material = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x020202, shininess: 300 } );
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.y = 1;
-      scene.add( mesh );
-
-      var geometry = new THREE.RollerCoasterShadow( curve, 500 );
-      var material = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.1, depthWrite: false, transparent: true } );
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.y = 1;
-      scene.add( mesh );
-*/
+      
       var funfairs = [];
-/*
-      // Audio
-
-      var context = new AudioContext();
-
-      var geometry = new THREE.CylinderGeometry( 100, 100, 50, 15 );
-      var material = new THREE.MeshLambertMaterial( { color: 0xff8080, shading: THREE.FlatShading } );
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( -800, 100, -700 );
-      mesh.rotation.x = Math.PI / 2;
-      scene.add( mesh );
-
-      funfairs.push( mesh );
-
-      var funfairA = new Sound( context );
-      funfairA.load( 'audio/rollercoaster/funfair_a.ogg' );
-      funfairA.setLoop( true );
-      funfairA.setVolume( 1.5 );
-      funfairA.play3D( mesh.position );
-
-      var geometry = new THREE.CylinderGeometry( 50, 60, 40, 10 );
-      var material = new THREE.MeshLambertMaterial( { color: 0x8080ff, shading: THREE.FlatShading } );
-      var mesh = new THREE.Mesh( geometry, material );
-      mesh.position.set( 500, 20, 300 );
-      scene.add( mesh );
-
-      funfairs.push( mesh );
-
-      var funfairB = new Sound( context );
-      funfairB.load( 'audio/rollercoaster/funfair_b.ogg' );
-      funfairB.setLoop( true );
-      funfairB.setVolume( 1.5 );
-      funfairB.play3D( mesh.position );
-
-      var slide = new Sound( context );
-      slide.load( 'audio/rollercoaster/slide.ogg' );
-      slide.setVolume( 0.5 );
-      slide.setLoop( true );
-      slide.play();
-
-      var ambient = new Sound( context );
-      ambient.load( 'audio/rollercoaster/ambient.ogg' );
-      ambient.setLoop( true );
-      ambient.setVolume( 0.1 );
-      ambient.play();
-
-      //
-*/
       var isFullscreen = false;
 
       window.addEventListener( 'touchend', function () {
@@ -289,36 +196,12 @@ for (var i = 0; i < 50; i++) {
         //
 
         if ( controls !== undefined ) {
-
           controls.update();
-
         }
-
-//        slide.setPlayBackRate( ( velocity * 5000 ) + 0.2 );
-
-        //
-
-//        camera.matrixWorld.decompose( cameraPosition, cameraQuaternion, cameraScale );
-
-//        cameraOrientation.set( 0, 0, -1 ).applyQuaternion( cameraQuaternion );
- //       cameraVelocity.subVectors( cameraPosition, cameraPositionOld );
-
-//       context.listener.setPosition( cameraPosition.x, cameraPosition.y, cameraPosition.z );
-//        context.listener.setOrientation( cameraOrientation.x, cameraOrientation.y, cameraOrientation.z, camera.up.x, camera.up.y, camera.up.z );
-//        context.listener.setVelocity( cameraVelocity.x, cameraVelocity.y, cameraVelocity.z );
-
-//        cameraPositionOld.copy( cameraPosition );
-
-        //
-
         effect.render( scene, camera );
-
       };
-
       requestAnimationFrame( animate );
 
-    </script>
-  
-    
-  </body>
+</script>
+</body>
 </html>
