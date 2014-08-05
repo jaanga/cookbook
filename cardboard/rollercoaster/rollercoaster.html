@@ -5,7 +5,6 @@
 <title>Roller Coaster</title>
 </head>
 <body>
-
 <script src="js/third-party/threejs/three.min.js"></script>
 <script src="js/third-party/threejs/StereoEffect.js"></script>
 <script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
@@ -28,12 +27,8 @@
       var light = new THREE.HemisphereLight( 0xfff0f0, 0x606066 );
       light.position.set( 1, 1, 1 );
       scene.add( light );
-      
-      var train = new THREE.Object3D();
-      scene.add( train );
 
       var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
- //     camera.rotation.y = Math.PI;
       scene.add( camera );
       
       var controls = undefined;
@@ -45,6 +40,7 @@
         controls = new THREE.DeviceOrientationControls( camera );
         controls.connect();
       };
+      
       window.addEventListener('deviceorientation', hasOrientation, false);
 // ground box
 
@@ -58,55 +54,11 @@ for (var i = 0; i < 50; i++) {
 
       // environment
 
-      var geometry = new THREE.PlaneGeometry( 5000, 5000, 15, 15 );
-      geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+      var geometry = new THREE.BoxGeometry( 5000, 15, 5000 );
       var material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
-
-      geometry.computeFaceNormals();
-
       var mesh = new THREE.Mesh( geometry, material );
+      mesh.position.y = -500;
       scene.add( mesh );
-
-      //
-/*
-      var PI2 = Math.PI * 2;
-
-      var curve = ( function () {
-
-        var vector = new THREE.Vector3();
-        var vector2 = new THREE.Vector3();
-
-        return {
-
-          getPointAt: function ( t ) {
-
-            t = t * PI2;
-
-            var x = Math.sin( t * 3 ) * Math.cos( t * 4 ) * 50;
-            var y = Math.cos( t * 8 ) * 4 + Math.cos( t * 17 ) + 5;
-            var z = Math.sin( t ) * Math.sin( t * 4 ) * 50;
-
-            return vector.set( x, y, z ).multiplyScalar( 20 );
-
-          },
-
-          getTangentAt: function ( t ) {
-
-            var delta = 0.0001;
-            var t1 = Math.max( 0, t - delta );
-            var t2 = Math.min( 1, t + delta );
-
-            return vector2.copy( this.getPointAt ( t2 ) ).sub( this.getPointAt( t1 ) ).normalize();
-
-          }
-
-        };
-
-      } )();
-      
-      var funfairs = [];
-      var isFullscreen = false;
-*/
 
       window.addEventListener( 'touchend', function () {
 
@@ -137,47 +89,9 @@ for (var i = 0; i < 50; i++) {
       
       //
 
-/*      
-      var position = new THREE.Vector3();
-      var tangent = new THREE.Vector3();
-
-      var lookAt = new THREE.Vector3();
-      
-      var velocity = 0;
-      var progress = 0;
-
-      var cameraPosition = new THREE.Vector3();
-      var cameraPositionOld = new THREE.Vector3();
-      var cameraQuaternion = new THREE.Quaternion();
-      var cameraScale = new THREE.Vector3();
-
-      var cameraOrientation = new THREE.Vector3();
-      var cameraVelocity = new THREE.Vector3();
-*/
-
       var animate = function ( time ) {
 
         requestAnimationFrame( animate );
-/*        
-        for ( var i = 0; i < funfairs.length; i ++ ) {
-
-          funfairs[ i ].rotation.y = time * 0.0002;
-
-        }
-
-
-
-        train.position.copy( position );
-
-  //      tangent.copy( curve.getTangentAt( progress ) );
-
-        velocity -= tangent.y * 0.0000015;
-        velocity = Math.max( velocity, 0.00004 );
-
- //       train.lookAt( lookAt.copy( position ).add( tangent ) );
-
-        //
-*/
 
         if ( controls !== undefined ) {
           controls.update();
