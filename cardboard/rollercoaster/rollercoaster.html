@@ -3,28 +3,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Roller Coaster</title>
-<style>
-body {
-margin: 0px;
-color: #fff;
-font-family: Monospace;
-background-color: #444;
-overflow: hidden;
-}
-a {
-color: #fff;
-}
-</style>
 </head>
 <body>
 
 <script src="js/third-party/threejs/three.min.js"></script>
 <script src="js/third-party/threejs/StereoEffect.js"></script>
 <script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
-
 <script src="js/DetectScreenSize.js"></script>
-
-    <script>
+<script>
 
       var renderer = new THREE.WebGLRenderer( { antialias: true } );
       renderer.setClearColor( 0xf0f0ff );
@@ -82,7 +68,7 @@ for (var i = 0; i < 50; i++) {
       scene.add( mesh );
 
       //
-
+/*
       var PI2 = Math.PI * 2;
 
       var curve = ( function () {
@@ -120,6 +106,7 @@ for (var i = 0; i < 50; i++) {
       
       var funfairs = [];
       var isFullscreen = false;
+*/
 
       window.addEventListener( 'touchend', function () {
 
@@ -149,7 +136,8 @@ for (var i = 0; i < 50; i++) {
       }, false );
       
       //
-      
+
+/*      
       var position = new THREE.Vector3();
       var tangent = new THREE.Vector3();
 
@@ -165,7 +153,8 @@ for (var i = 0; i < 50; i++) {
 
       var cameraOrientation = new THREE.Vector3();
       var cameraVelocity = new THREE.Vector3();
-      
+*/
+
       var animate = function ( time ) {
 
         requestAnimationFrame( animate );
