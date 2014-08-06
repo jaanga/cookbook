@@ -12,6 +12,7 @@
 <script>
 	var info, stats, renderer, scene, camera, controls;
 	var effect;
+	hasOrientation;
 
 	init();
 	animate();
@@ -39,14 +40,12 @@
 		light.position.set( 1, 1, 1 );
 		scene.add( light );
 
-		controls = new THREE.DeviceOrientationControls( camera );
-
 		for (var i = 0; i < 50; i++) {
-				geometry = new THREE.BoxGeometry( 50, 1000, 20 );
-				material = new THREE.MeshNormalMaterial();
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( Math.random() * 5000 - 2500 , -10, Math.random() * 5000 - 2500 );
-				scene.add( mesh );
+			geometry = new THREE.BoxGeometry( 50, 1000, 20 );
+			material = new THREE.MeshNormalMaterial();
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( Math.random() * 5000 - 2500 , -10, Math.random() * 5000 - 2500 );
+			scene.add( mesh );
 		}
 
 		geometry = new THREE.BoxGeometry( 5000, 15, 5000 );
@@ -54,6 +53,17 @@
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.position.y = -1000;
 		scene.add( mesh );
+
+      controls = undefined;
+      hasOrientation = function(evt) {
+        if (!evt.alpha) {
+          return;
+        }
+        window.removeEventListener('deviceorientation', hasOrientation, false);
+        controls = new THREE.DeviceOrientationControls( camera );
+        controls.connect();
+      };
+
 
 		window.addEventListener('deviceorientation', hasOrientation, false);
 
@@ -72,16 +82,8 @@
 			camera.updateProjectionMatrix();
 			effect.setSize( window.innerWidth, window.innerHeight );
 		}, false );
-	}
 
-	var hasOrientation = function ( evt ) {
-		if ( !evt.alpha) {
-			return;
-		}
-		window.removeEventListener('deviceorientation', hasOrientation, false);
-		controls = new THREE.DeviceOrientationControls( camera );
-		controls.connect();
-	};
+	}
 
 	function animate() {
 		requestAnimationFrame( animate );
