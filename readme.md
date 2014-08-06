@@ -18,8 +18,8 @@ You have two ways of viewing the Jaanga Cookbook files:
 
 [Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
 
-[Demo Rollercoaster Template R1](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/rollercoaster-template-r1.html )
-[Demo Rollercoaster Template R2](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/rollercoaster-template-r2.html )
+[Demo Cardboard Template R1](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/cardboard-template-r1.html )
+[Demo Cardboard Template R2](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/cardboard-template-r2.html )
 
 
 
