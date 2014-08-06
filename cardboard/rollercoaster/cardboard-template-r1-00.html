@@ -13,16 +13,16 @@
 	var info, stats, renderer, scene, camera, controls;
 	var effect;
 
-	var  controls = undefined;
+    var  controls = undefined;
 
-	var  hasOrientation = function(evt) {
-		if (!evt.alpha) {
-			return;
-		}
-		window.removeEventListener('deviceorientation', hasOrientation, false);
-		controls = new THREE.DeviceOrientationControls( camera );
-		controls.connect();
-	};
+    var  hasOrientation = function(evt) {
+        if (!evt.alpha) {
+          return;
+        }
+        window.removeEventListener('deviceorientation', hasOrientation, false);
+        controls = new THREE.DeviceOrientationControls( camera );
+        controls.connect();
+      };
 
 	init();
 	animate();
@@ -51,25 +51,12 @@
 		scene.add( light );
 
 		for (var i = 0; i < 50; i++) {
-			geometry = new THREE.BoxGeometry( 50, 500, 50 );
+			geometry = new THREE.BoxGeometry( 50, 1000, 20 );
 			material = new THREE.MeshNormalMaterial();
 			mesh = new THREE.Mesh( geometry, material );
 			mesh.position.set( Math.random() * 5000 - 2500 , -10, Math.random() * 5000 - 2500 );
 			scene.add( mesh );
 		}
-
-		loader = new THREE.JSONLoader();
-		loader.load( '../models/monster.js', function ( geometry ) {
-//			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -Math.PI / 2 ) );
-//			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI / 2 ) );
-			material = new THREE.MeshNormalMaterial();
-
-			for (var i = 0; i < 10; i++) {
-				mesh = new THREE.Mesh( geometry, material );
-				mesh.position.set( Math.random() * 5000 - 2500 , -10, Math.random() * 5000 - 2500 );
-				scene.add( mesh );
-			}
-		} );
 
 		geometry = new THREE.BoxGeometry( 5000, 15, 5000 );
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
