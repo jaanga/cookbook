@@ -12,7 +12,17 @@
 <script>
 	var info, stats, renderer, scene, camera, controls;
 	var effect;
-	hasOrientation;
+
+    var  controls = undefined;
+
+    var  hasOrientation = function(evt) {
+        if (!evt.alpha) {
+          return;
+        }
+        window.removeEventListener('deviceorientation', hasOrientation, false);
+        controls = new THREE.DeviceOrientationControls( camera );
+        controls.connect();
+      };
 
 	init();
 	animate();
@@ -54,15 +64,7 @@
 		mesh.position.y = -1000;
 		scene.add( mesh );
 
-      controls = undefined;
-      hasOrientation = function(evt) {
-        if (!evt.alpha) {
-          return;
-        }
-        window.removeEventListener('deviceorientation', hasOrientation, false);
-        controls = new THREE.DeviceOrientationControls( camera );
-        controls.connect();
-      };
+
 
 
 		window.addEventListener('deviceorientation', hasOrientation, false);
@@ -87,7 +89,9 @@
 
 	function animate() {
 		requestAnimationFrame( animate );
-		controls.update();
+        if ( controls !== undefined ) {
+          controls.update();
+        }
 		effect.render( scene, camera );
 	};
 
