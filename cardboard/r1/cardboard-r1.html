@@ -97,8 +97,11 @@
 	}
 
 	function resize() {
-		var width = container.offsetWidth;
-		var height = container.offsetHeight;
+//		var width = container.offsetWidth;
+//		var height = container.offsetHeight;
+
+		var width = window.innerWidth;
+		var height = window.innerHeight;
 
 		camera.aspect = width / height;
 		camera.updateProjectionMatrix();
