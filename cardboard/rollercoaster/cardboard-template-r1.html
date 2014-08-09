@@ -35,7 +35,9 @@
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
+
 		scene = new THREE.Scene();
+
 		scene.autoUpdate = false;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
@@ -100,9 +102,9 @@
 
 	function animate() {
 		requestAnimationFrame( animate );
-        if ( controls !== undefined ) {
-          controls.update();
-        }
+		if ( controls !== undefined ) {
+		  controls.update();
+		}
 		effect.render( scene, camera );
 	};
 
