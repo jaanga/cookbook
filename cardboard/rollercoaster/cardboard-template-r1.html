@@ -31,19 +31,17 @@
 		var geometry, material, mesh;
 
 		document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden' ;
-
+/*
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 
 		info.style.cssText = 'left: 20px; position: absolute; ';
 		info.innerHTML = '<h1>' + document.title + '</h1>' +
 			'<div id=msg></div>';
-
+*/
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
-
 		scene = new THREE.Scene();
-
 		scene.autoUpdate = false;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
@@ -116,8 +114,6 @@
 //				'oQ.z ' + controls.orientationQuaternian.z + '<br>' +
 //			'';
 		}
-
-
 		effect.render( scene, camera );
 	};
 
