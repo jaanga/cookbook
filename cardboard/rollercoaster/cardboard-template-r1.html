@@ -38,9 +38,12 @@
 		info.innerHTML = '<h1>' + document.title + '</h1>' +
 			'<div id=msg></div>';
 */
+
+		var container = document.body.appendChild( document.createElement( 'div' ) );
+		
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
+		container.appendChild( renderer.domElement );
 		scene = new THREE.Scene();
 		scene.autoUpdate = false;
 
