@@ -111,11 +111,11 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
 			controls.update();
-			msg.innerHTML = 'oQ.w '; // + controls.orientationQuaternian.w +
-//				'oQ.x ' + controls.orientationQuaternian.x + '<br>' +
-//				'oQ.y ' + controls.orientationQuaternian.y + '<br>' +
-//				'oQ.z ' + controls.orientationQuaternian.z + '<br>' +
-//			'';
+			msg.innerHTML = 'oQ.w '; // + controls.orientationQuaternion.w +
+				'oQ.x ' + controls.orientationQuaternion.x + '<br>' +
+				'oQ.y ' + controls.orientationQuaternion.y + '<br>' +
+				'oQ.z ' + controls.orientationQuaternion.z + '<br>' +
+			'';
 		}
 		effect.render( scene, camera );
 	};
