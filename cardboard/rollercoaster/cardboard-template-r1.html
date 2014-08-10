@@ -34,9 +34,9 @@
 		
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 
-		info.style.cssText = 'left: 20px; position: absolute; ';
-		info.innerHTML = '<h1>' + document.title + '</h1>' +
-			'<div id=msg>vvv</div>';
+		info.style.cssText = 'left: 10px; position: absolute; ';
+		info.innerHTML = '<h3>' + document.title + '</h3>' +
+			'<div id=msg>readout</div>';
 
 
 		var container = document.body.appendChild( document.createElement( 'div' ) );
@@ -111,10 +111,15 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
 			controls.update();
-			msg.innerHTML = 'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
+			msg.innerHTML = 
+				'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
 				'oQ.x ' + controls.orientationQuaternion.x.toFixed(3) + '<br>' +
 				'oQ.y ' + controls.orientationQuaternion.y.toFixed(3) + '<br>' +
 				'oQ.z ' + controls.orientationQuaternion.z.toFixed(3) + '<br>' +
+				'aQ.w ' + controls.alignQuaternion.w.toFixed(3) + '<br>' +
+				'aQ.x ' + controls.alignQuaternion.x.toFixed(3) + '<br>' +
+				'aQ.y ' + controls.alignQuaternion.y.toFixed(3) + '<br>' +
+				'aQ.z ' + controls.alignQuaternion.z.toFixed(3) + '<br>' +				
 			'';
 		}
 		effect.render( scene, camera );
