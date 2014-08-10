@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Roller Coaster</title>
+<title>Cardboard Template R1</title>
 </head>
 <body>
 <script src="js/third-party/threejs/three.min.js"></script>
@@ -111,10 +111,10 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
 			controls.update();
-			msg.innerHTML = 'oQ.w ' + controls.orientationQuaternion.w +
-				'oQ.x ' + controls.orientationQuaternion.x + '<br>' +
-				'oQ.y ' + controls.orientationQuaternion.y + '<br>' +
-				'oQ.z ' + controls.orientationQuaternion.z + '<br>' +
+			msg.innerHTML = 'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
+				'oQ.x ' + controls.orientationQuaternion.x.toFixed(3) + '<br>' +
+				'oQ.y ' + controls.orientationQuaternion.y.toFixed(3) + '<br>' +
+				'oQ.z ' + controls.orientationQuaternion.z.toFixed(3) + '<br>' +
 			'';
 		}
 		effect.render( scene, camera );
