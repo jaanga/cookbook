@@ -2,20 +2,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Cardboard Template R1</title>
+<title>Cardboard Template R2</title>
 </head>
 <body>
-<script src="js/third-party/threejs/three.min.js"></script>
-<script src="js/third-party/threejs/StereoEffect.js"></script>
-<script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
-<script src="js/DetectScreenSize.js"></script>
+<script src="../js/three.min.js"></script>
+<script src="../js/StereoEffect.js"></script>
+<script src="../js/DeviceOrientationControls.js"></script>
+<script src="../js/DetectScreenSize.js"></script>
 <script>
 	var info, stats, renderer, scene, camera, controls;
 	var effect;
 
-	var  controls = undefined;
+	var controls = undefined;
 
-	var  hasOrientation = function(evt) {
+	var hasOrientation = function(evt) {
 		if (!evt.alpha) {
 			return;
 		}
@@ -37,7 +37,6 @@
 		info.style.cssText = 'left: 10px; position: absolute; ';
 		info.innerHTML = '<h3>' + document.title + '</h3>' +
 			'<div id=msg>readout</div>';
-
 
 		var container = document.body.appendChild( document.createElement( 'div' ) );
 		
@@ -112,6 +111,7 @@
 		if ( controls !== undefined ) {
 			controls.update();
 			msg.innerHTML = 
+				'<table><tr><td>' +
 				'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
 				'oQ.x ' + controls.orientationQuaternion.x.toFixed(3) + '<br>' +
 				'oQ.y ' + controls.orientationQuaternion.y.toFixed(3) + '<br>' +
@@ -119,7 +119,8 @@
 				'aQ.w ' + controls.alignQuaternion.w.toFixed(3) + '<br>' +
 				'aQ.x ' + controls.alignQuaternion.x.toFixed(3) + '<br>' +
 				'aQ.y ' + controls.alignQuaternion.y.toFixed(3) + '<br>' +
-				'aQ.z ' + controls.alignQuaternion.z.toFixed(3) + '<br>' +				
+				'aQ.z ' + controls.alignQuaternion.z.toFixed(3) + '<br>' +
+				'</td></tr></table>' +
 			'';
 		}
 		effect.render( scene, camera );
