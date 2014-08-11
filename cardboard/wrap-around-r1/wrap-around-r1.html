@@ -47,7 +47,7 @@
 		scene.autoUpdate = false;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
-		camera.position.set( 0, 0, 2000 )
+		camera.position.set( 0, 0, -2000 )
 
 		scene.add( camera );
 
@@ -98,6 +98,8 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
 			controls.update();
+			camera.position.x = -2000 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.z = -2000 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 		}
 		effect.render( scene, camera );
 	};
