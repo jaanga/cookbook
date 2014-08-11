@@ -100,7 +100,7 @@
 			controls.update();
 			camera.position.x = -2000 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.position.z = -2000 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
-
+			camera.lookAt( scene.position );
 			msg.innerHTML = camera.position.x  + ' ' + camera.position.z;
 		}
 		effect.render( scene, camera );
