@@ -1,5 +1,8 @@
 Templates for Google Cardboard Read Me
-=======
+===
+[Web page version]( http://jaanga.github.io/cookbook/cardboard/ )
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )
+
 
 ### Live Demo
 
