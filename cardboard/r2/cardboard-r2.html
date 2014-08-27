@@ -31,7 +31,7 @@
 		var geometry, material, mesh;
 
 		document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden' ;
-		
+
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 
 		info.style.cssText = 'left: 10px; position: absolute; ';
@@ -39,7 +39,7 @@
 			'<div id=msg>readout</div>';
 
 		var container = document.body.appendChild( document.createElement( 'div' ) );
-		
+
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		container.appendChild( renderer.domElement );
@@ -54,10 +54,6 @@
 		effect.targetDistance = 50;
 		effect.setSize( window.innerWidth, window.innerHeight );
 
-		var light = new THREE.HemisphereLight( 0xfff0f0, 0x606066 );
-		light.position.set( 1, 1, 1 );
-		scene.add( light );
-
 		for (var i = 0; i < 50; i++) {
 			geometry = new THREE.BoxGeometry( 50, 500, 50 );
 			material = new THREE.MeshNormalMaterial();
@@ -68,8 +64,7 @@
 
 		loader = new THREE.JSONLoader();
 		loader.load( '../models/monster.js', function ( geometry ) {
-//			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -Math.PI / 2 ) );
-//			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( Math.PI / 2 ) );
+
 			material = new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading } );
 
 			for (var i = 0; i < 10; i++) {
@@ -81,7 +76,7 @@
 		} );
 
 		geometry = new THREE.BoxGeometry( 5000, 15, 5000 );
-		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
+		material = new THREE.MeshLambertMaterial( { color: 0x407000 } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.position.y = -1000;
 		scene.add( mesh );
@@ -110,7 +105,7 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
 			controls.update();
-			msg.innerHTML = 
+			msg.innerHTML =
 				'<table><tr><td>' +
 				'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
 				'oQ.x ' + controls.orientationQuaternion.x.toFixed(3) + '<br>' +
@@ -124,9 +119,9 @@
 				'<td>' +
 				'alpha ' + controls.alpha.toFixed(3) + '<br>' +
 				'beta ' + controls.beta.toFixed(3) + '<br>' +
-				'gamma ' + controls.gamma.toFixed(3) + '<br>' +				
+				'gamma ' + controls.gamma.toFixed(3) + '<br>' +
 				'movSpd ' + controls.movementSpeed + '<br>' +
-				'rllSpd ' + controls.rollSpeed + '<br>' +				
+				'rllSpd ' + controls.rollSpeed + '<br>' +
 				'</td></tr></table>' +
 			'';
 		}

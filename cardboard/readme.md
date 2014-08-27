@@ -6,23 +6,31 @@ Templates for Google Cardboard Read Me
 
 ### Live Demo
 
-<iframe src="http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html" width=100% height=500px class='overview' >
-There is an `iframe` here. It is not visible when viewed on http://jaanga.github.io/cookbook/cardboard. To view, please go to jaanga.github.io. See 'Project Links' just below.
+<iframe src="http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html" width=320px height=240px class='overview' >
+There is an `iframe` here. It is not visible when viewed on GitHub. To view, please go to http://jaanga.github.io/cookbook/cardboard.
 </iframe>
-_Coding demo_ [Full Screen]( http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )
+_Coding demo: Demo Cardboard Template R1_
 
-<!--
-[Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
 
-[Demo Rollercoaster](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/rollercoaster.html )   
--->
+### Cardboard Template R1]
 
-[Demo Cardboard Template R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r1/cardboard-r1.html )
 
-[Demo Cardboard Template R2](  http://jaanga.github.io/cookbook/cardboard/r2/cardboard-r2.html )
+* Based on coding example from Chrome Experiments for Cardboard: <http://vr.chromeexperiments.com/example.html>
 
-[Demo Cardboard Wrap-Around R1](  http://jaanga.github.io/cookbook/cardboard/wrap-around-r1/wrap-around-r1.html )
+### Demo Cardboard Template R2
 
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/r2/cardboard-r2.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r2/cardboard-r2.html )
+
+* Tries to be about as simple as possible
+* Displays readout of current viewing parameters
+
+### Demo Cardboard Wrap-Around R1
+
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around-r1/wrap-around-r1.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around-r1/wrap-around-r1.html )
 
 ## Concept
 

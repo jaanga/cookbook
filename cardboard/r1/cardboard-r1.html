@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Cardboard Example</title>
+<title>Cardboard Coding Example R1</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 </head>
@@ -30,13 +30,6 @@
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
-
-/*
-		renderer = new THREE.WebGLRenderer();
-		element = renderer.domElement;
-		container = document.getElementById('example');
-		container.appendChild(element);
-*/
 
 		effect = new THREE.StereoEffect( renderer );
 
@@ -69,22 +62,21 @@
 
 		window.addEventListener('deviceorientation', setOrientationControls, true);
 
-		var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
+		var light = new THREE.HemisphereLight( 0x777777, 0x000000, 0.6 );
 		scene.add(light);
 
 		var geometry = new THREE.PlaneGeometry(1000, 1000);
 
 		var texture = THREE.ImageUtils.loadTexture( '../textures/patterns/checker.png' );
-		texture.wrapS = THREE.RepeatWrapping;
-		texture.wrapT = THREE.RepeatWrapping;
+		texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat = new THREE.Vector2(50, 50);
 		texture.anisotropy = renderer.getMaxAnisotropy();
 
 		var material = new THREE.MeshPhongMaterial({
-			color: 0xffffff,
+//			color: 0xffffff,
 			specular: 0xffffff,
 			shininess: 20,
-			shading: THREE.FlatShading,
+//			shading: THREE.FlatShading,
 			map: texture
 		});
 
@@ -97,9 +89,6 @@
 	}
 
 	function resize() {
-//		var width = container.offsetWidth;
-//		var height = container.offsetHeight;
-
 		var width = window.innerWidth;
 		var height = window.innerHeight;
 
@@ -119,7 +108,7 @@
 	}
 
 	function render(dt) {
-	effect.render(scene, camera);
+		effect.render(scene, camera);
 	}
 
 	function animate(t) {
