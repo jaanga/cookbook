@@ -66,7 +66,7 @@
 		scene = new THREE.Scene();
 
 		camera = new THREE.PerspectiveCamera( 40, ( window.innerWidth / window.innerHeight ) , 1, 5000 );
-		camera.position.set( 50, 5, 50 );
+		camera.position.set( 500, 50, 500 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
 //		stats = new Stats();
