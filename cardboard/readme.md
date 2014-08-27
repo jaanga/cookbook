@@ -44,6 +44,15 @@ _Coding demo: Demo Cardboard Template R1_
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/castle/castle-cardboard.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/castle/castle-cardboard.html )
 
+* Fantasy wrap around
+
+## Saquoosha the Dancer
+
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/dancer/bvh-reader-saqoosha-basic.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/dancer/bvh-reader-saqoosha-basic.html )
+
+* Animated character wrap-around
+
 ## Concept
 
 ### Mission
