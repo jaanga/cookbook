@@ -11,7 +11,7 @@
 
 	var effect;
 
-//	var controls = undefined;
+	var controls = undefined;
 
 	var hasOrientation = function( evt ) {
 		if ( !evt.alpha ) {
@@ -67,7 +67,7 @@
 
 		camera = new THREE.PerspectiveCamera( 40, ( window.innerWidth / window.innerHeight ) , 1, 5000 );
 		camera.position.set( 500, 500, 500 );
-		controls = new THREE.TrackballControls( camera, renderer.domElement );
+//		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
 //		stats = new Stats();
 //		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0px; zIndex: 100; ';
