@@ -72,13 +72,19 @@ Provide sample template files for Google Cardboard
 or  
 <http://g.co/chromevr>
 
+[Link to links]( http://jaanga.github.io/cookbook/cardboard/links.md )
+
 ## Hardware
 
 [DoDoCase Google Cardboard VR Toolkit]( http://www.dodocase.com/products/google-cardboard-vr-goggle-toolkit )
 
 * Kinda sucks
 
+[Unofficial Cardboard]( https://www.unofficialcardboard.com/ )
 
+* Nice peeps
+* Prompt, cheap and friendly
+* Large (allows for spectacles) and assembled $22
 
 
 ## Features
@@ -108,6 +114,11 @@ Bugs on browsers other than Chrome need not be reported until such time as the w
 This repository contains files that are  at an early and volatile stage. Not all licensing requirements may have been fully met let alone identified. It is the intension of the authors to play fair and all such requirements will either be met or the feature in question will turned off.
 
 ## Change Log
+
+2014-08-27 ~ Theo
+
+* Add Schroder, Castle & Saquoosha
+
 
 2014-08-26 ~ Theo
 
