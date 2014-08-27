@@ -101,7 +101,7 @@
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
-		mesh.position.y = -0.25;
+		mesh.position.y = -2.25;
 		scene.add( mesh );
 
 		var loader = new THREE.JSONLoader();
@@ -115,6 +115,7 @@
 			}
 
 			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.y = -2
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
 			scene.add( mesh );
