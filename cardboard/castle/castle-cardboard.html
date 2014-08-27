@@ -147,7 +147,7 @@
 
 		var loader = new THREE.OBJMTLLoader();
 
-		loader.load( 'castle/castle.obj', 'castle/castle.mtl', function ( mesh ) {
+		loader.load( './castle/castle.obj', './castle/castle.mtl', function ( mesh ) {
 			mesh.position.set( 50, 210, 80 );
 			
 			for (var i = 0, len = mesh.children[0].children.length; i < len; i++) {
