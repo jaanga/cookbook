@@ -1,0 +1,113 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Cardboard Wrap-Around R1</title>
+</head>
+<body>
+<script src="../../js/three.min.js"></script>
+<script src="../../js/StereoEffect.js"></script>
+<script src="../../js/DeviceOrientationControls.js"></script>
+<script src="../../js/DetectScreenSize.js"></script>
+<script>
+	var info, stats, renderer, scene, camera, controls;
+	var effect;
+
+	var controls = undefined;
+
+	var hasOrientation = function( evt ) {
+		if ( !evt.alpha ) {
+			return;
+		}
+		window.removeEventListener('deviceorientation', hasOrientation, false);
+		controls = new THREE.DeviceOrientationControls( camera );
+		controls.connect();
+		orient.innerHTML = 'Event ' + new Date();
+	};
+
+	init();
+	animate();
+
+	function init() {
+		var geometry, material, mesh;
+
+		document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden' ;
+		
+		var info = document.body.appendChild( document.createElement( 'div' ) );
+
+		info.style.cssText = 'left: 10px; position: absolute; ';
+		info.innerHTML = '<h3>' + document.title + '</h3>' +
+			'<div id=orient >orientation</div>' +
+			'<div id=msg>readout</div>';
+
+		var container = document.body.appendChild( document.createElement( 'div' ) );
+		
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		container.appendChild( renderer.domElement );
+		scene = new THREE.Scene();
+		scene.autoUpdate = false;
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
+		camera.position.set( 0, 0, 2000 )
+
+		scene.add( camera );
+
+		effect = new THREE.StereoEffect( renderer );
+		effect.separation = 0.2;
+		effect.targetDistance = 50;
+		effect.setSize( window.innerWidth, window.innerHeight );
+
+		var light = new THREE.HemisphereLight( 0xfff0f0, 0x606066 );
+		light.position.set( 1, 1, 1 );
+		scene.add( light );
+
+		geometry = new THREE.BoxGeometry( 5000, 15, 5000 );
+		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.y = -1000;
+		scene.add( mesh );
+
+		for (var i = 0; i < 50; i++) {
+			geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			material = new THREE.MeshNormalMaterial();
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( Math.random() * 500 - 250 , Math.random() * 500 - 250, Math.random() * 500 - 250 );
+			scene.add( mesh );
+		}
+
+		window.addEventListener('deviceorientation', hasOrientation, false);
+
+		window.addEventListener( 'touchend', function () {
+			if ( isFullscreen === false ) {
+				document.body.webkitRequestFullscreen();
+				isFullscreen = true;
+			} else {
+				document.webkitExitFullscreen();
+				isFullscreen = false;
+			}
+		} );
+
+		window.addEventListener( 'resize', function () {
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			effect.setSize( window.innerWidth, window.innerHeight );
+		}, false );
+
+	}
+
+	function animate() {
+		requestAnimationFrame( animate );
+		if ( controls !== undefined ) {
+			controls.update();
+			camera.position.x = -2000 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.z = -2000 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.lookAt( scene.position );
+			msg.innerHTML = camera.position.x  + ' ' + camera.position.z;
+		}
+		effect.render( scene, camera );
+	};
+
+</script>
+</body>
+</html>

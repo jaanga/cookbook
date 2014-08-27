@@ -12,7 +12,7 @@ There is an `iframe` here. It is not visible when viewed on GitHub. To view, ple
 _Coding demo: Demo Cardboard Template R1_
 
 
-### Cardboard Template R1]
+### Cardboard Template R1 << Eeek! broken
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r1/cardboard-r1.html )
@@ -31,6 +31,9 @@ _Coding demo: Demo Cardboard Template R1_
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around-r1/wrap-around-r1.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around-r1/wrap-around-r1.html )
+
+* As you turn you head, the cammera rotates arounf the center object
+
 
 ## Concept
 
