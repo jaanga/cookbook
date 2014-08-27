@@ -11,12 +11,13 @@ There is an `iframe` here. It is not visible when viewed on http://jaanga.github
 </iframe>
 _Coding demo_ [Full Screen]( http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )
 
-
+<!--
 [Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
 
 [Demo Rollercoaster](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/rollercoaster.html )   
+-->
 
-[Demo Cardboard Template R1](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/cardboard-template-r1.html )
+[Demo Cardboard Template R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )
 
 [Demo Cardboard Template R2](  http://jaanga.github.io/cookbook/cardboard/r2/cardboard-r2.html )
 
