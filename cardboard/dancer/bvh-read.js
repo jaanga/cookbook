@@ -66,7 +66,7 @@
 		scene = new THREE.Scene();
 
 		camera = new THREE.PerspectiveCamera( 40, ( window.innerWidth / window.innerHeight ) , 1, 5000 );
-		camera.position.set( 500, 500, 500 );
+		camera.position.set( 50, 5, 50 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
 //		stats = new Stats();
@@ -225,7 +225,7 @@
 //			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
 		}
 		effect.render( scene, camera );
-			var frame = ( (Date.now() - Bvh.startTime ) / Bvh.secsPerFrame / 1000) | 0; 
-			Bvh.animate( frame ); 
+		var frame = ( (Date.now() - Bvh.startTime ) / Bvh.secsPerFrame / 1000) | 0; 
+		Bvh.animate( frame ); 
 
 	}
