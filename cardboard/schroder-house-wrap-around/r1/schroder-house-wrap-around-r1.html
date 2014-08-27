@@ -74,7 +74,7 @@
 		lightDirectional.shadowMapWidth = 2048;
 		lightDirectional.shadowMapHeight = 2048;
 
-		var r = 50
+		var r = 30
 		lightDirectional.position.set( -r, r, r );
 //		lightDirectional.target = cenObj;
 
@@ -83,7 +83,7 @@
 		lightDirectional.shadowCameraTop = r;
 		lightDirectional.shadowCameraBottom = -r;
 
-		lightDirectional.shadowCameraNear = 0;
+		lightDirectional.shadowCameraNear = 0.01;
 		lightDirectional.shadowCameraFar = 3 * r;
 		lightDirectional.updateMatrix();
 		lightDirectional.updateMatrixWorld();
@@ -101,7 +101,7 @@
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
-		mesh.position.y = 0;
+		mesh.position.y = -5;
 		scene.add( mesh );
 
 		var loader = new THREE.JSONLoader();
