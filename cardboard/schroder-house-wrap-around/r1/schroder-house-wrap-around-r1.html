@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Cardboard Wrap-Around R1</title>
+<title>Schroder House Wrap-Around R1</title>
 </head>
 <body>
 <script src="../../js/three.min.js"></script>
@@ -10,7 +10,9 @@
 <script src="../../js/DeviceOrientationControls.js"></script>
 <script src="../../js/DetectScreenSize.js"></script>
 <script>
-	var info, stats, renderer, scene, camera, controls;
+	var info, stats, renderer, scene, camera;
+	var lightAmbient, lightPoint, lightDirectional;
+
 	var effect;
 
 	var controls = undefined;
@@ -37,21 +39,54 @@
 
 		info.style.cssText = 'left: 10px; position: absolute; ';
 		info.innerHTML = '<h3>' + document.title + '</h3>' +
-			'<div id=orient >orientation</div>' +
 			'<div id=msg>readout</div>';
 
 		var container = document.body.appendChild( document.createElement( 'div' ) );
 		
 		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.shadowMapEnabled = true;
+		renderer.shadowMapSoft = true;
 		container.appendChild( renderer.domElement );
 		scene = new THREE.Scene();
 		scene.autoUpdate = false;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
-		camera.position.set( 0, 0, 2000 )
+		camera.position.set( 0, 2, 20 )
 
 		scene.add( camera );
+
+		scene.add( camera );  // needed for light to track
+
+		lightAmbient = new THREE.AmbientLight( 0x555555 );
+		scene.add( lightAmbient );
+
+		if ( !lightPoint && camera.children.length < 1 ) {
+			lightPoint = new THREE.PointLight( 0xffffff, 1 );
+			lightPoint.position = camera.position;
+			camera.add( lightPoint );
+		}
+
+		lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
+		scene.add( lightDirectional );
+
+		lightDirectional.castShadow = true;
+		lightDirectional.shadowMapWidth = 2048;
+		lightDirectional.shadowMapHeight = 2048;
+
+		var r = 50
+		lightDirectional.position.set( -r, r, r );
+//		lightDirectional.target = cenObj;
+
+		lightDirectional.shadowCameraLeft = -r;
+		lightDirectional.shadowCameraRight = r;
+		lightDirectional.shadowCameraTop = r;
+		lightDirectional.shadowCameraBottom = -r;
+
+		lightDirectional.shadowCameraNear = 0;
+		lightDirectional.shadowCameraFar = 3 * r;
+		lightDirectional.updateMatrix();
+		lightDirectional.updateMatrixWorld();
 
 		effect = new THREE.StereoEffect( renderer );
 		effect.separation = 0.2;
@@ -62,12 +97,30 @@
 		light.position.set( 1, 1, 1 );
 		scene.add( light );
 
-		geometry = new THREE.BoxGeometry( 5000, 15, 5000 );
+		geometry = new THREE.BoxGeometry( 500, 15, 500 );
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
-		mesh.position.y = -1000;
+		mesh.position.y = -10;
 		scene.add( mesh );
 
+		var loader = new THREE.JSONLoader();
+		loader.load( '../../models/schroder-house/schroder-house.js' , function ( geometry, materials ) {
+
+			material =  new THREE.MeshFaceMaterial( materials );
+
+			for (var i = 0, len = material.materials.length; i < len; i++) {
+				material.materials[i].side = 2;
+				material.materials[i].needsUpdate = true;
+			}
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			scene.add( mesh );
+
+		} );
+
+/*
 		for (var i = 0; i < 50; i++) {
 			geometry = new THREE.BoxGeometry( 50, 50, 50 );
 			material = new THREE.MeshNormalMaterial();
@@ -75,6 +128,7 @@
 			mesh.position.set( Math.random() * 500 - 250 , Math.random() * 500 - 250, Math.random() * 500 - 250 );
 			scene.add( mesh );
 		}
+*/
 
 		window.addEventListener('deviceorientation', hasOrientation, false);
 
@@ -100,8 +154,8 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
 			controls.update();
-			camera.position.x = -2000 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
-			camera.position.z = -2000 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.x = -200 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.z = -200 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
 			msg.innerHTML = camera.position.x  + ' ' + camera.position.z;
 		}
