@@ -41,7 +41,7 @@ Provide sample template files for Google Cardboard
 
 [Chrome Experiments for Cardboard]( http://vr.chromeexperiments.com/ ) 
 or  
-<g.co/chromevr>
+<http://g.co/chromevr>
 
 ## Hardware
 
