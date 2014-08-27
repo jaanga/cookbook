@@ -15,13 +15,14 @@
 
 	var controls = undefined;
 
-	var hasOrientation = function(evt) {
-		if (!evt.alpha) {
+	var hasOrientation = function( evt ) {
+		if ( !evt.alpha ) {
 			return;
 		}
 		window.removeEventListener('deviceorientation', hasOrientation, false);
 		controls = new THREE.DeviceOrientationControls( camera );
 		controls.connect();
+		orient.innerHTML = 'Event ' + new Date();
 	};
 
 	init();
@@ -36,6 +37,7 @@
 
 		info.style.cssText = 'left: 10px; position: absolute; ';
 		info.innerHTML = '<h3>' + document.title + '</h3>' +
+			'<div id=orient >orientation</div>';
 			'<div id=msg>readout</div>';
 
 		var container = document.body.appendChild( document.createElement( 'div' ) );
