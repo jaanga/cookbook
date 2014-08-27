@@ -101,7 +101,7 @@
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
-		mesh.position.y = -1;
+		mesh.position.y = -0.25;
 		scene.add( mesh );
 
 		var loader = new THREE.JSONLoader();
@@ -148,7 +148,7 @@
 			camera.position.x = -20 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.position.z = -20 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
-			msg.innerHTML = camera.position.x  + ' ' + camera.position.z;
+			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
 		}
 		effect.render( scene, camera );
 	};
