@@ -97,11 +97,11 @@
 		light.position.set( 1, 1, 1 );
 		scene.add( light );
 
-		geometry = new THREE.BoxGeometry( 500, 15, 500 );
+		geometry = new THREE.BoxGeometry( 500, 1, 500 );
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
-		mesh.position.y = -5;
+		mesh.position.y = -8;
 		scene.add( mesh );
 
 		var loader = new THREE.JSONLoader();
