@@ -12,7 +12,14 @@ You have two ways of viewing the Jaanga Cookbook files:
 
 ## Cookbook
 
+## Templates for Google Cardboard
 
+Read Me  
+[Web page version]( http://jaanga.github.io/cookbook/cardboard/ )  
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )  
+
+
+<!--
 [Demo Rollercoaster](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/rollercoaster.html )   
 [Demo 3rd Party](  http://jaanga.github.io/cookbook/cardboard/index.html )  
 
@@ -24,7 +31,7 @@ You have two ways of viewing the Jaanga Cookbook files:
 [Demo Cardboard R2](  http://jaanga.github.io/cookbook/cardboard/r2/cardboard-r2.html )
 
 [Demo Cardboard Wrap-Around R1](  http://jaanga.github.io/cookbook/cardboard/wrap-around-r1/wrap-around-r1.html )
-
+-->
 
 ## Boilerplate
 Sample Three.js boilerplate
