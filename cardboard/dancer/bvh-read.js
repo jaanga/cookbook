@@ -222,7 +222,7 @@
 			camera.position.x = -20 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.position.z = -20 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
-			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
+//			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
 		}
 		effect.render( scene, camera );
 			var frame = ( (Date.now() - Bvh.startTime ) / Bvh.secsPerFrame / 1000) | 0; 
