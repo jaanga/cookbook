@@ -54,6 +54,8 @@
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
 		camera.position.set( 0, 2, 20 )
 
+		scene.add( camera );
+
 		scene.add( camera );  // needed for light to track
 
 		lightAmbient = new THREE.AmbientLight( 0x555555 );
@@ -90,17 +92,16 @@
 		effect.separation = 0.2;
 		effect.targetDistance = 50;
 		effect.setSize( window.innerWidth, window.innerHeight );
-/*
+
 		var light = new THREE.HemisphereLight( 0xfff0f0, 0x606066 );
 		light.position.set( 1, 1, 1 );
 		scene.add( light );
-*/
 
-		geometry = new THREE.BoxGeometry( 500, 1, 500 );
+		geometry = new THREE.BoxGeometry( 500, 15, 500 );
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
-		mesh.position.y = -2.25;
+		mesh.position.y = -5;
 		scene.add( mesh );
 
 		var loader = new THREE.JSONLoader();
@@ -114,7 +115,6 @@
 			}
 
 			mesh = new THREE.Mesh( geometry, material );
-			mesh.position.y = -2
 			mesh.castShadow = true;
 			mesh.receiveShadow = true;
 			scene.add( mesh );
@@ -148,7 +148,7 @@
 			camera.position.x = -20 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.position.z = -20 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
-			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
+			msg.innerHTML = camera.position.x  + ' ' + camera.position.z;
 		}
 		effect.render( scene, camera );
 	};

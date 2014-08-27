@@ -2,13 +2,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Schroder House Wrap-Around R1</title>
+<title>Castle Cardboard Wrap-Around R1</title>
 </head>
 <body>
-<script src="../../js/three.min.js"></script>
-<script src="../../js/StereoEffect.js"></script>
-<script src="../../js/DeviceOrientationControls.js"></script>
-<script src="../../js/DetectScreenSize.js"></script>
+<script src="../js/three.min.js"></script>
+<script src="../js/StereoEffect.js"></script>
+<script src="../js/DeviceOrientationControls.js"></script>
+<script src="../js/DetectScreenSize.js"></script>
+
+<script src=http://mrdoob.github.com/three.js/examples/js/loaders/MTLLoader.js></script>
+<script src=http://mrdoob.github.com/three.js/examples/js/loaders/OBJMTLLoader.js></script>
+
 <script>
 	var info, stats, renderer, scene, camera;
 	var lightAmbient, lightPoint, lightDirectional;
@@ -34,6 +38,21 @@
 		var geometry, material, mesh;
 
 		document.body.style.cssText = 'font: 600 12pt monospace; margin: 0; overflow: hidden' ;
+
+		var css = document.body.appendChild( document.createElement('style') );
+		var col1 = "#" + Math.random().toString(16).slice(2, 8);
+		var col2 = "#" + Math.random().toString(16).slice(2, 8);
+		var col3 = "#" + Math.random().toString(16).slice(2, 8);
+		var X = ( Math.random() * window.innerWidth ).toFixed(0);
+		var Y = (Math.random() * window.innerHeight).toFixed(0);
+		var center =  20 + (Math.random() * 60).toFixed(0);
+
+		css.innerHTML = 'body { color: #333; font: 600 14pt monospace; margin: 0; height: 1000px; overflow: hidden; text-align: center; ' +
+			'background: -webkit-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
+			'background: -moz-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
+			'background: radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); }' +
+		'';
+
 		
 		var info = document.body.appendChild( document.createElement( 'div' ) );
 
@@ -52,7 +71,7 @@
 		scene.autoUpdate = false;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 5000 );
-		camera.position.set( 0, 2, 20 )
+		camera.position.set( 0, 200, 600 )
 
 		scene.add( camera );  // needed for light to track
 
@@ -96,28 +115,53 @@
 		scene.add( light );
 */
 
-		geometry = new THREE.BoxGeometry( 500, 1, 500 );
+		geometry = new THREE.BoxGeometry( 500, 15, 500 );
 		material = new THREE.MeshLambertMaterial( { color: 0x407000, shading: THREE.FlatShading } );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.receiveShadow = true;
-		mesh.position.y = -2.25;
+		mesh.position.y = -5;
+//		scene.add( mesh );
+
+// Ground plane
+		material = new THREE.MeshLambertMaterial( {color: Math.random() * 0xffffff, side: 2 } );
+		geometry = new THREE.PlaneGeometry( 400, 400, 100, 100 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( 0, 150, 0 );
+		mesh.castShadow = true;
+		mesh.receiveShadow = true;
+		scene.add( mesh );
+		
+		for (var i = 0, vtx, dis, len = mesh.geometry.vertices.length; i < len; i++) {
+			vtx = mesh.geometry.vertices[i];
+			dis = vtx.distanceTo( v( 0, -69, 0 ) );
+			if (  dis > 150 ) {
+				vtx.y = 300 - 2 * dis - 80 * Math.random();
+			}
+		}
+		mesh.scale.x = 1.2;
+		
+		mesh = mesh.clone();
+		mesh.material = new THREE.MeshBasicMaterial( { wireframe: true } );
 		scene.add( mesh );
 
-		var loader = new THREE.JSONLoader();
-		loader.load( '../../models/schroder-house/schroder-house.js' , function ( geometry, materials ) {
+		var loader = new THREE.OBJMTLLoader();
 
-			material =  new THREE.MeshFaceMaterial( materials );
-
-			for (var i = 0, len = material.materials.length; i < len; i++) {
-				material.materials[i].side = 2;
-				material.materials[i].needsUpdate = true;
-			}
-
-			mesh = new THREE.Mesh( geometry, material );
-			mesh.position.y = -2
-			mesh.castShadow = true;
-			mesh.receiveShadow = true;
+		loader.load( 'castle/castle.obj', 'castle/castle.mtl', function ( mesh ) {
+			mesh.position.set( 50, 210, 80 );
+			
+			for (var i = 0, len = mesh.children[0].children.length; i < len; i++) {
+				mesh.children[0].children[i].castShadow = true;
+				mesh.children[0].children[i].receiveShadow = true;		
+				mesh.children[0].children[i].material.color.r = Math.random();
+				mesh.children[0].children[i].material.color.g = Math.random();
+				mesh.children[0].children[i].material.color.b = Math.random();
+				mesh.children[0].children[i].material.emissive.r = Math.random();
+				mesh.children[0].children[i].material.emissive.g = Math.random();
+				mesh.children[0].children[i].material.emissive.b = Math.random();				
+			}			
 			scene.add( mesh );
+
 
 		} );
 
@@ -144,15 +188,18 @@
 	function animate() {
 		requestAnimationFrame( animate );
 		if ( controls !== undefined ) {
-			controls.update();
-			camera.position.x = -20 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
-			camera.position.z = -20 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
+
+			camera.position.x = -500 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.y = 200;
+			camera.position.z = -500 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
-			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
+			controls.update();
+			msg.innerHTML = camera.position.x  + ' ' + camera.position.z;
 		}
 		effect.render( scene, camera );
 	};
 
+	function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
 </script>
 </body>
 </html>
