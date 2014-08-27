@@ -34,9 +34,9 @@ _Coding demo: Demo Cardboard Template R1_
 
 * As you turn you head, the cammera rotates arounf the center object
 
-###Schoder House Wrap-Around R1
+###Schroder House Wrap-Around R1
 
-[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/schroder-house-wrap-around-r1/re/schroder-hose/wrap-around-r1.html )  
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/schroder-house-wrap-around-r1/r1/schroder-hose/wrap-around-r1.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/schroder-house-wrap-around-r1/r1/schroder-house-wrap-around-r1.html )
 
 ## Concept
