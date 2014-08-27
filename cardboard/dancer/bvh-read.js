@@ -219,8 +219,8 @@
 		requestAnimationFrame( animate );
 		if ( controls !== undefined && controls.orientationQuaternion ) {
 			controls.update();
-			camera.position.x = -20 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
-			camera.position.z = -20 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.x = -200 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.z = -200 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
 //			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
 		}
