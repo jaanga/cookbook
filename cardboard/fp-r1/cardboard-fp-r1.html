@@ -21,11 +21,9 @@
 		if (!evt.alpha) {
 			return;
 		}
-		
-		
+
 		window.removeEventListener('deviceorientation', hasOrientation, false);
 		controls = new THREE.DeviceOrientationControls( camera );
-
 
 		controls.connect();
 		controls.movementSpeed = 100;
@@ -53,15 +51,11 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		container.appendChild( renderer.domElement );
 		scene = new THREE.Scene();
-//		scene.autoUpdate = false;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-//		camera.position.set( 100, 100, 100 );
 		controls = new THREE.FirstPersonControls( camera );
-//		scene.add( camera );
-
-		controls.movementSpeed = 10;
-		controls.lookSpeed = 0.05;
+//		controls.movementSpeed = 10;
+//		controls.lookSpeed = 0.05;
 
 		effect = new THREE.StereoEffect( renderer );
 		effect.separation = 0.2;
