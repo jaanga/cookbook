@@ -21,8 +21,13 @@
 		if (!evt.alpha) {
 			return;
 		}
+		
+		
 		window.removeEventListener('deviceorientation', hasOrientation, false);
 		controls = new THREE.DeviceOrientationControls( camera );
+		controls.movementSpeed = 10;
+		controls.rollSpeed = 0.05;
+
 		controls.connect();
 	};
 
