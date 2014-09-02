@@ -53,7 +53,7 @@
 		controls = new THREE.FirstPersonControls( camera );
 //		scene.add( camera );
 
-		controls.movementSpeed = 1;
+		controls.movementSpeed = 10;
 		controls.lookSpeed = 0.05;
 
 		effect = new THREE.StereoEffect( renderer );
@@ -116,7 +116,7 @@
 		if ( controls.orientationQuaternion !== undefined ) {
 
 			if ( controls.gamma < 1 && controls.gamma > 0 ) { controls.autoForward = true; }
-			if ( controls.gamma < -1 && controls.gamme < 0 ) { controls.autoForward = false; }
+			if ( controls.gamma > -1 && controls.gamme < 0 ) { controls.autoForward = false; }
 
 			msg.innerHTML =
 				'<table><tr><td>' +
