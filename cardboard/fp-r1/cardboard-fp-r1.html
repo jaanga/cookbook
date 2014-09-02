@@ -23,10 +23,6 @@
 		}
 		window.removeEventListener('deviceorientation', hasOrientation, false);
 		controls = new THREE.DeviceOrientationControls( camera );
-		
-		controls.movementSpeed = 10;
-		controls.rollSpeed = 0.05;
-
 		controls.connect();
 	};
 
@@ -138,7 +134,7 @@
 				'beta ' + controls.beta.toFixed(3) + '<br>' +
 				'gamma ' + controls.gamma.toFixed(3) + '<br>' +
 				'movSpd ' + controls.movementSpeed + '<br>' +
-				'rllSpd ' + controls.lookSpeed + '<br>' +
+				'rllSpd ' + controls.rollSpeed + '<br>' +
 				'</td></tr></table>' +
 				'autoForward:' + controls.autoForward +
 			'';
