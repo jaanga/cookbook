@@ -116,7 +116,7 @@
 		if ( controls.orientationQuaternion !== undefined ) {
 
 			if ( controls.gamma < 1 && controls.gamma > 0 ) { controls.autoForward = true; }
-			if ( controls.gamma > -1 && controls.gamm < 0 ) { controls.autoForward = false; }
+			if ( controls.gamma > -1 && controls.gamma < 0 ) { controls.autoForward = false; }
 
 			msg.innerHTML =
 				'<table><tr><td>' +
