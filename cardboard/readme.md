@@ -4,15 +4,18 @@ Templates for Google Cardboard Read Me
 [Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )
 
 
-### Live Demo
+## Live Demo
 
 <iframe src="http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html" width=320px height=240px class='overview' >
 There is an `iframe` here. It is not visible when viewed on GitHub. To view, please go to http://jaanga.github.io/cookbook/cardboard.
 </iframe>
 _Coding demo: Demo Cardboard Template R1_
 
+## Look Around Templates
 
-### Cardboard Template R1 << Eeek! broken
+_Staying in one place, moving your head, you can see all about._
+
+### Cardboard Template R1
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r1/cardboard-r1.html )
@@ -27,33 +30,67 @@ _Coding demo: Demo Cardboard Template R1_
 * Tries to be about as simple as possible
 * Displays readout of current viewing parameters
 
+### Demo Cardboard Template R3
+
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/r3/cardboard-r3.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r3/cardboard-r3.html )
+
+* Add Trackball Controller to help with debugging
+* Loads DeviceOrientationControls when needed
+
+## Wrap Around Templates and demos
+
+* As you turn your head, the camera rotates around the objects in the center
+* All the current versions support horizontal movemt only
+
 ### Demo Cardboard Wrap-Around R1
 
-[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around-r1/wrap-around-r1.html )  
-[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around-r1/wrap-around-r1.html )
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/wrap-around-r1/wrap-around-r1.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/wrap-around-r1/wrap-around-r1.html )
 
-* As you turn you head, the cammera rotates arounf the center object
+### Schroder House Wrap-Around R1
 
-###Schroder House Wrap-Around R1
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/schroder-house-wrap-around/r1/schroder-house-wrap-around-r1.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/schroder-house-wrap-around/r1/schroder-house-wrap-around-r1.html )
 
-[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/schroder-house-wrap-around/r1/schroder-house-wrap-around-r1.html )  
-[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/schroder-house-wrap-around/r1/schroder-house-wrap-around-r1.html )
+### Castle Cardboard Wrap-Around R1
 
-###Castle Cardboard Wrap-Around R1
-
-[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/castle/castle-cardboard.html )  
-[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/castle/castle-cardboard.html )
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/castle/castle-cardboard.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/castle/castle-cardboard.html )
 
 * Fantasy wrap around
 
-## Saquoosha the Dancer
+### Saquoosha the Dancer
 
-[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/dancer/bvh-reader-saqoosha-basic.html )  
-[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/dancer/bvh-reader-saqoosha-basic.html )
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/dancer/bvh-reader-saqoosha-basic.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/dancer/bvh-reader-saqoosha-basic.html )
 
 * Animated character wrap-around
 
+## First Person Controllers
+
+_Look around and move forward_
+
+### First Person Controller R1
+
+[Full screen demo]( http://jaanga.github.io/cookbook/cardboard/first-person-controller/r1/cardboard-fp-r1.html )  
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/first-person-controller/r1/cardboard-fp-r1.html )
+
+* Tilt head up to start moving forward
+* Tilt head down to stop moving
+
+
 ## Concept
+
+### About
+
+[Wikipedia says]( http://en.wikipedia.org/wiki/Google_Cardboard ):
+
+_Google Cardboard is a fold-out cardboard smartphone mount that, when combined with lenses, a magnet, a piece of hook-and-loop fastener and a rubber band and held against the face, affords a virtual reality experience. This low-cost, open-source headset is designed by Google but offered freely for people to create on their own. A smartphone with stereoscopic display software fits into this device and the lenses allow a person to perceive the images as one single three-dimensional image. The hardware was announced at Google I/O 2014._
+
+_The official Google app that displays stereoscopic images requires WebGL support on the smartphone; phones with Chrome and WebGL can run Google's web experiments. Apple's iOS 8 will support this technology and Cardboard's official apps.[3] Third-party apps are available on the Google Play store with Cardboard support._
+
+
 
 ### Mission
 Provide sample template files for Google Cardboard

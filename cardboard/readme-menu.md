@@ -1,23 +1,15 @@
-[Jaanga](../../index.html ) &raquo;<br>[cookbook]( ../index.html ) &raquo;<br>[cardboard]( ./index.html )
-=========================================================================================
+[Jaanga](../../index.html ) &raquo;<br>[Cookbook]( ../index.html ) &raquo;<br>[Cardboard]( ./index.html )
+===
 
 <p id=rm >
 	<a href=JavaScript:displayPage("#readme.md#rm"); >Read Me</a>
-
 </p>
-
 
 
 <p id=li >
 	<a href=JavaScript:displayPage("#links.md#li"); >Links</a>
 </p>
 
-<!--
-<p id=def >
-	<a href=JavaScript:displayPage("#test-folder-def/readme.md#def"); >test-folder-def Read Me</a>
-</p>
-
--->
 
 ****
 
