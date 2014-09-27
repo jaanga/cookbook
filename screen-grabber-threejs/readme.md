@@ -1,7 +1,7 @@
 Screen Grabber Three.js Read Me
 ==
-[Web page version]( http://jaanga.github.io/cookbook/screen-grabber-threejs/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/screen-grabber-threejs/ )
+[Web page version]( http://jaanga.github.io/cookbook/screen-grabber-threejs/ )
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/screen-grabber-threejs )
 
 ### Live Demo
 
