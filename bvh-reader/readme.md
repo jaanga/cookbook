@@ -1,7 +1,7 @@
 Jaanga BVH Reader Read Me
 ====
-[Web page version]( http://jaanga.github.io/cookbook/bvh-reader/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/bvh-reader/ )
+[Web page view]( http://jaanga.github.io/cookbook/bvh-reader/)
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/bvh-reader/ )
 
 
 Live demo - Saqoosha's format: <http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html>  

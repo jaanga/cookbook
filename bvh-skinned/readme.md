@@ -1,7 +1,7 @@
 BVH Skinned Read Me
 ==
-[Web page version]( http://jaanga.github.io/cookbook/bvh-skinned/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/bvh-skinned/ )
+[Web page view]( http://jaanga.github.io/cookbook/bvh-skinned/)
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/bvh-skinned/ )
 
 ### Live Demo
 

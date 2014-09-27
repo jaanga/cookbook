@@ -96,8 +96,8 @@ building a 3D Globe using Three.js and Open Street Map data.
 
 #### Read Me
 
-[Web page version]( http://jaanga.github.io/cookbook/osome-globe/)  
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/ )
+[Web page view]( http://jaanga.github.io/cookbook/osome-globe/)  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/ )
 
 See WebGL Meet-Up: <http://jaanga.github.io/events/sf-webgl-2013-06-26/> _also broken_
 
@@ -108,16 +108,25 @@ Three of them - all from June 2013: <http://www.jaanga.com/2013_06_01_archive.ht
 <br>
 ### unFlatland
 
+_deprecated. See [Terrain Viewer]( http://jaanga.github.io/terrain-viewer/readme-reader.html )_
+
 #### Mission
 The map like she has never been seen before:  
 
-#### Live Demos
+#### Read Me
+[Web page view]( http://jaanga.github.io/cookbook/un-flatland/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland/ )
 
-R2: <http://jaanga.github.io/cookbook/un-flatland/r4/index.html> << The fastest, smallest, sweetest 3D map code you ever did see.
-R2: <http://jaanga.github.io/cookbook/un-flatland/r2/index.html>
-R1: <http://jaanga.github.io/cookbook/un-flatland/r1/index.html>  
+<br>
+### Screen Grabber Three.js
 
-More details here: <https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland> 
+#### Mission
+To enable screen capture of Three.js render window
+
+#### Read Me
+[Web page view]( http://jaanga.github.io/cookbook/screen-grabber-threejs/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/screen-grabber-threejs )
+
 
 <br>
 ### Video Surfaces

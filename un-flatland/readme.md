@@ -1,24 +1,25 @@
 unFlatland Read Me
-==================
+==
 
-Live demo: [UnFlatland]( http://jaanga.github.io/cookbook/un-flatland/index.html )
+[Web page view]( http://jaanga.github.io/cookbook/un-flatland/ "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
+
+### Live Demo
+
+<iframe src="http://jaanga.github.io/cookbook/un-flatland/r4/index.html " width=100% height=500px class='overview' >
+There is an `iframe` here. It is not visible when viewed on github.com/cookbook. To view, please go to jaanga.github.io.
+</iframe>
+[UnFlatland]( http://jaanga.github.io/cookbook/un-flatland/r4/index.html )
 
 For an amusing applied use of this technology see: [FGx Plane Spotter]( http://fgx.github.io/fgx-plane-spotter/inde.html )
 
 For [Leap Motion]( https://www.leapmotion.com/ ) device enabled and earlier versions see: [Flying Leap 3D]( https://github.com/jaanga/gestification/tree/gh-pages/projects/flying-leap-3d )
 
 ## Concept
-The fastest, smallest, sweetest 3D Map code you ever did see.
-
-## Project Links
-
-You have two ways of viewing the FGx Plane Spotter files:
-
-* Code hosted on GitHub: [jaanga.github.io]( http://jaanga.github.io/cookbook/un-flatland/ "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
-* Source code on GitHub: [github.com/jaanga]( https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
+The fastest, smallest, sweetest 3D map code you ever did see.
 
 
-## <a name="features"></a>Features
+## Features
 
 * Covers every part of the world that [OSM]( http://www.openstreetmap.org/ ) covers - matches [Slippy Map]( http://wiki.openstreetmap.org/wiki/Slippy_Map )
 * Works in your browser  - no plugin required

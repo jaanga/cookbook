@@ -1,7 +1,7 @@
 j3qUE
 ======
-[Web page version]( http://jaanga.github.io/cookbook/j3qUE/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/j3qUE/ )
+[Web page view]( http://jaanga.github.io/cookbook/j3qUE/)
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/j3qUE/ )
 
 ### Live Demo
 

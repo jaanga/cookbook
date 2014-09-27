@@ -1,7 +1,7 @@
 oSome Globe Read Me
 ==
-[Web page version]( http://jaanga.github.io/cookbook/osome-globe/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/ )
+[Web page view]( http://jaanga.github.io/cookbook/osome-globe/)
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/ )
 
 ### Live Demo
 

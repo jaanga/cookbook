@@ -1,7 +1,7 @@
 Babylon Read Me
 ===
-[Web page version]( http://jaanga.github.io/cookbook/babylon/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/babylon/ )
+[Web page view]( http://jaanga.github.io/cookbook/babylon/)
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/babylon/ )
 
 ## Live Demo
 
