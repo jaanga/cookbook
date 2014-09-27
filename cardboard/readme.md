@@ -1,7 +1,7 @@
 Templates for Google Cardboard Read Me
 ===
-[Web page version]( http://jaanga.github.io/cookbook/cardboard/ )
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )
+[Web page view]( http://jaanga.github.io/cookbook/cardboard/ "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
 
 
 ## Live Demo
@@ -10,6 +10,12 @@ Templates for Google Cardboard Read Me
 There is an `iframe` here. It is not visible when viewed on GitHub. To view, please go to http://jaanga.github.io/cookbook/cardboard.
 </iframe>
 _Coding demo: Demo Cardboard Template R1_
+
+### Mission
+Provide sample template files for Google Cardboard
+
+### Vision
+
 
 ## Look Around Templates
 
@@ -92,10 +98,6 @@ _The official Google app that displays stereoscopic images requires WebGL suppor
 
 
 
-### Mission
-Provide sample template files for Google Cardboard
-
-### Vision
 
 ## Resources
 
