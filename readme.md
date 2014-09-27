@@ -12,6 +12,9 @@ _Every project web page view includes a self-starting demo._
 _Several projects have moved up in the world and are now in repositories elsewhere. 
 These projects are noted as being deprecated below._
 
+_Projects here are often currently broken. 
+This usually means that that there has been an update to Three.js but the project has not yet been updated._ 
+
 <br>
 ## Cookbook Projects
 
@@ -78,7 +81,7 @@ To explore the wonderful [Babylon]( http://www.babylonjs.com/ ) 3D JavaScript li
 #### Mission
 Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file. The Three.js goes into its own file called in by an IFRAME into the main page. In the main file, you write in jQuery style. In the iframe, you write in Three.js style.
 
-#### LRead Me
+#### Read Me
 
 [Web page version]( http://jaanga.github.io/cookbook/j3qUE/)  
 [Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/j3qUE/ )
@@ -89,11 +92,14 @@ Blog Post: <http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-me
 ### oSome Globe  
 
 #### Mission
-The world like she has never been seen before.  
+building a 3D Globe using Three.js and Open Street Map data. 
 
-See WebGL Meet-Up: <http://jaanga.github.io/events/sf-webgl-2013-06-26/>
+#### Read Me
 
-More details here: https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe  
+[Web page version]( http://jaanga.github.io/cookbook/osome-globe/)  
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/ )
+
+See WebGL Meet-Up: <http://jaanga.github.io/events/sf-webgl-2013-06-26/> _also broken_
 
 Blog posts  
 

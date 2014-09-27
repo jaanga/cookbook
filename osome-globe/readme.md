@@ -1,5 +1,20 @@
 oSome Globe Read Me
-===================
+==
+[Web page version]( http://jaanga.github.io/cookbook/osome-globe/)
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/osome-globe/ )
+
+### Live Demo
+
+<iframe src="http://jaanga.github.io/cookbook/osome-globe/r4/index.html" width=100% height=500px class='overview' >
+There is an `iframe` here. It is not visible when viewed on github.com/cookbook. To view, please go to jaanga.github.io.
+</iframe>
+[oSome Globe]( http://jaanga.github.io/cookbook/osome-globe/r4/index.html )
+
+_Currently broken. ;-(_
+
+### Mission
+
+
 
 The world like she has never been seen before.  
 
