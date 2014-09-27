@@ -1,4 +1,4 @@
-[Jaanga](../../index.html ) &raquo;<br>[cookbook]( ../index.html ) &raquo;<br>[boilerplate]( ./index.html )
+[Jaanga](../../index.html ) &raquo;<br>[cookbook]( ../index.html ) &raquo;<br>[Template]( ./index.html )
 =========================================================================================
 
 <p id=rm >

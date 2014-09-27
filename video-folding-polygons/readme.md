@@ -1,5 +1,8 @@
 Video Folding Polygons
 ===
+[Web page version]( http://jaanga.github.io/cookbook/video-folding-polygons/)
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/video-folding-polygons/ )
+
 
 See also blog post: <http://www.jaanga.com/2013/09/folding-polygons-naughty-way-in-3d-with.html>
 

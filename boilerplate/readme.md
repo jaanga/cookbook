@@ -1,5 +1,7 @@
-Boilerplate Read Me
+Three.js Template Read Me
 =======
+[Web page version]( http://jaanga.github.io/cookbook/boilerplate/)
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/boilerplate/ )
 
 ### Live Demo
 
@@ -15,7 +17,7 @@ See Also
 ## Concept
 
 ### Mission
-Provide sample boilerplate files for a variety of Three.js script types
+Provide sample template or boilerplate files for a variety of Three.js script types
 
 ###Vision
 

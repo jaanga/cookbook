@@ -19,7 +19,7 @@ To build simple, sample files that can be used as the basis for more complex wor
 [Web page view]( http://jaanga.github.io/cookbook/cardboard/ )  
 [Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )  
 
-
+<br>
 ### Three.js Templates
 
 #### Mission
@@ -29,11 +29,12 @@ To build simple, sample files that can be used a the basis for more complex work
 
 [Source code view]( https://github.com/jaanga/cookbook/blob/gh-pages/boilerplate/ )
 
-
+<br>
 ### BVH Reader   
 
 #### Mission
-Fast and simple motion capture data reader makes your characters come alive  
+Fast and simple motion capture data reader makes your characters come alive.
+Open [Biovision Hierarchy]( http://en.wikipedia.org/wiki/Biovision_Hierarchy ) (BVH) files either from a server or from a local computer and to replay these files in 3D. T
 
 #### Read Me and Demos
 
@@ -50,6 +51,7 @@ More details here: [Jaanga BVH Reader]( https://github.com/jaanga/cookbook/tree/
 
 Blog post: [BVH: A format to capture motion - simply, quickly and economically](http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html )
 
+<br>
 ### BVH Skinned
 
 #### Mission
@@ -58,6 +60,17 @@ Blog post: [BVH: A format to capture motion - simply, quickly and economically](
 
 [Jaanga BVH Skinned R1]( http://jaanga.github.io/cookbook/bvh-skinned/r1/index.html )
 
+<br>
+### Babylon
+
+### Mission
+To explore the wonderful [Babylon]( http://www.babylonjs.com/ ) 3D JavaScript library
+
+### Read Me
+[Web page version]( http://jaanga.github.io/cookbook/babylon/)
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/babylon/ )
+
+<br>
 ### j3qUE
 
 #### Mission
@@ -69,6 +82,7 @@ Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery
 
 Blog Post: <http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html>
 
+<br>
 ### oSome Globe  
 
 #### Mission
@@ -82,6 +96,7 @@ Blog posts
 
 Three of them - all from June 2013: <http://www.jaanga.com/2013_06_01_archive.html>
 
+<br>
 ### unFlatland
 
 #### Mission
@@ -95,7 +110,7 @@ R1: <http://jaanga.github.io/cookbook/un-flatland/r1/index.html>
 
 More details here: <https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland> 
 
-
+<br>
 ### Video Surfaces
 
 #### Mission
@@ -106,6 +121,7 @@ To wrap or warp videos as textures of a variety of types of 3D meshes
 [Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces/ )  
 
 
+<br>
 
 ### Video Folding Polygons
 
