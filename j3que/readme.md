@@ -1,7 +1,7 @@
 j3qUE
 ======
-[Web page version]( http://jaanga.github.io/cookbook/bvh-skinned/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/bvh-skinned/ )
+[Web page version]( http://jaanga.github.io/cookbook/j3qUE/)
+[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/j3qUE/ )
 
 ### Live Demo
 
