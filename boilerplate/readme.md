@@ -1,16 +1,16 @@
 Three.js Template Read Me
 =======
-[Web page version]( http://jaanga.github.io/cookbook/boilerplate/)
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/boilerplate/ )
+[Web page view]( http://jaanga.github.io/cookbook/boilerplate/)
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/boilerplate/ )
 
 ### Live Demo
 
 <iframe src="http://jaanga.github.io/cookbook/boilerplate/shaders/latest/" width=100% height=500px class='overview' >
-There is an `iframe` here. It is not visible when viewed on github.com/fgx. To view, please go to fgx.github.io. See 'Project Links' just below.
+There is an `iframe` here. It is not visible when viewed on github.com/jaanga. To view, please go to <http://jaanga.github.io/cookbook>.
 </iframe>
 [Shader boilerplate for Three.js]( http://jaanga.github.io/cookbook/boilerplate/shaders/latest/ )
 
-See Also
+See also
 
 <https://github.com/jaanga/gestification/tree/gh-pages/cookbook/boilerplate>
 
