@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Cookbook Jaanga</title>
+<meta charset=utf-8>
+<meta name=author content='Theo Armour'>
+</head>
+<body>
+<script src=http://jaanga.github.io/libs/md/showdown.js ></script>
+<script src=http://jaanga.github.io/libs/db/r2/doc-browser.js ></script>
+
+	<div id=txt >
+
+		<h1>
+			<a href='../index.html' >Jaanga</a> &raquo; <a href=# >Cookbook</a>
+		</h1>
+
+		<p id=intro >
+			<a href=JavaScript:DS.displayMarkdown('readme.md',intro); >Cookbook Read Me</a>
+		</p>
+
+		<p>
+			<a href=JavaScript:DS.displayMarkdown('cardboard/readme.md',intro); >Cardboard</a>
+			Templates and demos for Google Cardboard
+		</p>
+
+		<p>
+			<a href=JavaScript:DS.displayMarkdown('bvh-reader/readme.md',intro); >BVH Reader</a>
+			Fast amnd simple motion capature data reader makes your characters come alive
+		</p>
+<!--
+		<p id=ab>
+			<a href=JavaScript:DS.displayMarkdown('chinary/readme.md',intro); >Chinary</a>
+			This app is coding example of a simple Chinese character dictionary as a web app.
+		</p>
+
+		<p id=de>
+			<a href=JavaScript:DS.displayMarkdown('doc-browser/readme.md',de); >docBrowser</a><br>
+			Minimal code that enables side-by-side menu and content panels with utmost flexibility for the cotent of both panels.
+		</p>
+-->
+		<p id=xx>
+			<a href=JavaScript:DS.displayMarkdown('j3que/readme.md',xx); >j3qUE</a><br>
+			Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file.
+			The Three.js goes into its own file called in by an IFRAME into the main page.
+			In the main file, you write in jQuery style. In the iframe, you write in Three.js style.
+		</p>
+
+		<p id=xx>
+			<a href=JavaScript:DS.displayMarkdown('osome-globe/readme.md',xx); >oSome Globe</a><br>
+			The world like she has never been seen before.
+		</p>
+
+		<p id=xx>
+			<a href=JavaScript:DS.displayMarkdown('un-flatland/readme.md',xx); >unFlatland</a><br>
+			The map like she has never been seen before.
+		</p>
+
+		<p id=xx>
+			<a href=JavaScript:DS.displayMarkdown('video-surfaces/readme.md',xx); >Video Surfaces & Video Folding Polygons</a><br>
+			The TV like she has never been seen before.
+		</p>
+
+
+<!--
+		<p id=xx>
+			<a href=JavaScript:DS.displayMarkdown('xxx/readme.md',xx); >xxx</a><br>
+			xxxx
+		</p>
+-->
+
+		<hr>
+
+		<p><a href='https://github.com/jaanga/cookbook' >Source code on GitHub</a></p>
+		<p>
+			<a href='https://github.com/jaanga/libs/blob/gh-pages/jaanga-copyright-and-mit-license.md' target='_blank'><small>Jaanga Copyright Notice and License</small></a>
+		</p>
+
+	</div>
+
+<script>
+
+	DS.menu.innerHTML = txt.innerHTML;
+	txt.innerHTML = '';
+	DS.init( 'https://github.com/jaanga/libs/tree/gh-pages/db/','readme.md', intro );
+
+</script>
+</body>
+</html>

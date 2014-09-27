@@ -1,47 +1,43 @@
 Jaanga Cookbook Read Me
 =======================
+[Web page view]( http://jaanga.github.io/cookbook/ ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
+[Source code view]( https://github.com/jaanga/cookbook/) <scan style=display:none ><< You are now probably here.</scan>
 
-_3D Code that's fun and easy to play with_  
+_This repository contains a variety of projects that are in early stages of development. 
+Several projects have moved up in the world and are now in repositories elsewhere. 
+These projects are noted as being deprecated below._
 
-## Project Files
+## Cookbook Projects
 
-You have two ways of viewing the Jaanga Cookbook files:
+### Templates for Google Cardboard
 
-* Web page hosted on GitHub: [jaanga.github.io]( http://jaanga.github.io/cookbook/index.html "view the files as apps." ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
-* Source code on GitHub: [github.com/jaanga]( https://github.com/jaanga/cookboo/ "View the files as source code." ) <scan style=display:none ><< You are now probably here.</scan>
+#### Mission
+To build simple, sample files that can be used as the basis for more complex works involving 
+[Google Cardboard]( https://cardboard.withgoogle.com/ ). All of the files build upon the [Three.js]( http://threejs.org] )  library.
 
-## Cookbook
-
-## Templates for Google Cardboard
-
-Read Me  
-[Web page version]( http://jaanga.github.io/cookbook/cardboard/ )  
-[Source code version]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )  
-
-
-<!--
-[Demo Rollercoaster](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/rollercoaster.html )   
-[Demo 3rd Party](  http://jaanga.github.io/cookbook/cardboard/index.html )  
-
-[Demo R1](  http://jaanga.github.io/cookbook/cardboard/r1/cardboard-r1.html )  
-
-[Demo Cardboard Template R1](  http://jaanga.github.io/cookbook/cardboard/rollercoaster/cardboard-template-r1.html )
+#### Read Me  
+[Web page view]( http://jaanga.github.io/cookbook/cardboard/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/cardboard/ )  
 
 
-[Demo Cardboard R2](  http://jaanga.github.io/cookbook/cardboard/r2/cardboard-r2.html )
+### Three.js Templates
 
-[Demo Cardboard Wrap-Around R1](  http://jaanga.github.io/cookbook/cardboard/wrap-around-r1/wrap-around-r1.html )
--->
+#### Mission
+To build simple, sample files that can be used a the basis for more complex work involving the [Three.js]( http://threejs.org] ) library
 
-## Boilerplate
-Sample Three.js boilerplate
+#### Read Me
 
-[Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/boilerplate/ )
+[Source code view]( https://github.com/jaanga/cookbook/blob/gh-pages/boilerplate/ )
 
-## BVH Reader   
+
+### BVH Reader   
+
+#### Mission
 Fast and simple motion capture data reader makes your characters come alive  
 
-[Read Me]( https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/readme.md )
+#### Read Me and Demos
+
+[Source code view]( https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/readme.md )
 
 
 Live demo: [Jaanga BVH Reader - Saqoosha files]( http://jaanga.github.io/cookbook/bvh-reader/r1/bvh-reader-saqoosha.html )
@@ -54,18 +50,28 @@ More details here: [Jaanga BVH Reader]( https://github.com/jaanga/cookbook/tree/
 
 Blog post: [BVH: A format to capture motion - simply, quickly and economically](http://www.jaanga.com/2013/09/bvh-format-to-capture-motion-simply.html )
 
-## BVH Skinned
+### BVH Skinned
 
-Live demo: [Jaanga BVH Skinned R1]( http://jaanga.github.io/cookbook/bvh-skinned/r1/index.html )
+#### Mission
 
-## j3qUE
+#### Live demo: 
+
+[Jaanga BVH Skinned R1]( http://jaanga.github.io/cookbook/bvh-skinned/r1/index.html )
+
+### j3qUE
+
+#### Mission
 Shows you an easy way to work with both jQuery and Three.js. The HTML and jQuery goes in the main HTML file. The Three.js goes into its own file called in by an IFRAME into the main page. In the main file, you write in jQuery style. In the iframe, you write in Three.js style.
 
-Live demo: <http://jaanga.github.io/cookbook/j3qUE/r2/index.html>
+#### Live demo
+
+<http://jaanga.github.io/cookbook/j3qUE/r2/index.html>
 
 Blog Post: <http://www.jaanga.com/2013/05/threejs-and-jquery-never-twain-need-meet.html>
 
-#oSome Globe  
+### oSome Globe  
+
+#### Mission
 The world like she has never been seen before.  
 
 See WebGL Meet-Up: <http://jaanga.github.io/events/sf-webgl-2013-06-26/>
@@ -76,8 +82,12 @@ Blog posts
 
 Three of them - all from June 2013: <http://www.jaanga.com/2013_06_01_archive.html>
 
-## unFlatland
+### unFlatland
+
+#### Mission
 The map like she has never been seen before:  
+
+#### Live Demos
 
 R2: <http://jaanga.github.io/cookbook/un-flatland/r4/index.html> << The fastest, smallest, sweetest 3D map code you ever did see.
 R2: <http://jaanga.github.io/cookbook/un-flatland/r2/index.html>
@@ -86,10 +96,26 @@ R1: <http://jaanga.github.io/cookbook/un-flatland/r1/index.html>
 More details here: <https://github.com/jaanga/cookbook/tree/gh-pages/un-flatland> 
 
 
-## Video Surfaces & Video Folding Polygons
-The TV like she has never been seen before:  
+### Video Surfaces
+
+#### Mission
+To wrap or warp videos as textures of a variety of types of 3D meshes
+
+#### Read Me
+[Web page view]( http://jaanga.github.io/cookbook/video-surfaces/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces/ )  
+
+
+
+### Video Folding Polygons
+
+#### Mission
+To display videos in unreal or disjointed manners 
 
 Post: <http://www.jaanga.com/2013/08/webgl-displaying-video-on-wobbly-moving.html>   
 
-Code: <https://github.com/jaanga/cookbook/tree/gh-pages/video-surfaces>
+#### Read Me
+
+[Web page view]( http://jaanga.github.io/cookbook/video-folding-polygons/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/video-folding-polygons/ )  
 

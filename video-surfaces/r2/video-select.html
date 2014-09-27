@@ -55,7 +55,7 @@
 		info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'position: absolute; width: 100%; ';
 		info.innerHTML = info.txt = '<h1>moving pictures moving</h1>' +
-			'Use your mouse to pan, zoom and rotate.<br>' +
+			'Requires Leap Motion device! Use your mouse to pan, zoom and rotate.<br>' +
 			'<a href="http://three.js.org" target="_blank">Three.js</a> - ' +
 			'<a href="http://www.khronos.org/webgl/" target="_blank">WebGL</a> - ' +
 			'<a href="http://jaanga.github.io" target="_blank">Jaanga</a><br>' +
@@ -100,7 +100,7 @@
 		stats.domElement.style.cssText = 'position: absolute; top: 0px; zIndex: 100; ';
 		document.body.appendChild( stats.domElement );		
 
-		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 		scene = new THREE.Scene();
