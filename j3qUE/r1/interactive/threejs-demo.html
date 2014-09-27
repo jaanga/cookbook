@@ -34,7 +34,7 @@
 		mesh = new THREE.Mesh( geometry, material );
 		scene.add( mesh );
 
-		renderer = new THREE.CanvasRenderer();
+		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff } );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
 		document.body.appendChild( renderer.domElement );
