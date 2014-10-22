@@ -9,13 +9,16 @@
 <script src='http://mrdoob.github.com/three.js/examples/js/controls/TrackballControls.js'></script>
 
 <script src="../js/StereoEffect.js"></script>
+<!--
 <script src="../js/DeviceOrientationControls.js"></script>
+-->
+<script src="http://mrdoob.github.com/three.js/examples/js/controls/DeviceOrientationControls.js"></script>
 <script src="../js/DetectScreenSize.js"></script>
 <script>
 	var info, stats, renderer, scene, camera, controls;
 	var effect;
 
-	var hasOrientation = function(evt) {
+	var hasOrientation = function( evt ) {
 		if (!evt.alpha) {
 			return;
 		}

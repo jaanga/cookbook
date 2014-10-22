@@ -197,8 +197,8 @@
 			'hello': function() { alert('Hello world!'); },
 			'move forward': function() { moveForward(); },
 			'move backward': function() { moveBackward(); },
-			'faster': function() { controls.movementSpeed += 10; msg.innerText='faster ~ ' + controls.movementSpeed; },
-			'slower': function() { controls.movementSpeed -= 10; msg.innerText='slower ~ ' + controls.movementSpeed; },
+			'faster': function() { controls.movementSpeed += 10; msg.innerText='faster ~ speed:' + controls.movementSpeed; },
+			'slower': function() { controls.movementSpeed -= 10; msg.innerText='slower ~ speed:' + controls.movementSpeed; },
 			'go home': function() { goHome(); },
 			'stop moving': function() { stopMoving(); }
 		  };
@@ -212,14 +212,14 @@
 	}
 
 	function moveForward() {
-		msg.innerText = 'move forward';
+		msg.innerText = 'move forward ~ speed:' + controls.movementSpeed;
 		controls.freeze = false;
 		controls.moveBackward = false;
 		controls.moveForward = true;
 	}
 
 	function moveBackward() {
-		msg.innerText = 'move backward';
+		msg.innerText = 'move backward' + controls.movementSpeed;
 		controls.freeze = false;
 		controls.moveForward = false;
 		controls.moveBackward = true;
