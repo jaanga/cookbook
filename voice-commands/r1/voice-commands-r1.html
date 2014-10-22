@@ -41,15 +41,15 @@
 			'background: -moz-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
 			'background: radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); }' +
 			'.red { color: red; }' +
-			'h1 { margin: 0; } ' +
+			'h1 { display: inline; margin: 0; } ' +
 		'';
 
 		info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'background-color: #eee; border-radius: 8px; color: #333; left: 0; ' +
 			'margin: -20px auto 0 auto; opacity: 0.85; padding: 10px;' +
-			'position: absolute; right: 0; text-align: left; top: 0 !important; min-width: 280px; max-width: 1000px; }' ;
-		info.innerHTML = '<h1>Voice Commands 3D</h1>' +
-			'<div>Commands: move forward, move backward, stop moving, go home ~ Theo Armour ~ 2014-10-22 ~ built for Kean</div>' +
+			'position: absolute; right: 0; text-align: left; top: 0 !important; min-width: 280pnx; max-width: 1000px; }' ;
+		info.innerHTML = '<h1>Voice Commands 3D </h1>~ Theo Armour ~ 2014-10-22 ~ built for Kea' +
+			'<div>Commands: move forward, move backward, faster, slower, stop moving, go home</div>' +
 			'<div id=msg >messages here...</div>' +
 		'';
 
@@ -197,6 +197,8 @@
 			'hello': function() { alert('Hello world!'); },
 			'move forward': function() { moveForward(); },
 			'move backward': function() { moveBackward(); },
+			'faster': function() { controls.movementSpeed += 10; msg.innerText='faster ~ ' + controls.movementSpeed; },
+			'slower': function() { controls.movementSpeed -= 10; msg.innerText='slower ~ ' + controls.movementSpeed; },
 			'go home': function() { goHome(); },
 			'stop moving': function() { stopMoving(); }
 		  };
