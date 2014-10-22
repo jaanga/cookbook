@@ -1,12 +1,15 @@
 Voice Commands Read Me
-=======
+==
+
+[Web page view]( http://jaanga.github.io/cookbook/voice-commands/ ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/voice-commands/ ) <scan style=display:none ><< You are now probably here.</scan>
 
 ### Live Demo
 
-<iframe src="http://xxx.github.io/index.html" width=100% height=500px class='overview' >
+<iframe src="http://jaanga.github.io/cookbook/voice-commands/latest/" width=100% height=500px class='overview' >
 There is an `iframe` here. It is not visible when viewed on github.com/xxx. To view, please see 'Project Links' below.
 </iframe>
-_xxx xxx_
+_[Voice Commands for Three.js]( http://jaanga.github.io/cookbook/voice-commands/latest/ )_
 
 ## Concept
 
