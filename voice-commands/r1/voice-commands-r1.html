@@ -5,11 +5,11 @@
 <meta charset=utf-8>
 </head>
 <body>
-<script src=http://mrdoob.github.com/three.js/examples/js/Detector.js></script>
-<script src=http://mrdoob.github.com/three.js/build/three.min.js></script>
-<script src=http://mrdoob.github.com/three.js/examples/js/controls/FirstPersonControls.js></script>
-<script src=http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js></script>
-<script src=http://cdnjs.cloudflare.com/ajax/libs/annyang/1.4.0/annyang.min.js ></script>
+<script src=https://mrdoob.github.com/three.js/examples/js/Detector.js></script>
+<script src=https://mrdoob.github.com/three.js/build/three.min.js></script>
+<script src=https://mrdoob.github.com/three.js/examples/js/controls/FirstPersonControls.js></script>
+<script src=https://mrdoob.github.com/three.js/examples/js/libs/stats.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/annyang/1.4.0/annyang.min.js ></script>
 
 <script>
 	if ( ! Detector.webgl ) Detector.addGetWebGLMessage(  );  // move the message wherever
@@ -45,13 +45,11 @@
 
 		info = document.body.appendChild( document.createElement( 'div' ) );
 		info.style.cssText = 'background-color: #eee; border-radius: 8px; color: #333; left: 0; ' +
-				'margin: -20px auto 0 auto; opacity: 0.85; padding: 10px;' +
-				'position: absolute; right: 0; text-align: left; top: 0 !important; min-width: 280px; max-width: 1000px; }' ;
-		info.txt = '<h1>Voice Commands 3D</h1>';
-		info.innerHTML = info.txt + 
-// 'With your Leap Motion controller:<br>Swipe side-to-side: Freeze/Unfreeze. Fist: stand in place and look around. ' +
-//		'<br>Open hand: Move forward/backward, left/right, up/down<br><br>' +
-			'Theo Armour ~ 2014-10-22 ~ built for Kean' +
+			'margin: -20px auto 0 auto; opacity: 0.85; padding: 10px;' +
+			'position: absolute; right: 0; text-align: left; top: 0 !important; min-width: 280px; max-width: 1000px; }' ;
+		info.innerHTML = '<h1>Voice Commands 3D</h1>' +
+			'<div>Theo Armour ~ 2014-10-22 ~ built for Kean</div>' +
+			'<div id=msg ></div>' +
 		'';
 
 // Three.js Basics
@@ -196,15 +194,38 @@
 
 		  var commands = {
 			'hello': function() { alert('Hello world!'); },
-			'go forward': function() { alert('Go forward!'); },
+			'move forward': function() { moveForward(); },
+			'move backward': function() { moveBackward(); },
+			'stop moving': function() { stopMoving(); }
 		  };
 
 		  // Add our commands to annyang
-		  annyang.addCommands(commands);
+		  annyang.addCommands( commands );
 
 		  // Start listening.
 		  annyang.start();
 		}
+	}
+
+	function moveForward() {
+		msg.innerText = 'move forward';
+		controls.freeze = false;
+		controls.moveBackward = false;
+		controls.moveForward = true;
+	}
+
+	function moveBackward() {
+		msg.innerText = 'move backward';
+		controls.freeze = false;
+		controls.moveForward = false;
+		controls.moveBackward = true;
+	}
+
+	function stopMoving() {
+		msg.innerText = 'stop moving';
+		controls.freeze = true;
+		controls.moveBackward = false;
+		controls.moveForward = false;
 	}
 
 	function animate() {
