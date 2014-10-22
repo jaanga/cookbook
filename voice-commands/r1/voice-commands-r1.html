@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Flying Leap 3D</title>
+<meta charset=utf-8>
+</head>
+<body>
+<script src=http://mrdoob.github.com/three.js/examples/js/Detector.js></script>
+<script src=http://mrdoob.github.com/three.js/build/three.min.js></script>
+<script src=http://mrdoob.github.com/three.js/examples/js/controls/FirstPersonControls.js></script>
+<script src=http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js></script>
+<script src=http://cdnjs.cloudflare.com/ajax/libs/annyang/1.4.0/annyang.min.js ></script>
+
+<script>
+	if ( ! Detector.webgl ) Detector.addGetWebGLMessage(  );  // move the message wherever
+	var info, renderer, scene, camera, controls, stats;
+	var clock = new THREE.Clock();
+
+	var info, palm, fingers = [];
+	var oFrame;
+	var delta = 0, x, y;
+
+	init();
+	animate();
+
+	function transcend(x, y) { return 0.05 * Math.sin( x * 0.07 + delta) * Math.sin( y * 0.07 + delta)  ; };
+
+	function init() {
+		var css, light, geometry, material, mesh;
+
+		css = document.body.appendChild( document.createElement('style') );
+		var col1 = "#" + Math.random().toString(16).slice(2, 8);
+		var col2 = "#" + Math.random().toString(16).slice(2, 8);
+		var col3 = "#" + Math.random().toString(16).slice(2, 8);
+		var X = ( Math.random() * window.innerWidth ).toFixed(0);
+		var Y = (Math.random() * window.innerHeight).toFixed(0);
+		var center =  20 + (Math.random() * 60).toFixed(0);
+
+		css.innerHTML = 'body { color: #888; font: 600 14pt monospace; margin: 0; height: 1000px; overflow: hidden; text-align: center; ' +
+			'background: -webkit-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
+			'background: -moz-radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); ' +
+			'background: radial-gradient(' + X + 'px ' + Y + 'px, farthest-corner, ' + col1 + ' 0%, ' + col2 + ' 50%, ' + col3 + ' 100%); }' +
+			'.red { color: red; }' +
+		'';
+
+		info = document.body.appendChild( document.createElement( 'div' ) );
+		info.style.cssText = 'background-color: #eee; border-radius: 8px; color: #333; left: 0; ' +
+				'margin: -20px auto 0 auto; opacity: 0.85; padding: 10px;' +
+				'position: absolute; right: 0; text-align: left; top: 0 !important; min-width: 280px; max-width: 1000px; }' ;
+		info.txt = '<h1>Voice Commands 3D</h1>';
+		info.innerHTML = info.txt + 
+// 'With your Leap Motion controller:<br>Swipe side-to-side: Freeze/Unfreeze. Fist: stand in place and look around. ' +
+//		'<br>Open hand: Move forward/backward, left/right, up/down<br><br>' +
+			'Theo Armour ~ 2014-10-22 ~ built for Kean' +
+		'';
+
+// Three.js Basics
+		if ( ! Detector.webgl ) {
+			renderer = new THREE.CanvasRenderer();
+		} else {
+			renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff } );
+		}
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.shadowMapEnabled = true;
+		document.body.appendChild( renderer.domElement );
+		scene = new THREE.Scene();
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 3000 );
+		camera.position.set( -200, 50, 0 );
+		controls = new THREE.FirstPersonControls( camera );
+
+		controls.lookSpeed = 0.015; // 0.0125;
+		controls.lookSpeedMin = 0.005;
+		controls.lookSpeedMax = 0.5;
+		controls.movementSpeed = 50;
+		controls.movementSpeedMin = 20;
+		controls.movementSpeedMax = 300;
+		controls.noFly = false;
+		controls.lookVertical = true;
+		controls.constrainVertical = true;
+		controls.verticalMin = 1.5;
+		controls.verticalMax = 2.0;
+		this.autoSpeedFactor = 0.0;
+		// controls.lon = -110;
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; top: 0px; zIndex: 100; ';
+		document.body.appendChild( stats.domElement );
+
+//  Lights
+		light = new THREE.AmbientLight( 0x333333);
+		light.color.setHSL( 0.1, 0.5, 0.3 );
+		scene.add( light );
+
+		light = new THREE.DirectionalLight( 0xffffff, 1 );
+		light.position.set( 1, 1, 1 ).normalize();
+		scene.add( light );
+
+		light = new THREE.DirectionalLight( 0xffffff, 1 );
+		light.position.set( -1, -1, -1 ).normalize();
+		scene.add( light );
+
+ 		light = new THREE.DirectionalLight( 0xffffff, 1 );
+		light.position.set( 0, 500, 0 );
+		scene.add( light );
+		light.castShadow = true;
+		light.shadowMapWidth = 2048;
+		light.shadowMapHeight = 2048;
+		var d = 500;
+		light.shadowCameraLeft = -d;
+		light.shadowCameraRight = d;
+		light.shadowCameraTop = d;
+		light.shadowCameraBottom = -d;
+
+		light.shadowCameraNear = 100;
+		light.shadowCameraFar = 600;
+//		light.shadowCameraVisible = true;
+
+
+// Assets
+		var landscape = new THREE.Object3D();
+
+		material = new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff, opacity: 0.7, side: THREE.DoubleSide, transparent: true } );
+		geometry = new THREE.PlaneGeometry( 1, 1, 100, 100 );
+		plane = new THREE.Mesh(geometry, material);
+		plane.scale.set( 1000, 1000, 1000 );
+		plane.castShadow = true;
+		plane.receiveShadow = true;
+		landscape.add( plane )
+
+		var trunks = [];
+		var leaves = [];
+		for (var i = 0, len = 0; i < len; i++) {
+			material = new THREE.MeshBasicMaterial( { color: Math.random() * 0xffffff, opacity: 0.7, side: THREE.DoubleSide, transparent: true } );
+			geometry = new THREE.BoxGeometry( 5, 5, 150 );
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			trunks.push( mesh );
+			landscape.add( mesh );
+/*
+			material = new THREE.MeshBasicMaterial( {color: Math.random() * 0xffffff, opacity: 0.7, side: THREE.DoubleSide, transparent: true } );
+			geometry = new THREE.TetrahedronGeometry( 80);
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.rotation.y = 3 * Math.random();
+			mesh.castShadow = true;
+			mesh.receiveShadow = true;
+			leaves.push( mesh );
+			landscape.add( mesh );
+*/
+		}
+		scene.add( landscape );
+
+		var v = plane.geometry.vertices;
+		delta += 0.01;
+		for ( var x = 0, index = 0; x <= 100; x++) {
+			for ( var y = 0; y <= 100; y++) {
+				v[index].z = 0.05 * Math.sin( x * 0.07 + delta) * Math.sin( y * 0.07 + delta) ;
+				index++;
+			}
+		}
+
+		for (var i = 0, index, len = trunks.length; i < len; i++) {
+			index = Math.floor( Math.random() *  10000 );
+//			trunks[i].position.set(  1000 * v[index].x, 1000 * v[index].y, 75 + 1000 * v[index].z);
+//			leaves[i].position.set(  1000 * v[index].x, 1000 * v[index].y, 170 + 1000 * v[index].z);
+		}
+
+		plane.geometry.verticesNeedUpdate = true;
+		plane.geometry.computeFaceNormals();
+		plane.geometry.computeVertexNormals();
+
+		var loader = new THREE.JSONLoader();
+		loader.load( '../models/w-hand-02-01.js', function ( geometry ) {
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI ) );
+			for (var i = 0, index; i < 18; i++) {
+				index = Math.floor( Math.random() *  10000 );
+				col = Math.random() * 0xffffff;
+
+				material = new THREE.MeshPhongMaterial( { ambient: 0x555555, color: col, specular: col, shininess: 50, wireframe: true } );
+				mesh = new THREE.Mesh( geometry, material );
+				mesh.rotation.y = 3 * Math.random();
+				mesh.position.set(  1000 * v[index].x, 1000 * v[index].y, 50 + 1000 * v[index].z);
+				mesh.scale.set( 8, 8, 8);
+				mesh.castShadow = true;
+				mesh.receiveShadow = true;
+				landscape.add( mesh );
+			}
+		});
+		landscape.rotation.x = -1.5708;
+
+
+		if (annyang) {
+		  // Let's define a command.
+
+		  var commands = {
+			'hello': function() { alert('Hello world!'); },
+			'go forward': function() { alert('Go forward!'); },
+		  };
+
+		  // Add our commands to annyang
+		  annyang.addCommands(commands);
+
+		  // Start listening.
+		  annyang.start();
+		}
+	}
+
+	function animate() {
+		requestAnimationFrame( animate );
+		var delta = clock.getDelta()
+		controls.update( delta );
+		renderer.render( scene, camera );
+		stats.update();
+	}
+
+	function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
+</script>
+</body>
+</html>

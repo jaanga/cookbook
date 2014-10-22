@@ -11,15 +11,18 @@ There is an `iframe` here. It is not visible when viewed on GitHub. To view, ple
 </iframe>
 _Coding demo: Demo Cardboard Template R1_
 
+_Scroll down for links relating to Google Cardboard and suggestions as to where to obtain Cardboard_
+
 ### Mission
-Provide sample template files for Google Cardboard
+Provide sample Three.js template files for Google Cardboard
 
 ### Vision
-
+To explore news ways and methods of visualizing in 3D
 
 ## Look Around Templates
 
-_Staying in one place, moving your head, you can see all about._
+* You are standing in one place
+* Moving your head, you can see all about
 
 ### Cardboard Template R1
 
@@ -27,13 +30,15 @@ _Staying in one place, moving your head, you can see all about._
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r1/cardboard-r1.html )
 
 * Based on coding example from Chrome Experiments for Cardboard: <http://vr.chromeexperiments.com/example.html>
+* See the demo above
 
 ### Demo Cardboard Template R2
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/r2/cardboard-r2.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r2/cardboard-r2.html )
 
-* Tries to be about as simple as possible
+* Tries to be about as simple code as possible
+* Displays a bunch of trilons and monsters
 * Displays readout of current viewing parameters
 
 ### Demo Cardboard Template R3
@@ -42,22 +47,30 @@ _Staying in one place, moving your head, you can see all about._
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r3/cardboard-r3.html )
 
 * Add Trackball Controller to help with debugging
+* Displays trilons and monsters
 * Loads DeviceOrientationControls when needed
 
 ## Wrap Around Templates and demos
 
 * As you turn your head, the camera rotates around the objects in the center
-* All the current versions support horizontal movemt only
+* All the current versions support horizontal movement only
 
 ### Demo Cardboard Wrap-Around R1
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/wrap-around-r1/wrap-around-r1.html )  
-[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/wrap-around-r1/wrap-around-r1.html )
+[Source code]( https://github.com/jaanga/
+
+* Very simple - just displays a bunch of cubes
+* Displays readout of current viewing parameters
 
 ### Schroder House Wrap-Around R1
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/schroder-house-wrap-around/r1/schroder-house-wrap-around-r1.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/schroder-house-wrap-around/r1/schroder-house-wrap-around-r1.html )
+
+* Displays a Sketch Up model converted to JSON
+* Schroder House ~ 1919 ~ one of the earliest examples of modern architecture
+
 
 ### Castle Cardboard Wrap-Around R1
 
@@ -65,13 +78,14 @@ _Staying in one place, moving your head, you can see all about._
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/castle/castle-cardboard.html )
 
 * Fantasy wrap around
+* Takes a while to load
 
 ### Saquoosha the Dancer
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/dancer/bvh-reader-saqoosha-basic.html )  
 [Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/wrap-around/dancer/bvh-reader-saqoosha-basic.html )
 
-* Animated character wrap-around
+* Animated character dances in the middle of the stage
 
 ## First Person Controllers
 
@@ -97,8 +111,6 @@ _Google Cardboard is a fold-out cardboard smartphone mount that, when combined w
 _The official Google app that displays stereoscopic images requires WebGL support on the smartphone; phones with Chrome and WebGL can run Google's web experiments. Apple's iOS 8 will support this technology and Cardboard's official apps.[3] Third-party apps are available on the Google Play store with Cardboard support._
 
 
-
-
 ## Resources
 
 [Google Cardboard]( https://developers.google.com/cardboard/ )
@@ -117,7 +129,7 @@ or
 
 [DoDoCase Google Cardboard VR Toolkit]( http://www.dodocase.com/products/google-cardboard-vr-goggle-toolkit )
 
-* Kinda sucks
+* San Francisco start-up selling designer goods
 
 [Unofficial Cardboard]( https://www.unofficialcardboard.com/ )
 
@@ -126,7 +138,6 @@ or
 * Large (allows for spectacles) and assembled $22
 
 
-## Features
 
 ## Road Map
 
@@ -152,7 +163,12 @@ Bugs on browsers other than Chrome need not be reported until such time as the w
 
 This repository contains files that are  at an early and volatile stage. Not all licensing requirements may have been fully met let alone identified. It is the intension of the authors to play fair and all such requirements will either be met or the feature in question will turned off.
 
+
 ## Change Log
+
+2014-09-28 ~ Theo
+
+* Updates to read me file
 
 2014-08-27 ~ Theo
 
