@@ -9,7 +9,6 @@
 <script src=http://mrdoob.github.com/three.js/build/three.min.js ></script>
 <script src=http://mrdoob.github.com/three.js/examples/js/controls/FirstPersonControls.js ></script>
 <script src=http://mrdoob.github.com/three.js/examples/js/libs/stats.min.js ></script>
-<script src=http://mrdoob.github.com/three.js/examples/js/controls/DeviceOrientationControls.js ></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/annyang/1.4.0/annyang.min.js ></script>
 
 <script>
@@ -17,18 +16,9 @@
 	var info, renderer, scene, camera, controls, stats;
 	var clock = new THREE.Clock();
 
-//	var info, palm, fingers = [];
-//	var oFrame;
+	var info, palm, fingers = [];
+	var oFrame;
 	var delta = 0, x, y;
-
-	var hasOrientation = function( evt ) {
-		if (!evt.alpha) {
-			return;
-		}
-		window.removeEventListener('deviceorientation', hasOrientation, false);
-		controls = new THREE.DeviceOrientationControls( camera );
-		controls.connect();
-	};
 
 	init();
 	animate();
@@ -219,8 +209,6 @@
 		  // Start listening.
 		  annyang.start();
 		}
-
-		window.addEventListener('deviceorientation', hasOrientation, false);
 	}
 
 	function moveForward() {
@@ -257,34 +245,8 @@
 		requestAnimationFrame( animate );
 		var delta = clock.getDelta()
 		controls.update( delta );
-//		renderer.render( scene, camera );
+		renderer.render( scene, camera );
 		stats.update();
-
-		if ( controls.orientationQuaternion !== undefined ) {
-
-			msg.innerHTML =
-				'<table><tr><td>' +
-				'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
-				'oQ.x ' + controls.orientationQuaternion.x.toFixed(3) + '<br>' +
-				'oQ.y ' + controls.orientationQuaternion.y.toFixed(3) + '<br>' +
-				'oQ.z ' + controls.orientationQuaternion.z.toFixed(3) + '<br>' +
-				'aQ.w ' + controls.alignQuaternion.w.toFixed(3) + '<br>' +
-				'aQ.x ' + controls.alignQuaternion.x.toFixed(3) + '<br>' +
-				'aQ.y ' + controls.alignQuaternion.y.toFixed(3) + '<br>' +
-				'aQ.z ' + controls.alignQuaternion.z.toFixed(3) + '<br>' +
-				'</td>' +
-				'<td>' +
-				'alpha ' + controls.alpha.toFixed(3) + '<br>' +
-				'beta ' + controls.beta.toFixed(3) + '<br>' +
-				'gamma ' + controls.gamma.toFixed(3) + '<br>' +
-				'movSpd ' + controls.movementSpeed + '<br>' +
-				'rllSpd ' + controls.rollSpeed + '<br>' +
-				'</td></tr></table>' +
-			'';
-			effect.render( scene, camera );
-		} else {
-			renderer.render( scene, camera );
-		}
 	}
 
 	function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
