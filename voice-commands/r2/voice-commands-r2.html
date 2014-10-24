@@ -59,8 +59,8 @@
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 		controls = new THREE.FirstPersonControls( camera );
-//		controls.movementSpeed = 10;
-//		controls.lookSpeed = 0.05;
+		controls.movementSpeed = 30;
+		controls.lookSpeed = 0.05;
 
 		effect = new THREE.StereoEffect( renderer );
 		effect.separation = 0.2;
@@ -137,7 +137,7 @@
 	}
 
 	function moveForward() {
-		commands.innerText = ' move forward';
+		commands.innerText = ' move forward ~ speed:' + controls.movementSpeed;
 		movement = true
 	}
 
