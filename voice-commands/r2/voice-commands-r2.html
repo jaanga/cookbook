@@ -19,6 +19,8 @@
 
 	var clock = new THREE.Clock();
 
+	var movement = false;
+
 	var hasOrientation = function(evt) {
 		if (!evt.alpha) {
 			return;
@@ -91,6 +93,26 @@
 		mesh.position.y = -250;
 		scene.add( mesh );
 
+		if (annyang) {
+		  // Let's define a command.
+
+		  var commands = {
+			'hello': function() { alert('Hello world!'); },
+			'move forward': function() { moveForward(); },
+			'move backward': function() { moveBackward(); },
+			'faster': function() { controls.movementSpeed += 10; commands.innerText='faster ~ speed:' + controls.movementSpeed; },
+			'slower': function() { controls.movementSpeed -= 10; commands.innerText='slower ~ speed:' + controls.movementSpeed; },
+			'go home': function() { goHome(); },
+			'stop moving': function() { stopMoving(); }
+		  };
+
+		  // Add our commands to annyang
+		  annyang.addCommands( commands );
+
+		  // Start listening.
+		  annyang.start();
+		}
+
 		window.addEventListener('deviceorientation', hasOrientation, false);
 
 		window.addEventListener( 'touchend', function () {
@@ -113,6 +135,32 @@
 
 	}
 
+	function moveForward() {
+		movement = true
+	}
+
+	function moveForward() {
+		movement = true;
+	}
+
+	function stopMoving() {
+		commands.innerText = 'stop moving';
+//		controls.freeze = true;
+//		controls.moveBackward = false;
+//		controls.moveForward = false;
+
+		movement = false;
+	}
+
+	function goHome() {
+		commands.innerText = 'go home';
+		controls.freeze = false;
+		controls.moveBackward = false;
+		controls.moveForward = false;
+		camera.position.set( -200, 50, 0 );
+		controls.target.set( 0, 0, 0 );
+	}
+
 	function animate() {
 		requestAnimationFrame( animate );
 		controls.update( clock.getDelta() );
@@ -120,6 +168,9 @@
 
 			if ( controls.gamma < 1 && controls.gamma > 0 ) { controls.autoForward = true; }
 			if ( controls.gamma > -1 && controls.gamma < 0 ) { controls.autoForward = false; }
+
+			if ( movement === true ) { controls.autoForward = true; }
+			if ( movement === false ) { controls.autoForward = false; }
 
 			msg.innerHTML =
 				'<table><tr><td>' +
