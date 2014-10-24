@@ -1,7 +1,8 @@
 Jaanga Cookbook Read Me
 ===
-[Web page view]( http://jaanga.github.io/cookbook/ ) <input value="<< You are now probably here." size=28 style="font:bold 12pt monospace;border-width:0;" >  
-[Source code view]( https://github.com/jaanga/cookbook/) <scan style=display:none ><< You are now probably here.</scan>
+[Web page view]( http://jaanga.github.io/cookbook/ ) &nbsp; [Source code view]( https://github.com/jaanga/cookbook/) 
+
+## Cookbook Projects
 
 _This repository contains a variety of projects that are in early stages of development._
 
@@ -17,12 +18,12 @@ This usually means that that there has been an update to Three.js but the projec
 
 <br>
 
-## Cookbook Projects
+
 
 ### Voice Commands for Three.js
 
 #### Mission
-To build simple, sample files that can be used as the basis for more complex works involving 
+To build simple, sample files that can be used as the basis for more complex works involving voice recognition and 3D
 
 #### Read Me  
 [Web page view]( http://jaanga.github.io/cookbook/voice-commands/ )  
