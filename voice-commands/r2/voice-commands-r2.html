@@ -47,7 +47,8 @@
 
 		info.style.cssText = 'left: 10px; position: absolute; ';
 		info.innerHTML = '<h3>' + document.title + '</h3>' +
-			'<div id=msg>readout</div>';
+			'<div id=commands>readout</div>';
+			'<div id=msg>messages</div>';
 
 		var container = document.body.appendChild( document.createElement( 'div' ) );
 
@@ -99,11 +100,11 @@
 		  var commands = {
 			'hello': function() { alert('Hello world!'); },
 			'move forward': function() { moveForward(); },
-			'move backward': function() { moveBackward(); },
-			'faster': function() { controls.movementSpeed += 10; commands.innerText='faster ~ speed:' + controls.movementSpeed; },
-			'slower': function() { controls.movementSpeed -= 10; commands.innerText='slower ~ speed:' + controls.movementSpeed; },
+//			'move backward': function() { moveBackward(); },
+//			'faster': function() { controls.movementSpeed += 10; commands.innerText='faster ~ speed:' + controls.movementSpeed; },
+//			'slower': function() { controls.movementSpeed -= 10; commands.innerText='slower ~ speed:' + controls.movementSpeed; },
 			'go home': function() { goHome(); },
-			'stop moving': function() { stopMoving(); }
+//			'stop moving': function() { stopMoving(); }
 		  };
 
 		  // Add our commands to annyang
@@ -136,10 +137,12 @@
 	}
 
 	function moveForward() {
+		commands.innerText = ' move forward';
 		movement = true
 	}
 
-	function moveForward() {
+	function xxxmoveForward() {
+		commands.innerText = 'stop moving';
 		movement = true;
 	}
 
