@@ -63,6 +63,7 @@
 			'position: absolute; right: 0; text-align: left; top: 0 !important; min-width: 280pnx; max-width: 1000px; }' ;
 		info.innerHTML = '<h1>Voice Commands 3D </h1>~ Theo Armour ~ 2014-10-22 ~ built for Kea' +
 			'<div>Commands: move forward, move backward, faster, slower, stop moving, go home</div>' +
+			'<div id=commands >messages here...</div>' +
 			'<div id=msg >messages here...</div>' +
 		'';
 
@@ -210,8 +211,8 @@
 			'hello': function() { alert('Hello world!'); },
 			'move forward': function() { moveForward(); },
 			'move backward': function() { moveBackward(); },
-			'faster': function() { controls.movementSpeed += 10; msg.innerText='faster ~ speed:' + controls.movementSpeed; },
-			'slower': function() { controls.movementSpeed -= 10; msg.innerText='slower ~ speed:' + controls.movementSpeed; },
+			'faster': function() { controls.movementSpeed += 10; commands.innerText='faster ~ speed:' + controls.movementSpeed; },
+			'slower': function() { controls.movementSpeed -= 10; commands.innerText='slower ~ speed:' + controls.movementSpeed; },
 			'go home': function() { goHome(); },
 			'stop moving': function() { stopMoving(); }
 		  };
@@ -224,32 +225,34 @@
 		}
 
 		window.addEventListener('deviceorientation', hasOrientation, false);
+
+		controls.autoForward = false;
 	}
 
 	function moveForward() {
-		msg.innerText = 'move forward ~ speed:' + controls.movementSpeed;
+		commands.innerText = 'move forward ~ speed:' + controls.movementSpeed;
 		controls.freeze = false;
-//		controls.moveBackward = false;
-//		controls.moveForward = true;
-controls.autoForward = true;
+		controls.moveBackward = false;
+		controls.moveForward = true;
+//controls.autoForward = true;
 	}
 
 	function moveBackward() {
-		msg.innerText = 'move backward' + controls.movementSpeed;
+		commands.innerText = 'move backward' + controls.movementSpeed;
 		controls.freeze = false;
 		controls.moveForward = false;
 		controls.moveBackward = true;
 	}
 
 	function stopMoving() {
-		msg.innerText = 'stop moving';
+		commands.innerText = 'stop moving';
 		controls.freeze = true;
 		controls.moveBackward = false;
 		controls.moveForward = false;
 	}
 
 	function goHome() {
-		msg.innerText = 'go home';
+		commands.innerText = 'go home';
 		controls.freeze = false;
 		controls.moveBackward = false;
 		controls.moveForward = false;
@@ -265,6 +268,9 @@ controls.autoForward = true;
 		stats.update();
 
 		if ( controls.orientationQuaternion !== undefined ) {
+
+			if ( controls.gamma < 1 && controls.gamma > 0 ) { controls.autoForward = true; }
+			if ( controls.gamma > -1 && controls.gamma < 0 ) { controls.autoForward = false; }
 
 			msg.innerHTML =
 				'<table><tr><td>' +
@@ -291,6 +297,39 @@ controls.autoForward = true;
 		}
 	}
 
+	function animate() {
+		requestAnimationFrame( animate );
+		controls.update( clock.getDelta() );
+		if ( controls.orientationQuaternion !== undefined ) {
+
+			if ( controls.moveForward === true ) { controls.autoForward = true; }
+			if ( controls.moveForward === false ) { controls.autoForward = false; }
+
+			msg.innerHTML =
+				'<table><tr><td>' +
+				'oQ.w ' + controls.orientationQuaternion.w.toFixed(3) + '<br>' +
+				'oQ.x ' + controls.orientationQuaternion.x.toFixed(3) + '<br>' +
+				'oQ.y ' + controls.orientationQuaternion.y.toFixed(3) + '<br>' +
+				'oQ.z ' + controls.orientationQuaternion.z.toFixed(3) + '<br>' +
+				'aQ.w ' + controls.alignQuaternion.w.toFixed(3) + '<br>' +
+				'aQ.x ' + controls.alignQuaternion.x.toFixed(3) + '<br>' +
+				'aQ.y ' + controls.alignQuaternion.y.toFixed(3) + '<br>' +
+				'aQ.z ' + controls.alignQuaternion.z.toFixed(3) + '<br>' +
+				'</td>' +
+				'<td>' +
+				'alpha ' + controls.alpha.toFixed(3) + '<br>' +
+				'beta ' + controls.beta.toFixed(3) + '<br>' +
+				'gamma ' + controls.gamma.toFixed(3) + '<br>' +
+				'movSpd ' + controls.movementSpeed + '<br>' +
+				'rllSpd ' + controls.rollSpeed + '<br>' +
+				'</td></tr></table>' +
+				'autoForward:' + controls.autoForward +
+			'';
+			effect.render( scene, camera );
+		} else {
+			renderer.render( scene, camera );
+		}
+	};
 	function v( x, y, z ){ return new THREE.Vector3( x, y, z ); }
 </script>
 </body>
