@@ -28,6 +28,9 @@
 		window.removeEventListener('deviceorientation', hasOrientation, false);
 		controls = new THREE.DeviceOrientationControls( camera );
 		controls.connect();
+		controls.movementSpeed = 100;
+		controls.rollSpeed = 0.05;
+
 	};
 
 	init();
