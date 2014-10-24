@@ -1,9 +1,9 @@
 [Jaanga](../index.html ) &raquo;<br>[Cookbook]( ./index.html )
 ===
 
-<p id=rm >
+<div id=rm class=menu >
 	<a href=JavaScript:displayPage("#readme.md#rm"); >Read Me</a>
-</p>
+</div>
 
 
 <hr>
