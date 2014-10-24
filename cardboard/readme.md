@@ -58,7 +58,7 @@ To explore news ways and methods of visualizing in 3D
 ### Demo Cardboard Wrap-Around R1
 
 [Full screen demo]( http://jaanga.github.io/cookbook/cardboard/wrap-around/wrap-around-r1/wrap-around-r1.html )  
-[Source code]( https://github.com/jaanga/
+[Source code]( https://github.com/jaanga/cookbook/blob/gh-pages/cardboard/r1/cardboard-r1.html )
 
 * Very simple - just displays a bunch of cubes
 * Displays readout of current viewing parameters
