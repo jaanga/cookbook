@@ -1,9 +1,11 @@
 [Jaanga](../../index.html ) &raquo;<br>[Cookbook]( ../index.html ) &raquo;<br>[Voice Commands]( ./index.html )
 ===
+<br>
 
 <div id=rm >
 	<a href=JavaScript:displayPage("#readme.md#rm"); >Read Me</a>
 </div>
+
 
 <i class="fa fa-external-link"></i> [Live Demo]( http://jaanga.github.com/cookbook/voice-commands/latest/ ) 
 

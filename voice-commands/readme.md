@@ -5,7 +5,8 @@ Voice Commands Read Me
 ### Live Demo
 
 <iframe src="http://jaanga.github.io/cookbook/voice-commands/latest/" width=100% height=500px class='overview' >
-There is an `iframe` here. It is not visible when viewed on github.com/jaanga/cookbook/. To view, please see 'Project Links' below.
+There is an `iframe` here. It is not visible when viewed on https://github.com/jaanga/cookbook/tree/gh-pages/voice-commands/. 
+To view, please click 'web page view' above.
 </iframe>
 _Voice Commands for Three.js ~ [Full Screen (Latest)]( http://jaanga.github.io/cookbook/voice-commands/latest/ )_
 
