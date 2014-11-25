@@ -1,16 +1,17 @@
 [Jaanga](../../index.html ) &raquo;<br>[Cookbook]( ../index.html ) &raquo;<br>[Screen Grabber Three.js]( ./index.html )
 ===
+<br>
 
-<p id=rm >
+<div id=rm >
 	<a href=JavaScript:displayPage("#readme.md#rm"); >Read Me</a>
-</p>
+</div>
 
-<!--
-<i class="fa fa-external-link"></i> [Live Demo (latest)]( https://github.com/jaanga/libs/tree/gh-pages/db ) 
--->
 
-<i class="fa fa-github"></i> [Source Code on GitHub]( https://github.com/jaanga/ ) 
+<i class="fa fa-external-link"></i> [Live Demo]( ./latest/index.html ) 
+
+<i class="fa fa-github"></i> [Source code on GitHub]( https://github.com/jaanga/cookbook/tree/gh-pages/screen-grabber-threejs )  
+
+<i class="fa fa-copy"></i> [Copyright and license]( https://github.com/jaanga/jaanga.github.io/blob/master/jaanga-copyright-and-mit-license.md )
+
 <br>
-<br>
- 
-<i class="fa fa-copy"></i> [Copyright and License]( https://github.com/jaanga/jaanga.github.io/blob/master/jaanga-copyright-and-mit-license.md )
+
