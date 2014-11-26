@@ -107,21 +107,21 @@
 
 // Assets
 		material = new THREE.MeshBasicMaterial( {color: Math.random() * 0xffffff } );
-		geometry = new THREE.CubeGeometry( 100, 3, 100 );
+		geometry = new THREE.BoxGeometry( 100, 3, 100 );
 		// geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.castShadow = true;
 		mesh.receiveShadow = true;
 		scene.add( mesh );
 
-		geometry = new THREE.CubeGeometry( 10, 100, 10 );
+		geometry = new THREE.BoxGeometry( 10, 100, 10 );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 		mesh.castShadow = true;
 		mesh.receiveShadow = true;
 		scene.add( mesh );
 
-		geometry = new THREE.CubeGeometry( 10, 10, 10 );
+		geometry = new THREE.BoxGeometry( 10, 10, 10 );
 		colorful( colors, 100);
 		for ( var i = 0; i < 100; i++) {
 			material = [
