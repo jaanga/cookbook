@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang=en>
+<head>
+<title>Screen Grabber Iframe R3</title>
+<meta charset=utf-8>
+<meta name=author content='Theo Armour'>
+</head>
+<body>
+<script src=http://jaanga.github.io/libs/fs/Blob.js /></script>
+<script src=http://jaanga.github.io/libs/fs/canvas-toBlob.js /></script>
+<script src=http://jaanga.github.io/libs/fs/FileSaver.js /></script>
+<script>
+// copyright (c) 2014 Jaanga authors ~ MIT License
+
+// vars in functions that we might want to be global for debugging
+
+
+	var optionsSize = ['1024 x 1024','1024 x 768','1024 x 512','800 x 600','640 x 480','600 x 600','512 x 512','512 x 256',
+		'384 x 384','320 x 240','256 x 256', '128 x 128', '64 x 64'];
+	var size;
+	var output;
+	var canvas;
+
+	var img, imgHeight, imgWidth, imgScale1 = 1, imgScale2 = 0.75, imgScale3 = 0.5, imgScale4 = 0.25;
+	var fname, txt1, txt2, txt3, txt4;
+
+	init();
+
+	function init() {
+		document.body.style.cssText = 'font: bold 12pt monospace; ';
+
+		var info = document.body.appendChild( document.createElement( 'div' ) );
+
+		info.innerHTML =
+			'<a href="" ><h1 style=margin:0; >' + document.title + ' </h1></a>' +
+			'<p>' +
+				'<input type=file id=inpFile onchange=openFile() >' +
+				'Select a size <select id=selSize onchange=updateSize() ></select> ' +
+				'width: <input type=number id=sizeWidth style=width:50px; min=1 /> ' +
+				'height: <input type=number id=sizeHeight style=width:50px; min=1 /> ~ ' +
+				'<a href=JavaScript:grabIt(); >Grab It</a> ' +
+				'<a href=JavaScript:saveIt(); >Save it</a> ' +
+
+	/*
+
+				'<a href=JavaScript:seconds3grabIt(); >Grab It in 3 Seconds</a> ' +
+
+				'<a href=JavaScript:saveIt(canvas1,txt1); >Save 1</a> ' +
+				'<a href=JavaScript:saveIt(canvas2,txt2); >Save 2</a> ' +
+				'<a href=JavaScript:saveIt(canvas3,txt3); >Save 3</a> ' +
+				'<a href=JavaScript:saveIt(canvas4,txt4); >Save 4</a> &nbsp; ' +
+
+				'Frame size: ' +
+				'<select id=selLeft onchange="changeFrame( this.selectedIndex );" >' +
+					'<option>512x512 - 384x384 - 256x256 - 128x128 </option>' +
+					'<option>640x480 - 480x360 - 320x240 - 240x180</option>' +
+					'<option>800x600 - 600x450 - 400x300 - 200x150</option>' +
+				'</select> ' +
+				'<a href=JavaScript:doIt(); >do it</a>' +
+	*/
+			'</p>' +
+		'';
+
+
+		for (var i = 0,len = optionsSize.length; i < len; i++) {
+			opt = selSize.appendChild( document.createElement( 'option' ) );
+			opt.text = optionsSize[ i ];
+		}
+		selSize.selectedIndex = 4;
+		updateSize();
+
+/*
+		var ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+		ifr.src = '../grab-test.html';
+
+		var canvas1 = document.body.appendChild( document.createElement( 'canvas' ) );
+		var canvas2 = document.body.appendChild( document.createElement( 'canvas' ) );
+		var canvas3 = document.body.appendChild( document.createElement( 'canvas' ) );
+		var canvas4 = document.body.appendChild( document.createElement( 'canvas' ) );
+
+		canvas1.style.cssText = canvas2.style.cssText = canvas3.style.cssText = canvas4.style.cssText = 'border: 2px #000 solid; margin: 0 50px;';
+
+		canvas1.height = canvas1.width = imgHeight = imgWidth = ifr.height = ifr.width = 512;
+		canvas2.height = canvas2.width = 384;
+		canvas3.height = canvas3.width = 256;
+		canvas4.height = canvas4.width = 128;
+
+		var context1 = canvas1.getContext('2d',{preserveDrawingBuffer: true});
+		var context2 = canvas2.getContext('2d');
+		var context3 = canvas3.getContext('2d');
+		var context4 = canvas4.getContext('2d');
+
+		changeFrame( 1 );
+*/
+
+	}
+
+	function updateSize() {
+		size = optionsSize[ selSize.selectedIndex ];
+		width = parseInt( size.substr( 0, size.indexOf(' x ') ), 10 );
+		height = parseInt( size.substr( size.indexOf(' x ') + 3 ), 10);
+
+		sizeWidth.value = width;
+		sizeHeight.value = height;
+
+		if ( output ) {
+			addIframe( output )
+		}
+console.log( size, width, height );
+	}
+
+	function addIframe( contents ) {
+
+		var iframes = document.getElementsByTagName( 'iframe' ) ;
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		var canvases = document.getElementsByTagName( 'canvas' ) ;
+
+		for ( var i = 0, len = canvases.length; i < len; i++ ) {
+
+			canvases[0].parentNode.removeChild( canvases[ 0 ] );
+
+		}
+
+		ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+		ifr.width = sizeWidth.value; // window.innerWidth;
+		ifr.height = sizeHeight.value; //window.innerHeight;
+		ifr.style.borderWidth = '1px';
+		ifr.srcdoc = contents;
+
+
+		canvas = document.body.appendChild( document.createElement( 'canvas' ) );
+		canvas.style.cssText = 'border: 2px #000 solid; margin: 0 10px;';
+		canvas.width = ifr.width;
+		canvas.height = ifr.height;
+		context = canvas.getContext( '2d' );
+	}
+
+	function openFile() {
+
+		var iframes = document.getElementsByTagName( 'iframe' ) ;
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		var canvases = document.getElementsByTagName( 'canvas' ) ;
+
+		for ( var i = 0, len = canvases.length; i < len; i++ ) {
+
+			canvases[0].parentNode.removeChild( canvases[ 0 ] );
+
+		}
+
+		file = inpFile.files[ 0 ];
+
+		var reader = new FileReader();
+
+		reader.onload = function ( event ) {
+
+			output = reader.result;
+
+			re = /antialias: true/gi;
+			mat = output.match( re );
+console.log( mat );
+			str = 'antialias: true, preserveDrawingBuffer: true' ;
+
+			output = output.replace( re, str );
+
+			addIframe( output ) ;
+
+		};
+
+		reader.readAsText( file );
+	}
+
+	function grabIt() {
+		img = new Image();
+		img.onload = function() {
+
+			context.setTransform(1,0,0,1,0,0);
+			context.clearRect ( 0, 0, imgWidth, imgHeight);
+			context.scale( imgScale1, imgScale1 );
+			context.drawImage( img, 0, 0 );
+
+		};
+
+		img.src = ifr.contentWindow.renderer.domElement.toDataURL('image/png');
+	}
+
+	function seconds3grabIt() {
+		setTimeout(function(){
+			//img.src = ifr.contentWindow.renderer.domElement.toDataURL('image/png');
+			grabIt()
+			console.log( 'got it');
+		},3000);
+	}
+
+	function saveIt ( ) {
+		canvas.toBlob( function( blob ) {
+			saveAs( blob, file.name + '.png'); 
+		});
+	}
+
+</script>
+</body>
+</html>
