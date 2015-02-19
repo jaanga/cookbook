@@ -28,9 +28,17 @@ Looks like a lot of CORS issues here...
 Cannot capture itself
 
 ### Copyright, License and Credits
-copyright &copy; 2014 Jaanga authors ~ MIT License
+copyright &copy; 2015 Jaanga authors ~ MIT License
 
 ### Change Log
+
+2015-02-19 ~ Theo
+
+* Start r4
+* Remake of vA3C Hacker R3 version
+* Enable capturing screens from URLs
+* Still needs much clean up
+
 
 2014-11-25 ~ Theo
 

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>export-screen-grabber</title>
+<meta charset=utf-8 />
+<meta name=author content='Theo Armour' />
+</head>
+<body>
+<script>
+
+	var image, imageSize, imageHeight, imageWidth;
+
+	var imageSizes = [
+		'1024 x 1024','1024 x 768','1024 x 512','800 x 600','640 x 480','600 x 600','512 x 512','512 x 256',
+		'480 x 480','480 x 320','384 x 384','320 x 240','256 x 256', '128 x 128', '64 x 64'
+	];
+
+	var template;
+	var templateItem, templates = [
+		['lights-shadows','template-lights-shadows-preserve-drawing-buffer.html'],
+		['skybox','template-skybox-preserve-drawing-buffer.html']
+	]
+	var contents;
+	var url;
+	var canvas;
+	var context;
+	var fileName;
+	var parameters = [];
+
+	init();
+
+	function init() {
+
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { font: 600 12pt monospace; }' +
+			'iframe { border-width: 1px; margin-left: 20px; margin-top: 20px; } ';
+		'';
+
+		var info = document.body.appendChild( document.createElement( 'div' ) );
+		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+		'<p>' +
+			'<p>1a. Paste link <input type=text id=inpURL style=width:600px; onchange=openURL(); /> <button onclick=openURL() >Open</button> ' +
+			'1b. <input type=file id=inpFile onchange=openFile(this) >' +
+			'Scale: <input type=number id=inpScale step=1 value=5 style=width:3em; /><p>' +
+			'2. Select a template <select id=selTemplate onchange=updateTemplate() ></select> ' +
+			'3. Select a size <select id=selSize onchange=updateSize() ></select> ~ ' +
+				'width: <input type=number id=sizeWidth style=width:50px; min=1 /> ' +
+				'height: <input type=number id=sizeHeight style=width:50px; min=1 /> ~ ' +
+			'4. <a href=JavaScript:grabIt(); >Grab It</a> ~  ' +
+			'5.<a id=download href=# onclick=downloadIt(); >Save It</a>' +
+		'</p>' +
+		'<div id=msg ></div>' +
+		'<div id=msg1 ></div>' +
+		'<div id=msg2 ></div>' +
+		'<div id=msg3 ></div>' +
+	'';
+
+		for ( var i = 0, len = templates.length; i < len; i++ ) {
+
+			opt = selTemplate.appendChild( document.createElement( 'option' ) );
+			opt.text = templates[ i ][0];
+
+		}
+
+		selTemplate.selectedIndex = 1;
+
+		for ( var i = 0, len = imageSizes.length; i < len; i++ ) {
+
+			opt = selSize.appendChild( document.createElement( 'option' ) );
+			opt.text = imageSizes[ i ];
+
+		}
+
+		selSize.selectedIndex = 4;
+
+		updateSize();
+
+		updateTemplate();
+
+	}
+
+	function updateSize() {
+
+		imageSize = imageSizes[ selSize.selectedIndex ];
+		imageWidth = parseInt( imageSize.substr( 0, imageSize.indexOf(' x ') ), 10 );
+		imageHeight = parseInt( imageSize.substr( imageSize.indexOf(' x ') + 3 ), 10);
+
+		sizeWidth.value = imageWidth;
+		sizeHeight.value = imageHeight;
+
+		callback = function(){ console.log( 'done' ); };
+
+		if ( contents ) {
+
+			openFile();
+
+		} else if ( url ) {
+
+			openURL();
+
+		} else { //show defaults
+
+			loadFileHTMLByContents( '<p>Content will appear here...</p><p>', parameters, callback, imageWidth, imageHeight );
+
+		}
+
+		var canvases = document.getElementsByTagName( 'canvas' ) ;
+
+		for ( var i = 0, len = canvases.length; i < len; i++ ) {
+
+			canvases[0].parentNode.removeChild( canvases[ 0 ] );
+
+		}
+
+		canvas = document.body.appendChild( document.createElement( 'canvas' ) );
+		canvas.style.cssText = 'border: 2px #000 solid; margin: 0 10px;';
+		canvas.width = imageWidth;
+		canvas.height = imageHeight;
+		context = canvas.getContext( '2d' );
+
+	}
+
+	function updateTemplate() {
+
+		templateItem = templates[ selTemplate.selectedIndex ];
+
+	}
+
+	function downloadIt() {
+
+//		var name = fileName.substr( 1 + fileName.lastIndexOf( '/' ) );
+
+		var slash = navigator.platform === "Win32" ? '\\' : '/' ;
+
+		var name = fileName.substr( 1 + fileName.lastIndexOf( slash ) );
+
+console.log( fileName, name )
+
+		name = name.replace(/\.html|\.json|\.js|\.obj|\.stl/gi,'-') + imageSize.replace( / /gi,'' ) + '.png';
+
+		var c2du = canvas.toDataURL();
+
+		download.download = name;
+
+		download.href = c2du;
+
+	}
+
+var xmlHttp;
+
+	function openURL() {
+
+//console.log( inpURL, inpURL.value );
+
+
+//		dispatchFileByURL( parameters );
+
+		template = '../templates/' + templateItem[1];
+
+//		callback = function() {}; //  template = currentTemplate; }
+
+		fileName = url = inpURL.value;
+
+		var scale = parseFloat( inpScale.value );
+
+		parameters = '#' + url + '#sx=' + scale + '#sy=' + scale + '#sz=' + scale;
+
+		parameters = parameters.split( '#' );
+
+		var fileType = url.toLowerCase().substr( url.lastIndexOf( '.' ) );
+
+		if ( fileType === '.html' || fileType === '.htm' ) {
+
+			requestFile( url, callbackRF );
+
+			function callbackRF() {
+
+				contents = xmlHttp.responseText;
+console.log( contents );
+				re = /antialias: true/gi;
+
+				mat = contents.match( re );
+
+				str = 'antialias: true, preserveDrawingBuffer: true' ;
+
+				contents = contents.replace( re, str );
+
+				ifr.onload = function() {
+
+	//				updateSceneVariables();
+
+	//				updateSceneElements();
+
+		//			callback();
+
+				};
+
+				ifr.srcdoc = contents;
+
+			}
+
+
+		} else if ( fileType === '.json' || fileType === '.js' ) {
+
+			loadFileHTMLByURL( template, parameters, function() {
+
+				updateSceneVariables();
+
+				loadFileJSONbyURL( parameters, updateSceneElements );
+
+				callback();
+
+			}, imageWidth, imageHeight, css );
+
+		} else if ( fileType === '.obj' ) {
+
+			loadFileHTMLByURL( template, parameters, function() {
+
+				updateSceneVariables();
+
+				loadFileOBJByURL( parameters, updateSceneElements );
+
+				callback();
+
+			}, imageWidth, imageHeight, css );
+
+
+		} else if ( fileType === '.stl' ) {
+
+			loadFileHTMLByURL( template, parameters, function() {
+
+				updateSceneVariables();
+
+				loadFileSTLByURL( parameters, updateSceneElements );
+
+				callback();
+
+			}, imageWidth, imageHeight, css );
+
+
+		} else {
+
+			alert( fileType + ': as yet unhandled file type...' );
+
+		}
+
+	}
+
+
+	function openFile() {
+
+		file = inpFile.files[ 0 ];
+
+		fileName = file.name;
+
+		currentTemplate = template;
+
+		template = '../templates/' + templateItem[1];
+
+		callback = function() {}; //  template = currentTemplate; }
+
+		var scale = parseFloat( inpScale.value );
+
+		parameters = '#' + fileName + '#sx=' + scale + '#sy=' + scale + '#sz=' + scale;
+
+		parameters = parameters.split( '#' );
+
+		var reader = new FileReader();
+
+		reader.onload = function ( event ) {
+
+			contents = reader.result;
+
+			var fileType = file.name.toLowerCase().substr( file.name.lastIndexOf( '.' ) );
+
+			if ( fileType === '.html' ) {
+
+				re = /antialias: true/gi;
+
+				mat = contents.match( re );
+
+//console.log( mat );
+
+				str = 'antialias: true, preserveDrawingBuffer: true' ;
+
+				contents = contents.replace( re, str );
+
+				ifr.onload = function() {
+
+//					updateSceneVariables();
+
+//					updateSceneElements();
+
+					callback();
+
+				};
+
+				ifr.srcdoc = contents;
+
+			} else if ( fileType === '.json' || fileType === '.js' ) {
+
+				loadFileHTMLByURL( template, parameters, function() {
+
+					updateSceneVariables();
+
+					loadFileJSONByContents( contents, parameters, updateSceneElements );
+
+					callback();
+
+				}, imageWidth, imageHeight, css );
+
+			} else if ( fileType === '.obj' ) {
+
+				loadFileHTMLByURL( template, parameters, function() {
+
+					updateSceneVariables();
+
+					loadFileOBJByContents( contents, parameters, updateSceneElements );
+
+					callback();
+
+				}, imageWidth, imageHeight, css );
+
+			} else if ( fileType === '.stl' ) {
+
+				loadFileHTMLByURL( template, parameters, function() {
+
+					updateSceneVariables();
+
+					loadFileSTLByContents( contents, parameters, updateSceneElements );
+
+					callback();
+
+				}, imageWidth, imageHeight, css );
+
+			} else {
+
+				alert( file.name + ': as yet unhandled file type...' );
+
+			}
+
+		};
+
+
+		if ( reader.readAsBinaryString !== undefined ) {
+
+			reader.readAsBinaryString( file );
+
+		} else {
+
+			reader.readAsArrayBuffer( file );
+
+		}
+
+	}
+
+	function grabIt() {
+
+		image = new Image();
+
+		image.onload = function() {
+
+			context.clearRect ( 0, 0, imageWidth, imageHeight);
+			context.drawImage( image, 0, 0 );
+
+		};
+
+		image.src = ifr.contentWindow.renderer.domElement.toDataURL( 'image/png' );
+
+	}
+
+	function seconds3grabIt() {
+
+		setTimeout(function(){
+
+			grabIt();
+			console.log( 'got it');
+
+		}, 3000 );
+
+	}
+
+/* 
+filesaver.js stuff
+	function saveIt ( ) {
+
+		var name = file.name.replace(/\.html/,'-') + imageSize.replace( / /gi,'' ) + '.png';
+
+		canvas.toBlob( function( blob ) {
+
+			saveAs( blob, name );
+
+		});
+
+	}
+
+*/
+
+	function loadFileHTMLByURL( url, parameters, callback, width, height, css, parameters ) {
+/*
+		var callback = callback ? callback : function () {} ;
+
+		parameters = parameters ? parameters : 'none';
+
+		var iframes = document.getElementsByTagName( 'iframe' );
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+
+		ifr.width = width ? width : window.innerWidth;
+		ifr.height = height ? height : window.innerHeight;
+		ifr.style.cssText = css ? css : 'border-width: 0; position: absolute; z-index: -10; ';
+
+		ifr.onload = function() {
+
+			callback( '', parameters );
+
+		};
+*/
+
+		ifr = resetIframe( width, height );
+
+		ifr.src = url;
+
+	};
+
+	function loadFileHTMLByContents( contents, parameters, callback, width, height ) {
+/*
+		callback = callback ? callback : function () {} ;
+
+		parameters = parameters ? parameters : [] ;
+
+
+
+		var iframes = document.getElementsByTagName( 'iframe' ) ;
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+
+		ifr.width = width ? width : window.innerWidth;
+		ifr.height = height ? height : window.innerHeight;
+
+		ifr.onload= function() {
+
+			callback( '', parameters );
+
+		}
+*/
+
+		ifr = resetIframe( width, height );
+
+		ifr.srcdoc = contents;
+
+	}
+
+	function resetIframe( width, height, callback ) {
+
+		var iframes = document.getElementsByTagName( 'iframe' );
+
+		for ( var i = 0, len = iframes.length; i < len; i++ ) {
+
+			iframes[0].parentNode.removeChild( iframes[ 0 ] );
+
+		}
+
+		var ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+		ifr.width = width ? width : window.innerWidth;
+		ifr.height = height ? height : window.innerHeight;
+		ifr.onload = callback || function() {};
+
+		return ifr;
+
+	}
+
+	function requestFile( fileName, callback ){
+
+		xmlHttp = new XMLHttpRequest ();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
+
+	};
+
+</script>
+</body>
+</html>
