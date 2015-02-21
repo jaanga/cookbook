@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>cors communications</title>
+<meta charset=utf-8 />
+<meta name=author content='Theo Armour' />
+</head>
+<body>
+<script>
+
+	document.body.style.cssText = ' font: bold 12pt monospace; ';
+
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
+		'<div>' +
+			'<button onclick=JavaScript:ifr.src="http://en.wikipedia.org/wiki/Comparison_of_3D_computer_graphics_software"; >wiki</button>' +
+		'</div>' +
+		'<div id=msg ></div>';
+
+	ifr = document.body.appendChild( document.createElement( 'iframe' ) );
+	ifr.height = 600
+	ifr.width = 800;
+	ifr.style.borderWidth = '1px';
+//	ifr.src = 'https://github.com/tzigzagz/tzigzagz.github.io/tree/master/tzzz-grid-view';
+	ifr.src = 'http://tzigzagz.github.io/browse-tzigzagz-files.html';
+//	ifr.src = 'http://en.wikipedia.org/wiki/Comparison_of_3D_computer_graphics_software';
+	ifr.src = 'http://fgx.github.io/fgx-aircraft-overview/latest/';
+
+
+</script>
+</body>
+</html>

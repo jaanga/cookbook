@@ -18,6 +18,13 @@ This usually means that that there has been an update to Three.js but the projec
 
 <br>
 
+### CORS Communication
+
+#### Mision
+To explore communication between repos on GitHub
+
+[Web page view]( http://jaanga.github.io/cookbook/cors-communications/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/cors-communications/ )  
 
 
 ### Voice Commands for Three.js
