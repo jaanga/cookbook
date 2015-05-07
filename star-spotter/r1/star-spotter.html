@@ -13,6 +13,8 @@
 
 	var fileName ='../data/hygdata_v3.csv';
 	var xmlHttp;
+	var count = 0;
+	var stars;
 
 	var raycaster;
 	var mouse;
@@ -29,9 +31,9 @@
 		css.innerHTML ='body { font: 600 12pt monospace; margin: 0; overflow: hidden; }' ;
 
 		info = document.body.appendChild( document.createElement( 'div' ) );
-		info.style.cssText = 'margin: 20px; position: absolute; ';
+		info.style.cssText = 'margin: 20px; max-width: 300px; position: absolute; ';
 		info.innerHTML = '<a href="" ><h1>' + document.title + '</h1></a>' +
-			'<div id=msg1 ></div>' +
+			'<div id=msg1 >Loading the dats for 119,614 stars...</div>' +
 		'';
 
 		stats = new Stats();
@@ -65,7 +67,7 @@
 		scene.add( axisHelper );
 
 		raycaster = new THREE.Raycaster();
-		raycaster.params.PointCloud.threshold = 10;
+		raycaster.params.PointCloud.threshold = 0.1;
 		mouse = new THREE.Vector2();
 
 		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
@@ -87,25 +89,30 @@
 
 	function callback() {
 
-		if ( xmlHttp.readyState != 4  ) { return; }
-		text = xmlHttp.responseText;
-		lines = text.split(/\r\n|\n/);
-		var material = new THREE.SpriteMaterial( { color: 0xff0000 } );
-		data = [];
-		var sep = ',', l, vector;
+		if ( xmlHttp.readyState === 4  ) {
+			text = xmlHttp.responseText;
+			stars = text.split(/\r\n|\n/);
+			var material = new THREE.SpriteMaterial( { color: 0xff0000 } );
+			var l, vector;
+			var geometry = new THREE.Geometry();    
 
-		geometry = new THREE.Geometry();    
+			for ( var i = 0; i < stars.length; i++ ) {
+				l = stars[i].split( ',' );
+				vector = new THREE.Vector3( parseFloat( l[ 17 ] ), parseFloat( l[ 18 ] ), parseFloat( l[ 19 ]) );
+				geometry.vertices.push(  vector );
+			}
 
-		for ( var i = 0; i < lines.length; i++ ) {
-			l = lines[i].split( sep );
-			vector = new THREE.Vector3( parseFloat( l[ 17 ] ), parseFloat( l[ 18 ] ), parseFloat( l[ 19 ]) );
-			geometry.vertices.push(  vector );
+			particles = new THREE.PointCloud( geometry );
+
+			scene.add( particles );
+
+			msg1.innerHTML = 'Click on a symbol to view its data.<br>Data requests:' + count++;
+
+		} else {
+
+			msg1.innerHTML = 'Loading the dats for 119,614 stars.<br>Data requests:' + count++;
+
 		}
-//		console.log( data[ 10 ] );
-
-		particles = new THREE.PointCloud( geometry );
-
-		scene.add( particles );
 
 	}
 
@@ -136,39 +143,44 @@
 			intersected = intersects[ 0 ].object;
 			intersected.material.color.setHex( Math.random() * 0xffffff );
 
-console.log( lines[ intersects[ 0].index ] );
-
-			l = lines[ intersects[ 0].index ].split( ',' );
+			l = stars[ intersects[ 0].index ].split( ',' );
 			msg1.innerHTML = 
+// id,hip,hd,hr,gl,bf,proper,ra,dec,dist,pmra,pmdec,rv,mag,absmag,spect,ci,x,y,z,vx,vy,vz,rarad,decrad,pmrarad,pmdecrad,
+// bayer,flam,con,comp,comp_primary,base,lum,var,var_min,var_max
 
-				'<p>Primary key:' + l[ 0 ] + '</p>' +
-				'<p>Hipparcos ID:' + l[ 1 ] + '</p>' +
-				'<p>Draper ID:' + l[ 2 ] + '</p>' +
-				'<p>Gliese ID:' + l[ 3 ] + '</p>' +
-				'<p>Bayer designation' + l[ 4 ] + '</p>' +
-				'<p>' + l[ 5 ] + '</p>' +
-				'<p>Name' + l[ 6 ] + '</p>' +
-				'<p>Right Ascension' + l[ 7 ] + '</p>' +
-				'<p>Right Declination' + l[ 9 ] + '</p>' +
-				'<p>' + l[ 10 ] + '</p>' +
-				'<p>' + l[ 11 ] + '</p>' +
-				'<p>' + l[ 12 ] + '</p>' +
-				'<p>' + l[ 13 ] + '</p>' +
-				'<p>' + l[ 14 ] + '</p>' +
-				'<p>' + l[ 15 ] + '</p>' +
-				'<p>' + l[ 16 ] + '</p>' +
-				'<p>' + l[ 17 ] + '</p>' +
-				'<p>' + l[ 18 ] + '</p>' +
-				'<p>' + l[ 19 ] + '</p>' +
-				'<p>' + l[ 20 ] + '</p>' +
-				'<p>' + l[ 21 ] + '</p>' +
-				'<p>' + l[ 22 ] + '</p>' +
+				'<p>Primary key:' + l[ 0 ] + '<br>' +
+				'Hipparcos ID:' + l[ 1 ] + '<br>' +
+				'Draper ID:' + l[ 2 ] + '<br>' +
+				'hr:' + l[ 3 ] + '<br>' +
+				'Gliese ID:' + l[ 4 ] + '<br>' +
+				'Bayer designation:' + l[ 5 ] + '<br>' +
+				'Name:' + l[ 6 ] + '<br>' +
+				'Right Ascension:' + l[ 7 ] + '<br>' +
+				'Right Declination:' + l[ 8 ] + '<br>' +
+				'dist:' + l[ 9 ] + '<br>' +
+				'pmra:' + l[ 10 ] + '<br>' +
+				'pmdec:' + l[ 11 ] + '<br>' +
+				'rv:' + l[ 12 ] + '<br>' +
+				'mag:' + l[ 13 ] + '<br>' +
+				'absmag:' + l[ 14 ] + '<br>' +
+				'spect:' + l[ 15 ] + '<br>' +
+				'ci:' + l[ 16 ] + '<br>' +
+				'x:' + l[ 17 ] + '<br>' +
+				'y:' + l[ 18 ] + '<br>' +
+				'z:' + l[ 19 ] + '<br>' +
+				'vx:' + l[ 20 ] + '<br>' +
+				'vy:' + l[ 21 ] + '<br>' +
+				'vz:' + l[ 22 ] + '<br>' +
+				'rarad:' + l[ 23 ] + '<br>' +
+				'decrad:' + l[ 24 ] + '<br>' +
+				'pmrarad:' + l[ 25 ] + '<br>' +
+				'pmdecrad"' + l[ 26 ] + '<br>' +
+				'' + l[ 27 ] + '<br>' +
 
 
 
 			''
 		}
-
 
 	}
 
