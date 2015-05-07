@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>Theo Armour Testing</title>
+<meta charset=utf-8 />
+</head>
+<body>
+<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js ></script>
+<script>
+// Let's make a read me file written in MarkDown be viewable as HTML
+
+	document.body.style.cssText = ' font: bold 12pt monospace; left: 0; margin: 0 auto; position: absolute; right: 0; max-width:900px;';
+
+	var info = document.body.appendChild( document.createElement( 'div' ) );
+	var converter = new Showdown.converter();
+	var xmlHttp;
+
+	if ( !location.hash ) {
+
+		var fileName = 'readme.md';
+
+	} else {
+
+		fileName = location.hash.split( '#' )[1];
+	}
+
+	window.addEventListener ( 'hashchange', onHashChange, false );
+
+	requestFile( fileName );
+
+
+
+	function requestFile( fileName ) {
+
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
+
+	}
+
+	function callback() {
+
+		if ( xmlHttp.readyState != 4  ) { return; }
+
+		var text = xmlHttp.responseText;
+		text = converter.makeHtml( text );
+		info.innerHTML = text;
+
+
+	}
+
+	function onHashChange() {
+
+		var hashes = location.hash.split ( '#' );
+
+		if ( hashes.length < 2 ) { return; } 
+
+		requestFile( hashes[ 1 ] );
+
+	}
+
+</script>
+</body>
+</html>
