@@ -45,8 +45,12 @@ Thank you David Nash!
 	* Needs default value is no data for a star of star data is a huge outlier
 	* Needs to know the bell curve of typical values
 * Permalink capability to provide ability to zoom to any star
+	* target and camera x, y, z
+	* sprite type
 * Link to and from scrollable/searchable ASCII table with the same data items
 * Add Level of Detail and logarithmic zooming capabilities
+	* Zoom out to many more distant objects
+	* Zoom into many more objects within our solar system 
 
 
 ## Issues
@@ -57,15 +61,20 @@ Thank you David Nash!
 
 2015-05-09 ~ Theo
 
-* R3
+* [Star Spotter R3]( http://jaanga.github.io/cookbook/star-spotter/r3/star-spotter-r3.html )
 	* Moves over to BufferGeometry
 		* Enables each particle to have own attributes such as color and size
+	* Adds name placards
 
-* R2
+* [Star Spotter R2]( http://jaanga.github.io/cookbook/star-spotter/r2/star-spotter-r2.html )
 	* code clean-up
 	* adds choice of sprites
 
 
 2015-05-06 ~ Theo
 
-* First commit
+* [Star Spotter R1]( http://jaanga.github.io/cookbook/star-spotter/r1/star-spotter.html )
+	* First commit
+	* Looad 119k+ stars
+	* Zoom, pan and rotate
+	* Built in a few hours
