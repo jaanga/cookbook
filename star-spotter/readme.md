@@ -8,19 +8,33 @@ Fullscreen latest: [Jaanga Star Spotter]( http://jaanga.github.io/cookbook/star-
 
 Dedication: To Paul and David for a delightful dinner and for spurring me to do this 
 
-[Source code on GitHub]( )
-
 <input type=button value='Source code on GitHub' onclick=window.location.href='https://github.com/jaanga/cookbook/tree/gh-pages/star-spotter '; />
 
-### Attributions
+## Concept
+
+People have been charting heavenly bodies and their attributes since the beginning of humankind. 
+But these efforts has been fraught with difficulty, have covered small numbers of bodies and require much learning
+
+### Vision
+
+To show that - using modern technology - creating a real-time 3D [orerry]( http://en.wikipedia.org/wiki/Orrery ) is easy-peasy
+
+### Mission
+
+To create an interactive view of the universe with a small amount of easy to read code i the hopes that people with real knowledge of astronomy will feel like pitching in.  
+
+
+## Attributions
 
 Star data courtesy of:
 
-<http://www.astronexus.com/hyg>
+* <http://www.astronexus.com/hyg>
 
-<https://github.com/astronexus/HYG-Database>
+* <https://github.com/astronexus/HYG-Database>
 
-### Road Mp
+Thank you David Nash!
+
+## Road Map
 
 * Link each object to online databases such as: <http://heasarc.gsfc.nasa.gov/W3Browse/star-catalog/sao.html?
 * Currently the 'Time travel' slider updates star positions in a mostly arbitrary manner. Future revisions:
@@ -32,14 +46,25 @@ Star data courtesy of:
 	* Needs to know the bell curve of typical values
 * Permalink capability to provide ability to zoom to any star
 * Link to and from scrollable/searchable ASCII table with the same data items
-* Add Loevel of Detail and logarithmic zooming capabilities
+* Add Level of Detail and logarithmic zooming capabilities
 
 
-### Issues
+## Issues
 
 * Sprite bitmap backgrounds not transparent
 
-### Change Log
+## Change Log
+
+2015-05-09 ~ Theo
+
+* R3
+	* Moves over to BufferGeometry
+		* Enables each particle to have own attributes such as color and size
+
+* R2
+	* code clean-up
+	* adds choice of sprites
+
 
 2015-05-06 ~ Theo
 
