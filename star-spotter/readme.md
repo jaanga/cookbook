@@ -55,9 +55,14 @@ Thank you David Nash!
 
 ## Issues
 
-* Sprite bitmap backgrounds not transparent
 
 ## Change Log
+
+2015-05-10 ~ Theo
+
+* Fixed: Sprite bitmap backgrounds not transparent
+	* Thanks to contribution by @paulmasson
+
 
 2015-05-09 ~ Theo
 

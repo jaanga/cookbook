@@ -20,13 +20,14 @@ This usually means that that there has been an update to Three.js but the projec
 
 ### Drawing on Heightmap
 
-[Web page view]( http://jaanga.github.io/cookbook/drawing-on-heightmap/ )  
+[Web page view]( http://jaanga.github.io/cookbook/drawing-on-heightmap/drawing-on-heightmap.html )  
 [Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/drawing-on-heightmap/ )  
 
 ### Star Spotter
 
 [Web page view]( http://jaanga.github.io/cookbook/star-spotter/ )  
 [Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/star-spotter/ )  
+
 
 ### CORS Communication
 
