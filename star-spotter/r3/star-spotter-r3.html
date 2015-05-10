@@ -192,7 +192,7 @@ max = test > max ? test : max;
 
 			geometry.computeBoundingSphere();
 
-			var material = new THREE.PointCloudMaterial( { map: texture, vertexColors: THREE.VertexColors } );
+			var material = new THREE.PointCloudMaterial( { map: texture, vertexColors: THREE.VertexColors, alphaTest: .1 } );
 
 			particleSystem = new THREE.PointCloud( geometry, material );
 			scene.add( particleSystem );
