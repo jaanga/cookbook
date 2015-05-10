@@ -16,7 +16,17 @@ These projects are noted as being deprecated below._
 _Projects here are often currently broken. 
 This usually means that that there has been an update to Three.js but the project has not yet been updated._ 
 
-<br>
+---
+
+### Drawing on Heightmap
+
+[Web page view]( http://jaanga.github.io/cookbook/drawing-on-heightmap/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/drawing-on-heightmap/ )  
+
+### Star Spotter
+
+[Web page view]( http://jaanga.github.io/cookbook/star-spotter/ )  
+[Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/star-spotter/ )  
 
 ### CORS Communication
 
