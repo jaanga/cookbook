@@ -17,6 +17,7 @@
 	var count = 0;
 	var particleSystem;
 	var stars;
+	var placards;
 
 	var raycaster;
 	var mouse;
@@ -66,7 +67,6 @@
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
 		document.body.appendChild( stats.domElement );
 
-//		renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true, clearColor: 0xffffff }  );
 		renderer = new THREE.WebGLRenderer( { antialias: true }  );
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -76,6 +76,7 @@
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 500;
 
 		scene = new THREE.Scene();
 
@@ -118,11 +119,11 @@
 
 			drawStars();
 
-			msg1.innerHTML = 'Click on a symbol to view its data.<br>Data requests:' + count++;
+			msg1.innerHTML = 'Click on a star to view her data.<br>Data requests:' + count++;
 
 		} else {
 
-			msg1.innerHTML = 'Loading the dats for 119,614 stars.<br>Data requests:' + count++ + ' of 13K+ probable requests';
+			msg1.innerHTML = 'Loading the dats for 119,614 stars.<br>Data requests:' + count++ + ' of 13k to 25k probable requests on first load';
 
 		}
 
@@ -132,6 +133,9 @@
 	function drawStars() {
 
 			scene.remove( particleSystem );
+			scene.remove( placards );
+
+			placards = new THREE.Object3D();
 
 			var particles = stars.length - 2;
 
@@ -147,26 +151,35 @@
 			count = 0;
 
 			travel = 100000 * parseFloat( inpTravel.value );
-//console.log( travel );
+
 			for ( var i = 0, j = 1; i < positions.length; i += 3 ) {
 
 				star = stars[ j++ ].split( ',' );
 
+/*
 test = parseFloat( star[ 20 ] );
 min = test < min ? test : min;
 max = test > max ? test : max;
+*/
 
-if ( star[ 6 ] ) { count++ };
-
-				positions[ i ]     = parseFloat( star[ 17 ] ) + travel * parseFloat( star[ 20 ] );
-				positions[ i + 1 ] = parseFloat( star[ 18 ] ) + travel * parseFloat( star[ 21 ] );
-				positions[ i + 2 ] = parseFloat( star[ 19 ] ) + travel * parseFloat( star[ 22 ] );
-
+				x = parseFloat( star[ 17 ] ) + travel * parseFloat( star[ 20 ] );
+				y = parseFloat( star[ 18 ] ) + travel * parseFloat( star[ 21 ] );
+				z = parseFloat( star[ 19 ] ) + travel * parseFloat( star[ 22 ] );
+				positions[ i ] = x;
+				positions[ i + 1 ] = y;
+				positions[ i + 2 ] = z;
 				color.setHSL( ( parseFloat( star[ 33 ] ) + 0 ) / 10, 1, 0.5 );
 
 				colors[ i ]     = color.r;
 				colors[ i + 1 ] = color.g;
 				colors[ i + 2 ] = color.b;
+
+				if ( star[ 6 ] ) { 
+
+//					count++;
+					drawPlacard( star[ 6 ], 0.01, '#0f0', x, y + 0.75, z);
+
+				}
 
 // TBD: size, alpha etc
 
@@ -183,9 +196,60 @@ if ( star[ 6 ] ) { count++ };
 
 			particleSystem = new THREE.PointCloud( geometry, material );
 			scene.add( particleSystem );
-
+			scene.add( placards )
 
 	}
+
+	function drawPlacard ( text, scale, color, x, y, z) {
+
+		var texture = canvasText( text, color );
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, useScreenCoordinates: false, opacity: 1 } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+		placards.add( sprite )
+
+	}
+
+	function canvasText( textArray, color ) {
+
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+
+		if ( typeof textArray === 'string' ) textArray = [ textArray ];
+		context.font = '48px sans-serif';
+		var width = 0;
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+		}
+
+		canvas.width = width + 20; // 480
+		canvas.height = textArray.length * 60;
+
+		context.fillStyle = color;
+		context.globalAlpha = 0.85
+		context.fillRect( 0, 0, canvas.width, canvas.height);
+
+		context.lineWidth = 1 ;
+		context.strokeStyle = '#000';
+		context.strokeRect( 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = '#000' ;
+		context.font = '48px sans-serif';
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+			context.fillText( textArray[i], 10, 48  + i * 60 );
+		}
+
+		var texture = new THREE.Texture( canvas );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+		texture.needsUpdate = true;
+		return texture;
+
+	}
+
 
 	function onDocumentTouchStart( event ) {
 		
