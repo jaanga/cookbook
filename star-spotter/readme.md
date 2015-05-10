@@ -8,7 +8,7 @@ Fullscreen latest: [Jaanga Star Spotter]( http://jaanga.github.io/cookbook/star-
 
 Dedication: To Paul and David for a delightful dinner and for spurring me to do this 
 
-<input type=button value='Source code on GitHub' onclick=window.location.href='https://github.com/jaanga/cookbook/tree/gh-pages/star-spotter '; />
+<input type=button value='Source code on GitHub' onclick=window.location.href='https://github.com/jaanga/cookbook/tree/gh-pages/star-spotter'; />
 
 ## Concept
 
