@@ -22,7 +22,7 @@
 	var raycaster;
 	var mouse;
 
-	var css, info, stats, renderer, scene, camera, controls;
+	var stats, renderer, scene, camera, controls;
 	var geometry, material, mesh, texture;
 
 	init();
@@ -37,9 +37,9 @@
 			'#bars { color: #fcf; }' +
 		'';
 
-		info = document.body.appendChild( document.createElement( 'div' ) );
-		info.style.cssText = 'margin: 0 20px; max-width: 300px; position: absolute; ';
-		info.innerHTML = '<h2><a href="" >' + document.title + '</a> - ' +
+		var menu = document.body.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = 'margin: 0 20px; max-width: 300px; position: absolute; ';
+		menu.innerHTML = '<h2><a href="" >' + document.title + '</a> - ' +
 			'<a id=i href=http://jaanga.github.io/cookbook/star-spotter/index.html >&#x24D8;</a>' +
 			'</h2>' +
 			'<div>Symbol <select id=selSprite ></select></div>' +
