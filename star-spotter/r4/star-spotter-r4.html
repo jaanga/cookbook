@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title>Jaanga Star Spotter R4</title>
+<meta charset=utf-8 />
+<meta name=viewport content='width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0' />
+</head>
+<body>
+<script src=http://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/controls/FirstPersonControls.js ></script>
+<script src=http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+<script>
+// copyright 2015 jaanga authors ~ MIT License
+
+	var fileName ='../data/hygdata_v3.csv';
+	var xmlHttp;
+	var count = 0;
+	var particleSystem;
+	var stars;
+	var placards;
+	var frusta;
+
+	var raycaster;
+	var mouse;
+
+	var stats, renderer, scene, camera, controls;
+	var geometry, material, mesh, texture;
+
+	var cam1, cam2, con1, con2;
+	var clock = new THREE.Clock();
+
+	init();
+	animate();
+
+	function init() {
+
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { color: #fff; font: 600 12pt monospace; margin: 0; overflow: hidden; }' +
+			'h1, a { color: #fff; margin: 0; }' +
+			'#bars, #i { text-decoration: none; }' +
+			'#bars { color: #fcf; }' +
+		'';
+
+		var menu = document.body.appendChild( document.createElement( 'div' ) );
+		menu.style.cssText = 'margin: 0 20px; max-width: 300px; position: absolute; ';
+		menu.innerHTML = '<h2><a href="" >' + document.title + '</a> - ' +
+			'<a id=i href=http://jaanga.github.io/cookbook/star-spotter/index.html >&#x24D8;</a>' +
+			'</h2>' +
+			'<div>Symbol <select id=selSprite ></select></div>' +
+			'<div>Time travel <input type=range id=inpTravel min=0 max=1 step= 0.01 value=0 onmousemove=drawStars(); /></div>' +
+			'<p><button onclick=setControlsFirstPerson(); >First Person Controls</button> ' +
+				'<button onclick=setControlsOrbit(); >Orbit Controls</button></p>' +
+			'<p><input type=checkbox id=chkFreeze > Freeze camera<br>' +
+				'<input type=checkbox id=chkFrusta onclick=drawFrusta(); > Random frustra</p>' +
+
+
+			'<div id=msg1 >Loading the dats for 119,614 stars...</div>' +
+		'';
+
+		var sprites = ['ball','circle','disc','snowflake1','snowflake2','snowflake3','snowflake4','snowflake5' ];
+
+		for ( var i = 0; i < sprites.length; i++ ) {
+
+			option = selSprite.appendChild( document.createElement( 'option' ) );
+			option.text = sprites[ i ];
+
+		}
+
+		selSprite.onchange = function() { 
+
+			texture = THREE.ImageUtils.loadTexture( '../sprites/' + sprites[ selSprite.selectedIndex ] + '.png' ); 
+			drawStars();
+
+		};
+
+		stats = new Stats();
+		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0; z-index: 100; ';
+		document.body.appendChild( stats.domElement );
+
+		renderer = new THREE.WebGLRenderer( { antialias: true }  );
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 100, 100, 100 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 500;
+
+		scene = new THREE.Scene();
+
+// axes
+		var axisHelper = new THREE.AxisHelper( 50 );
+		scene.add( axisHelper );
+
+// texture
+		texture = THREE.ImageUtils.loadTexture( '../sprites/ball.png' );
+
+// interaction
+		raycaster = new THREE.Raycaster();
+		raycaster.params.PointCloud.threshold = 0.1;
+		mouse = new THREE.Vector2();
+
+		renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false ); // for mobile
+
+// get data / start spotting
+		requestFile();
+
+		addCamerasControls();
+
+	}
+
+	function addCamerasControls() {
+
+		cam1 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		cam1.position.set( -150, 20, 0 );
+
+		cam2 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		cam2.position.set( 100, 100, 100 );
+		con2 = new THREE.OrbitControls( cam2, renderer.domElement );
+
+		window.addEventListener( 'keydown', onKeyDown, false );
+
+		setControlsOrbit();
+
+	}
+
+	function setControlsFirstPerson() {
+
+		cam1.position.set( 150, 20, 0 );
+		con1 = new THREE.FirstPersonControls( cam1  );
+		con1.lookSpeed = 0.05;
+		con1.movementSpeed = 50;
+//		con1.theta = 0.5 * Math.PI;
+//		con1.target.set( 100, -10, 0 );
+		con1.lon = 180;
+
+		camera = cam1;
+		controls = con1;
+
+	}
+
+
+	function setControlsOrbit() {
+
+		camera = cam2;
+		controls = con2;
+
+	}
+
+
+	function onKeyDown( event ) {
+
+		switch ( event.keyCode ) {
+
+			case 32: /*spacebar*/ chkFreeze.checked = !chkFreeze.checked; break;
+
+		}
+
+	}
+
+	function drawFrusta() {
+
+		scene.remove( frusta );
+
+		if ( chkFrusta.checked === true ) {
+
+			frusta = new THREE.Object3D();
+
+			for ( var i = 0; i < 15; i++ ) {
+
+				frusta.add ( drawFrustum( 2 * Math.PI * Math.random(), 0.2 * Math.PI * Math.random(),  Math.PI * Math.random(), 0.1 * Math.PI * Math.random(), 2, 250) )
+
+			}
+
+			scene.add( frusta );
+
+		}
+	}
+
+
+	function drawFrustum( theta, thetaDelta, phi, phiDelta, radiusNear, radiusFar ) {
+
+		geometry = new THREE.BoxGeometry( 10, 10, 10 );
+
+		geometry.vertices[ 0 ] = convertPosition( theta, phi, radiusFar );
+		geometry.vertices[ 1 ] = convertPosition( theta + thetaDelta, phi, radiusFar );
+		geometry.vertices[ 2 ] = convertPosition( theta, phi + phiDelta, radiusFar );
+		geometry.vertices[ 3 ] = convertPosition( theta + thetaDelta, phi + phiDelta, radiusFar );
+
+		geometry.vertices[ 4 ] = convertPosition( theta + thetaDelta, phi, radiusNear );
+		geometry.vertices[ 5 ] = convertPosition( theta, phi, radiusNear );
+		geometry.vertices[ 6 ] = convertPosition( theta + thetaDelta, phi + phiDelta, radiusNear );
+		geometry.vertices[ 7 ] = convertPosition( theta, phi + phiDelta, radiusNear );
+
+		material = new THREE.MeshNormalMaterial( { opacity: 0.5, side: 2, transparent: true } );
+		mesh = new THREE.Mesh( geometry, material );
+
+		return mesh;
+
+	}
+
+	function convertPosition( phi, theta, radius ) {
+
+		x = radius * Math.sin( theta ) * Math.cos( phi )
+		z = radius * Math.sin( theta ) * Math.sin( phi )
+		y = radius * Math.cos( theta )
+
+		return v( x, y, z );
+
+	}
+
+	function v( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+	function requestFile() {
+		var start = 0;
+		var stop = 100000;
+		xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', fileName, true );
+//		xmlHttp.setRequestHeader('Range', 'bytes=' + start + '-' + stop );
+		xmlHttp.onreadystatechange = callback;
+		xmlHttp.send( null );
+
+	}
+
+	function callback() {
+
+		if ( xmlHttp.readyState === 4  ) {
+			text = xmlHttp.responseText;
+			stars = text.split(/\r\n|\n/);
+
+			drawStars();
+
+			msg1.innerHTML = 'Click on a star to view her data.<br>Data requests:' + count++;
+
+		} else {
+
+			msg1.innerHTML = 'Loading the dats for 119,614 stars.<br>Data requests:' + count++ + ' of 13k to 25k probable requests on first load';
+
+		}
+
+	}
+
+
+	function drawStars() {
+
+			scene.remove( particleSystem );
+			scene.remove( placards );
+
+			placards = new THREE.Object3D();
+
+			var particles = stars.length - 2;
+
+			geometry = new THREE.BufferGeometry();
+
+			positions = new Float32Array( particles * 3 );
+			colors = new Float32Array( particles * 3 );
+
+			color = new THREE.Color();
+
+			min = 10000000;
+			max = -100000000;
+			count = 0;
+
+			travel = 100000 * parseFloat( inpTravel.value );
+
+			for ( var i = 0, j = 1; i < positions.length; i += 3 ) {
+
+				star = stars[ j++ ].split( ',' );
+
+/*
+test = parseFloat( star[ 20 ] );
+min = test < min ? test : min;
+max = test > max ? test : max;
+*/
+
+				x = parseFloat( star[ 17 ] ) + travel * parseFloat( star[ 20 ] );
+				y = parseFloat( star[ 18 ] ) + travel * parseFloat( star[ 21 ] );
+				z = parseFloat( star[ 19 ] ) + travel * parseFloat( star[ 22 ] );
+				positions[ i ] = x;
+				positions[ i + 1 ] = y;
+				positions[ i + 2 ] = z;
+				color.setHSL( ( parseFloat( star[ 33 ] ) + 0 ) / 10, 1, 0.5 );
+
+				colors[ i ]     = color.r;
+				colors[ i + 1 ] = color.g;
+				colors[ i + 2 ] = color.b;
+
+				if ( star[ 6 ] ) { 
+
+//					count++;
+					drawPlacard( star[ 6 ], 0.01, '#0f0', x, y + 0.75, z);
+
+				}
+
+// TBD: size, alpha etc
+
+			}
+
+//console.log( 'min', min, '\nmax', max, '\ncount', count );
+
+			geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+			geometry.addAttribute( 'color', new THREE.BufferAttribute( colors, 3 ) );
+
+			geometry.computeBoundingSphere();
+
+			var material = new THREE.PointCloudMaterial( { map: texture, vertexColors: THREE.VertexColors, alphaTest: .1 } );
+
+			particleSystem = new THREE.PointCloud( geometry, material );
+			scene.add( particleSystem );
+			scene.add( placards )
+
+	}
+
+	function drawPlacard ( text, scale, color, x, y, z) {
+
+		var texture = canvasText( text, color );
+		var spriteMaterial = new THREE.SpriteMaterial( { map: texture, useScreenCoordinates: false, opacity: 1 } );
+		var sprite = new THREE.Sprite( spriteMaterial );
+		sprite.position.set( x, y, z ) ;
+		sprite.scale.set( scale * texture.image.width, scale * texture.image.height );
+
+		placards.add( sprite )
+
+	}
+
+	function canvasText( textArray, color ) {
+
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+
+		if ( typeof textArray === 'string' ) textArray = [ textArray ];
+		context.font = '48px sans-serif';
+		var width = 0;
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+			width = context.measureText( textArray[i] ).width > width ? context.measureText( textArray[i] ).width : width;
+		}
+
+		canvas.width = width + 20; // 480
+		canvas.height = textArray.length * 60;
+
+		context.fillStyle = color;
+		context.globalAlpha = 0.85
+		context.fillRect( 0, 0, canvas.width, canvas.height);
+
+		context.lineWidth = 1 ;
+		context.strokeStyle = '#000';
+		context.strokeRect( 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = '#000' ;
+		context.font = '48px sans-serif';
+
+		for (var i = 0, len = textArray.length; i < len; i++) {
+			context.fillText( textArray[i], 10, 48  + i * 60 );
+		}
+
+		var texture = new THREE.Texture( canvas );
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+		texture.needsUpdate = true;
+		return texture;
+
+	}
+
+
+	function onDocumentTouchStart( event ) {
+		
+		event.preventDefault();
+		
+		event.clientX = event.touches[0].clientX;
+		event.clientY = event.touches[0].clientY;
+		onDocumentMouseDown( event );
+
+	}
+
+	function onDocumentMouseDown(e) {
+
+		mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
+		mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
+
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 ).unproject( camera );
+
+		raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
+
+		scene.updateMatrixWorld();
+		intersects = raycaster.intersectObject( particleSystem );
+
+		if ( intersects.length > 0 ) {
+ 
+			intersected = intersects[ 0 ].object;
+
+// id,hip,hd,hr,gl,bf,proper,ra,dec,dist,pmra,pmdec,rv,mag,absmag,spect,ci,x,y,z,vx,vy,vz,rarad,decrad,pmrarad,pmdecrad,
+// bayer,flam,con,comp,comp_primary,base,lum,var,var_min,var_max
+
+			l = stars[ intersects[ 0 ].index + 1].split( ',' );
+			msg1.innerHTML = 
+
+				'<p>' +
+				'1 Primary key:' + l[ 0 ] + '<br>' +
+				'2 Hipparcos ID:' + l[ 1 ] + '<br>' +
+				'3 Draper ID:' + l[ 2 ] + '<br>' +
+				'4 Harvard ID:' + l[ 3 ] + '<br>' +
+				'5 Gliese ID:' + l[ 4 ] + '<br>' +
+				'6 B/F designation:' + l[ 5 ] + '<br>' +
+				'7 Name:' + l[ 6 ] + '<br>' +
+				'8 Right Ascension:' + l[ 7 ] + '<br>' +
+				'9 Right Declination:' + l[ 8 ] + '<br>' +
+				'10 Parsecs distance :' + l[ 9 ] + '<br>' +
+				'11 Proper motion right ascension:' + l[ 10 ] + '<br>' +
+				'12 pm declination:' + l[ 11 ] + '<br>' +
+				'13 radial velocity:' + l[ 12 ] + '<br>' +
+				'14 app visual mag:' + l[ 13 ] + '<br>' +
+				'15 absolute magnitude:' + l[ 14 ] + '<br>' +
+				'16 spectral type:' + l[ 15 ] + '<br>' +
+				'17 color index:' + l[ 16 ] + '<br>' +
+				'18 x:' + l[ 17 ] + '<br>' +
+				'19 y:' + l[ 18 ] + '<br>' +
+				'20 z:' + l[ 19 ] + '<br>' +
+				'21 vx:' + l[ 20 ] + '<br>' +
+				'22 vy:' + l[ 21 ] + '<br>' +
+				'23 vz:' + l[ 22 ] + '<br>' +
+				'24 rarad:' + l[ 23 ] + '<br>' +
+				'25 decrad:' + l[ 24 ] + '<br>' +
+				'26 pm rarad:' + l[ 25 ] + '<br>' +
+				'27 pm decrad:' + l[ 26 ] + '<br>' +
+				'28 bayer:' + l[ 27 ] + '<br>' +
+				'29 flam:' + l[ 28 ] + '<br>' +
+				'30 con:' + l[ 29 ] + '<br>' +
+				'31 comp:' + l[ 30 ] + '<br>' +
+				'32 comp primary:' + l[ 31 ] + '<br>' +
+				'33 base:' + l[ 32 ] + '<br>' +
+				'34 lum:' + l[ 33 ] + '<br>' +
+				'35 var:' + l[ 34 ] + '<br>' +
+				'36 var min:' + l[ 35 ] + '<br>' +
+				'37 var max:' + l[ 36 ] + '<br>' +
+
+			''
+		}
+
+	}
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+
+		if ( chkFreeze.checked === true ) {
+
+			controls.enabled = false
+
+		} else {
+
+			controls.update( clock.getDelta() );
+			controls.enabled = true
+
+		}
+
+		stats.update();
+		renderer.render( scene, camera );
+
+	}
+</script>
+</body>
+</html>

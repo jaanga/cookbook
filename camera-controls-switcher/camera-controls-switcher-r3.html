@@ -16,6 +16,7 @@
 	var css, info, stats, renderer, scene, camera, controls, cam1, cam2, con1, con2;
 	var geometry, material, mesh;
 
+	var cam1, cam2, con1, con2;
 	var clock = new THREE.Clock();
 
 	init();
@@ -59,12 +60,7 @@
 
 		//controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-		cam1 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-		cam1.position.set( -150, 20, 0 );
 
-		cam2 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-		cam2.position.set( 100, 100, 100 );
-		con2 = new THREE.OrbitControls( cam2, renderer.domElement );
 
 		scene = new THREE.Scene();
 		scene.add( new THREE.AxisHelper( 50 ) );
@@ -80,17 +76,27 @@
 		mesh.position.set( 0, -9, 0 );
 		scene.add( mesh );
 
-
 		addBoxes();
 
-		setControlsOrbit();
+		addCamerasControls();
+
+	}
+
+	function addCamerasControls() {
+
+		cam1 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		cam1.position.set( -150, 20, 0 );
+
+		cam2 = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		cam2.position.set( 100, 100, 100 );
+		con2 = new THREE.OrbitControls( cam2, renderer.domElement );
 
 		window.addEventListener( 'keydown', onKeyDown, false );
 		renderer.domElement.addEventListener( 'wheel', onMouseWheel, false );
 
+		setControlsOrbit();
 
 	}
-
 
 	function setControlsFirstPerson() {
 
@@ -158,10 +164,10 @@ console.log( event );
 
 		if ( chkFreeze.checked === true ) {
 
-
 			controls.enabled = false
 
 		} else {
+
 			controls.update( clock.getDelta() );
 			controls.enabled = true
 

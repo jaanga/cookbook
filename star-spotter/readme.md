@@ -40,7 +40,7 @@ Thank you David Nash!
 * Currently the 'Time travel' slider updates star positions in a mostly arbitrary manner. Future revisions:
 	* Tie movements to specific time periods and, for example, display the date of the current positions
 	* Also be able to show apparent movement around Sol for any specific date
-* Currently, color is tied to an arbitrary element. Future revisions
+* Currently, color is tied to an arbitrary element. Future revisions:
 	* Tie color, size, alpha and other visual attributes to arbitrary star attributes as selected by the user
 	* Needs default value is no data for a star of star data is a huge outlier
 	* Needs to know the bell curve of typical values
@@ -51,12 +51,23 @@ Thank you David Nash!
 * Add Level of Detail and logarithmic zooming capabilities
 	* Zoom out to many more distant objects
 	* Zoom into many more objects within our solar system 
+* Add DSO csv file objects
+* Add solar system objects
 
 
 ## Issues
 
+* Time travel freezes after First Persom camera invoked
 
 ## Change Log
+
+* 2015-05-17 ~ Theo
+
+* Add First Person Camera
+	* With freeze camera checkbox
+* Add random frustums / frusta?
+	* To demo what frustums indicating the volumes of various constellations
+
 
 2015-05-10 ~ Theo
 
