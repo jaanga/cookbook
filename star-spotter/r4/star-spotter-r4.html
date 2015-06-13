@@ -285,7 +285,8 @@ max = test > max ? test : max;
 				positions[ i ] = x;
 				positions[ i + 1 ] = y;
 				positions[ i + 2 ] = z;
-				color.setHSL( ( parseFloat( star[ 33 ] ) + 0 ) / 10, 1, 0.5 );
+//				color.setHSL( ( parseFloat( star[ 33 ] ) + 0 ) / 10, 1, 0.5 );
+				color.set( colorFromLuminosity( star[ 33 ] ) );
 
 				colors[ i ]     = color.r;
 				colors[ i + 1 ] = color.g;
@@ -314,6 +315,25 @@ max = test > max ? test : max;
 			particleSystem = new THREE.PointCloud( geometry, material );
 			scene.add( particleSystem );
 			scene.add( placards )
+
+	}
+	
+	// https://en.wikipedia.org/wiki/Stellar_classification#Harvard_spectral_classification
+
+	function colorFromLuminosity( lum ) {
+
+		var color = new THREE.Color();
+
+		if ( lum > 30000 )			color.set( 0x9db4ff );
+		else if ( lum > 25 && lum <= 30000 )	color.set( 0xbbccff );
+		else if ( lum > 5 && lum <= 25 )	color.set( 0xfbf8ff );
+		else if ( lum > 1.5 && lum <= 5 )	color.set( 0xffffed );
+		else if ( lum > 0.6 && lum <= 1.5 )	color.set( 0xffff00 );
+		else if ( lum > 0.08 && lum <= 0.6 )	color.set( 0xff9833 );
+		else if ( lum <= 0.08 )			color.set( 0xff0000 );
+		else					color.set( 0x000000 );
+
+		return color;
 
 	}
 
