@@ -5,7 +5,7 @@
 <style></style>
 </head>
 
-<body>
+<body style="margin: 0in">
 
 <script src="http://mrdoob.github.com/three.js/build/three.min.js"></script>
 <script src="http://mrdoob.github.com/three.js/examples/js/controls/OrbitControls.js"></script>
@@ -93,7 +93,6 @@ function move( face, direction ) {
   eval( 'rotate.' + face.substring(0,1) + ' = ' + direction );
   current = Math.PI/2;
   animate = true;
-  once = true;
 }
 
 function recolor( cube ) {
@@ -131,9 +130,8 @@ var render = function () {
     origin.rotation.y += step * rotate.y;
     origin.rotation.z += step * rotate.z;
     current -= step;
-    if ( current <= 0 && once ) {
+    if ( current <= 0 ) {
       animate = false;
-      once = false;
       origin.updateMatrixWorld();
       for ( var i = origin.children.length - 1 ; i >= 0 ; i-- ) {
         origin.children[i].position.setFromMatrixPosition( origin.children[i].matrixWorld );
@@ -150,7 +148,6 @@ var render = function () {
 }
 
 var animate = true;
-var once = true;
 random();
 render();
 
