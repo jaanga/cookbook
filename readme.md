@@ -18,6 +18,10 @@ This usually means that that there has been an update to Three.js but the projec
 
 ---
 
+### Rubik's Cube
+
+[Web page view]( http://jaanga.github.io/cookbook/rubiks-cube/rubiks-cube-base.html )  
+
 ### Drawing on Heightmap
 
 [Web page view]( http://jaanga.github.io/cookbook/drawing-on-heightmap/drawing-on-heightmap.html )  
