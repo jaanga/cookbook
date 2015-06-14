@@ -457,9 +457,8 @@ max = test > max ? test : max;
 				'34 lum:' + l[ 33 ] + '<br>' +
 				'35 var:' + l[ 34 ] + '<br>' +
 				'36 var min:' + l[ 35 ] + '<br>' +
-				'37 var max:' + l[ 36 ] + '<br>' +
-
-			''
+				'37 var max:' + l[ 36 ] +
+				'</p>';
 		}
 
 	}
@@ -470,12 +469,12 @@ max = test > max ? test : max;
 
 		if ( chkFreeze.checked === true ) {
 
-			controls.enabled = false
+			controls.enabled = false;
 
 		} else {
 
 			controls.update( clock.getDelta() );
-			controls.enabled = true
+			controls.enabled = true;
 
 		}
 
