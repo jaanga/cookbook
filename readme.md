@@ -87,8 +87,8 @@ Blog post: [BVH: A format to capture motion - simply, quickly and economically](
 
 <br>
 ### BVH Skinned
-
-_2014-09-26 ~ Demo is currently broken. ;-(_
+[Web page view]( http://jaanga.github.io/cookbook/bvh-skinned/latest/ )   
+[Source code view]( https://github.com/jaanga/cookbook/blob/gh-pages/bvh-reader/ )
 
 #### Mission
 To create fully skinned character animations such that the skins move with a natural appearance with any any and all underlying BVH motion capture files

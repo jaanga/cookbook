@@ -5,10 +5,10 @@ BVH Skinned Read Me
 
 ### Live Demo
 
-<iframe src="http://jaanga.github.io/cookbook/bvh-skinned/r1/index.html" width=100% height=500px class='overview' >
+<iframe src="http://jaanga.github.io/cookbook/bvh-skinned/latest/" width=100% height=500px class='overview' >
 There is an `iframe` here. It is not visible when viewed on github.com/cookbook. To view, please go to jaanga.github.io.
 </iframe>
-[Skinned BVH R1](http://jaanga.github.io/cookbook/bvh-skinned/r1/index.html )
+[Skinned BVH](http://jaanga.github.io/cookbook/bvh-skinned/latest/ )
 
 
 ### Mission
@@ -29,6 +29,10 @@ This repository contains files that are  at an early and volatile stage. Not all
 
 
 ###Change Log
+
+2015-06-29 ~ Theo
+
+* Fixed skeleton bug 
 
 2013-09-05 ~ Theo
 * Folders and files added to Cookbook repo
