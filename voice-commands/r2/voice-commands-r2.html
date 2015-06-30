@@ -21,8 +21,9 @@
 
 	var movement = false;
 
-	var hasOrientation = function(evt) {
-		if (!evt.alpha) {
+	var hasOrientation = function( evt ) {
+
+		if ( !evt.alpha ) {
 			return;
 		}
 
@@ -94,7 +95,7 @@
 		mesh.position.y = -250;
 		scene.add( mesh );
 
-		if (annyang) {
+		if ( annyang ) {
 		  // Let's define a command.
 
 		  var commands = {
@@ -117,6 +118,7 @@
 		window.addEventListener('deviceorientation', hasOrientation, false);
 
 		window.addEventListener( 'touchend', function () {
+
 			if ( isFullscreen === false ) {
 				document.body.webkitRequestFullscreen();
 				isFullscreen = true;
@@ -124,6 +126,7 @@
 				document.webkitExitFullscreen();
 				isFullscreen = false;
 			}
+
 		} );
 
 		window.addEventListener( 'resize', function () {
