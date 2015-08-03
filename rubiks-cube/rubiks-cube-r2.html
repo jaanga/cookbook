@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style></style>
+</head>
+
+<body style="margin: 0in">
+
+<script src="http://mrdoob.github.com/three.js/build/three.min.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+
+var scene = new THREE.Scene();
+var renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setClearColor( 0x777777 );
+document.body.appendChild( renderer.domElement ); 
+
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 ); 
+camera.up.set( 0, 0, 1 );
+camera.position.set( 3, 3, 3 );
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+var red    = 0xff0000;
+var orange = 0xff7700;
+var yellow = 0xffff00;
+var green  = 0x00ff00;
+var blue   = 0x0000ff;
+var white  = 0xffffff;
+var black  = 0x000000;
+
+var F = 'y == 1';
+var B = 'y == -1';
+var U = 'z == 1';
+var D = 'z == -1';
+var L = 'x == 1';
+var R = 'x == -1';
+var M = 'x == 0';
+var E = 'z == 0';
+var S = 'y == 0';
+
+var moves = [ F, B, U, D, L, R, M, E, S ];
+
+var cubes = [];
+for ( var i=-1 ; i <= 1 ; i++ ) {
+  for ( var j=-1 ; j <= 1 ; j++ ) {
+    for ( var k=-1 ; k <= 1 ; k++ ) {
+      var geometry = new THREE.BoxGeometry( .95, .95, .95 );
+      var materials = [];
+      for ( var l=0 ; l < 6 ; l++ ) {
+        materials.push( new THREE.MeshBasicMaterial( { color: black } ) );
+      }
+      var cube = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
+      cube.position.set( i, j, k );
+      cube.move = false;
+
+      // color sides
+      if ( cube.position.x ==  1 ) cube.material.materials[0].color.setHex( red );
+      if ( cube.position.x == -1 ) cube.material.materials[1].color.setHex( orange );
+      if ( cube.position.y ==  1 ) cube.material.materials[2].color.setHex( green );
+      if ( cube.position.y == -1 ) cube.material.materials[3].color.setHex( blue );
+      if ( cube.position.z ==  1 ) cube.material.materials[4].color.setHex( yellow );
+      if ( cube.position.z == -1 ) cube.material.materials[5].color.setHex( white );
+
+      cubes.push( cube );
+    }
+  }
+}
+
+for ( var i=0 ; i < 27 ; i++ ) scene.add( cubes[i] );
+
+var rotate = new THREE.Vector3();
+var matrix = new THREE.Matrix4();
+var step = Math.PI/2 / 150;
+var current = 0;
+
+function random() {
+  var index = Math.round( ( moves.length - 1 ) * Math.random() );
+  var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+  move( moves[index], plusOrMinus );
+}
+
+function move( face, direction ) {
+  rotate.set( 0, 0, 0 );
+  for ( var i=0 ; i < 27 ; i++ ) {
+    if ( eval( 'cubes[i].position.' + face ) ) cubes[i].move = true;
+  }
+  eval( 'rotate.' + face.substring(0,1) + ' = ' + direction );
+  matrix.makeRotationAxis( rotate, step );
+  current = Math.PI/2;
+  animate = true;
+}
+
+window.addEventListener('resize', function() {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix(); } );
+
+var render = function () {
+  requestAnimationFrame( render ); 
+  renderer.render(scene, camera);
+  controls.update();
+
+  if ( animate ) {
+    for ( var i=0 ; i < 27 ; i++ ) {
+      if ( cubes[i].move == true ) {
+        cubes[i].add( new THREE.Vector3().crossVectors( rotate, cubes[i].position ).multiplyScalar( step ) );
+        cubes[i].applyMatrix( matrix );
+      }
+    }
+    current -= step;
+    if ( current <= 0 ) {
+      animate = false;
+      for ( var i=0 ; i < 27 ; i++ ) {
+        cubes[i].position.round();
+        var angle = Math.PI/2;
+        cubes[i].rotation.x = Math.round( cubes[i].rotation.x / angle ) * angle;
+        cubes[i].rotation.y = Math.round( cubes[i].rotation.y / angle ) * angle;
+        cubes[i].rotation.z = Math.round( cubes[i].rotation.z / angle ) * angle;
+        cubes[i].move = false;
+      }
+      random();
+      }
+  }
+}
+
+var animate = true;
+random();
+render();
+
+</script>
+
+</body>
+</html>
