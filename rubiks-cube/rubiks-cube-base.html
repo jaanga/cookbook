@@ -23,8 +23,6 @@ camera.up.set( 0, 0, 1 );
 camera.position.set( 3, 3, 3 );
 var controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-// geometric code goes here
-
 var red    = 0xff0000;
 var orange = 0xff7700;
 var yellow = 0xffff00;
@@ -135,9 +133,7 @@ var render = function () {
       origin.updateMatrixWorld();
       for ( var i = origin.children.length - 1 ; i >= 0 ; i-- ) {
         origin.children[i].position.setFromMatrixPosition( origin.children[i].matrixWorld );
-        origin.children[i].position.x = Math.round( origin.children[i].position.x );
-        origin.children[i].position.y = Math.round( origin.children[i].position.y );
-        origin.children[i].position.z = Math.round( origin.children[i].position.z );
+        origin.children[i].position.round();
         recolor( origin.children[i] );
         scene.add( origin.children[i] );
       }
