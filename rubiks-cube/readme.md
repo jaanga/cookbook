@@ -17,4 +17,4 @@ Cubelets are manipulated by adding them as children to a parent object which is 
 [Web page view]( http://jaanga.github.io/cookbook/rubiks-cube/rubiks-cube-r2.html "View as live web page" ) &mdash; 
 [Source code view]( https://github.com/jaanga/cookbook/tree/gh-pages/rubiks-cube/rubiks-cube-r2.html "View as source code" )
 
-Cubelets are manipulatd directly by changing orientation and position simultaneously. Rotations are handled with the `applyMatrix` method of `Object3D` rather than altering Euler angles. This ensures that the rotations are always with respect to world axes, not the internal axes of the cubelets. Positions are updated with vector addition. This is a simpler method for manipulating objects both conceptually and codewise.
+Cubelets are manipulatd directly by changing orientation and position simultaneously. Rotations are handled with the `applyMatrix` method of `Object3D` rather than altering Euler angles. This ensures that rotations are always with respect to world axes, not the internal axes of cubelets. Positions are updated with vector addition. This is a simpler method for manipulating objects both conceptually and codewise.
