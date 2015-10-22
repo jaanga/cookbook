@@ -38,7 +38,7 @@
 
 	function getBlogPosts() {
 
-		var xx = 'https://api.github.com/repos/jaanga/cookbook/git/trees/87c39de8d22bc039603f9229eac929d806676106?recursive=1'
+		var xx = 'https://api.github.com/repos/jaanga/cookbook/contents/blogmire?access_token=7b5d2a0c1bf23428b7e74cc60a0f09adb2462c8f';
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( 'GET', xx, true );
 
@@ -53,21 +53,23 @@
 
 			for ( var i = 0; i < lines.length; i++ ) {
 
-				if ( lines[ i ].indexOf( '.md' ) > -1 ) {
+				if ( lines[ i ].indexOf( '"path"' ) > -1 && lines[ i ].indexOf( '.md' ) > -1 ) {
 
 					line = lines[ i ];
-					fname =  line.substr( 15 ).replace( '",','' );
-arr.push( fname );
+					fname =  line.substr( 22 ).replace( '",','' );
+arr.push( fname.substr( 0, 10 ) );
 					txt += fname + '<br>';
 
-					requestFile( 'http://jaanga.github.io/cookbook/blogmire/' + fname );
+					requestFile( 'http://jaanga.github.io/cookbook/blogmire/' + fname + '?access_token=7b5d2a0c1bf23428b7e74cc60a0f09adb2462c8f' );
 
 				}
 
 			}
 
 			posts.innerHTML += txt;
+arr.sort( function(a, b){return b-a } );
 console.log( arr );
+
 		};
 
 		xmlHttp.send( null );
