@@ -34,11 +34,9 @@
 
 	}
 
-
-
 	function getBlogPosts() {
 
-		var xx = 'https://api.github.com/repos/jaanga/cookbook/contents/blogmire?access_token=7b5d2a0c1bf23428b7e74cc60a0f09adb2462c8f';
+		var xx = 'https://api.github.com/repos/jaanga/cookbook/contents/blogmire';
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( 'GET', xx, true );
 
@@ -57,27 +55,31 @@
 
 					line = lines[ i ];
 					fname =  line.substr( 22 ).replace( '",','' );
-arr.push( fname.substr( 0, 10 ) );
+					arr.push( { date: fname.substr( 0, 8 ), name: fname } );
 					txt += fname + '<br>';
-
-					requestFile( 'http://jaanga.github.io/cookbook/blogmire/' + fname + '?access_token=7b5d2a0c1bf23428b7e74cc60a0f09adb2462c8f' );
 
 				}
 
 			}
 
-			posts.innerHTML += txt;
-arr.sort( function(a, b){return b-a } );
-console.log( arr );
+			arr.sort( function( a, b ){return b.date - a.date } );
 
-		};
+			posts.innerHTML += txt;
+
+			for ( var i = 0; i < arr.length; i++ ) {
+
+				requestFile ( arr[ i ].name );
+
+			}
+
+		}
 
 		xmlHttp.send( null );
 
 	}
 
 	function requestFile ( fileName ) {
-
+//console.log( arr[ i ].name );
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( 'GET', fileName, true );
 		xmlHttp.onreadystatechange = function() {
