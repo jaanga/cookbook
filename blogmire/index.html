@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8 >
+<meta name=viewport content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' >
+</head>
+<body>
+<script src=http://cdnjs.cloudflare.com/ajax/libs/showdown/1.2.3/showdown.min.js ></script>
+<script>
+
+	var arr = [];
+
+	init();
+
+	function init() {
+
+		var css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML = 'body { font: 12pt monospace; left: 0; margin: 0 auto; max-width: 800px; right: 0; }' +
+			'h2, a { margin: 0; }' +
+			'#i { text-decoration: none; }' +
+		'';
+
+		content = document.body.appendChild( document.createElement( 'div' ) );
+
+		content.innerHTML = '<h2>' +
+				'<a href="" >Blogmire</a> ' +
+				'<a id=i href=http://jaanga.github.io/ >&#x24D8;</a>' +
+			'</h2>' +
+			'<div id=names ></div>' +
+			'<div id=posts ></div>' +
+		'';
+
+		getBlogPosts();
+
+	}
+
+	function getBlogPosts() {
+
+		var xx = 'https://api.github.com/repos/jaanga/cookbook/contents/blogmire';
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', xx, true );
+
+		xmlHttp.onreadystatechange = function() {
+
+			if ( xmlHttp.readyState !== 4 ) { return; }
+
+			response =  xmlHttp.responseText;
+
+			var lines = response.split(/\r\n|\n/);
+			var txt = '';
+
+			for ( var i = 0; i < lines.length; i++ ) {
+
+				if ( lines[ i ].indexOf( '"path"' ) > -1 && lines[ i ].indexOf( '.md' ) > -1 ) {
+
+					line = lines[ i ];
+					fname =  line.substr( 22 ).replace( '",','' );
+					arr.push( { date: fname.substr( 0, 8 ), name: fname } );
+					txt += fname + '<br>';
+
+				}
+
+			}
+
+			arr.sort( function( a, b ){return b.date - a.date } );
+
+			posts.innerHTML += txt;
+
+			for ( var i = 0; i < arr.length; i++ ) {
+
+				requestFile ( arr[ i ].name );
+
+			}
+
+		}
+
+		xmlHttp.send( null );
+
+	}
+
+	function requestFile ( fileName ) {
+//console.log( arr[ i ].name );
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( 'GET', fileName, true );
+		xmlHttp.onreadystatechange = function() {
+
+			posts.innerHTML += xmlHttp.readyState === 4 ? new showdown.Converter().makeHtml( xmlHttp.responseText ) : '';
+
+		};
+
+		xmlHttp.send( null );
+
+	}
+
+</script>
+</body>
+</html>
