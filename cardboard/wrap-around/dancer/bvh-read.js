@@ -66,7 +66,7 @@
 		scene = new THREE.Scene();
 
 		camera = new THREE.PerspectiveCamera( 40, ( window.innerWidth / window.innerHeight ) , 1, 5000 );
-		camera.position.set( 500, 50, 500 );
+		camera.position.set( 1500, 150, 1500 );
 		controls = new THREE.TrackballControls( camera, renderer.domElement );
 
 //		stats = new Stats();
@@ -216,11 +216,14 @@
 */
 
 	function animate() {
+
 		requestAnimationFrame( animate );
+
 		if ( controls !== undefined && controls.orientationQuaternion ) {
+
 			controls.update();
-			camera.position.x = -500 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
-			camera.position.z = -500 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.x = -1500 * Math.cos( controls.orientationQuaternion.y * Math.PI * 2 );
+			camera.position.z = -1500 * Math.sin( controls.orientationQuaternion.y * Math.PI * 2 );
 			camera.lookAt( scene.position );
 //			msg.innerHTML = camera.position.x.toFixed(0)  + ' ' + camera.position.z.toFixed(0);
 		}
