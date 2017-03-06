@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Jaanga Cookbook</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Browse and view files on GitHub with remarkable ease.' >
+<meta name=keywords content='CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2017-03-05' >
+</head>
+<body>
+<script src=https://cdn.rawgit.com/showdownjs/showdown/master/dist/showdown.min.js ></script>
+<script src=tootoo.js ></script>
+<script>
+// Copyright © 2017 PushMe PullYou authors. MIT license
+// https://github.com/showdownjs/showdown
+
+	let user = {
+		user : 'jaanga',
+		repo : 'cookbook',
+		branch : 'gh-pages',
+		folder : '',
+		noIndex : 'true'
+	};
+
+	init();
+
+	function init() {
+
+		var css, container, contents, hamburger, menu;
+		var b = '<br>';
+
+		css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML =
+			'html, body { font: 12pt monospace; height: 100%; margin: 0; }' +
+			'a { color: crimson; text-decoration: none; }' +
+			'button, input[type=button] { background-color: #ccc; border: 2px #fff solid; color: #322; }' +
+			'summary { outline: none; }' +
+			'summary h3 { display: inline; }' +
+
+			'.popUp { background-color: white; border: 1px solid red; left: 180px; opacity: 1.0; padding: 5px; position: absolute; width: 120px; z-index: 10; }' +
+
+			'#bars { color: crimson; cursor: pointer; font-size: 24pt; text-decoration: none; }' +
+			'#button { background-color: #555; color: #fff; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: 20px; }' +
+			'#button:hover { cursor: pointer; opacity: 1; }' +
+			'#button a { text-decoration: none; color: #fff; }' +
+			'#container {  height: 100%; left: 0; position: absolute; transition: left 1s; width: 100%; }' +
+
+// let each type of contents decide its best width and placement
+			'#contents { border: 0px #ccc solid; height: 100%; left: 325px; position: absolute; width: ' + ( window.innerWidth - 325 ) + 'px; }' +
+//			'#contents { border: 2px #ccc solid; margin-left: 325px; position: absolute; width: 100%; }' +
+
+			'#hamburger { background-color: #eee; left: 325px; position: absolute; top: 20px;  z-index: 1 }' +
+			'#hamburger h2 { margin: 0;}' +
+
+			'#menu { background-color: #eee; border: 1px #ccc solid; box-sizing:border-box; height: 100%; overflow-y: auto; padding: 0 10px; position: fixed; width: 325px; }' +
+			'#menu h2 {margin: 0; }' +
+			'#menuBreadcrumbs h2, #menuBreadcrumbs h3 { font-size: 14pt; margin: 0; }' +
+
+			'#nextFile { color: #888; font-size: 36pt; opacity: 0.5; padding: 8px; position: fixed; right: 20px; top: ' + (0.5 * window.innerHeight ) + 'px; }' +
+			'#nextFile:hover { cursor: pointer; opacity: 1; }' +
+			'#nextFile a { text-decoration: none; color: #888; }' +
+
+			'#previousFile { color: #888; font-size: 36pt; opacity: 0.5; padding: 8px; position: fixed; margin-left: 350px; top: ' + (0.5 * window.innerHeight ) + 'px; }' +
+			'#previousFile:hover { cursor: pointer; opacity: 1; }' +
+			'#previousFile a { text-decoration: none; color: #888; }' +
+
+		'';
+
+		container = document.body.appendChild( document.createElement( 'div' ) );
+		container.id = 'container';
+		container.innerHTML =
+
+			'<div id=menu >' +
+
+
+				'<h2>' +
+					'<a href=https://pushme-pullyou.github.io/ title="Pushme-Pullyou - your coming and going happy place" > &#x2766 </a><br>' +
+					'<a href="" title="Click here to refresh this page" >' + document.title + '</a>' +
+					' ~ <a href="https://github.com/pushme-pullyou/pushme-pullyou.github.io/tree/master/tootoo/" onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
+				'</h2>' +
+
+				'<div class=popUp id=popHelp style=display:none; ><div>Hi there!</div>Click the i-in-circle, info icon for latest updates.</div>' +
+
+				'<p><small>Browse and view files on GitHub with remarkable ease.</small></p>' +
+
+				'<details open>' +
+
+					'<summary><h3>Menu</h3></summary>' +
+
+					'<div id=menuBreadcrumbs ></div>' + b +
+
+					'<div id=menuItems ></div>' + b +
+
+				'</details>' +
+
+				'<details>' +
+
+					'<summary><h3>Current File Info</h3></summary>' +
+
+					'<div id=menuFileData ></div>' + b +
+
+					'<div id=menuInfo ></div>' + b +
+
+				'</details>' +
+
+				TOO.menuSettings +
+
+				'<details>' +
+					'<summary><h3>About</h3></summary>' +
+					'<p>Copyright &copy; 2017 Pushme-Pullyou authors. <a href=http://pushme-pullyou/pushme-pullyou.github.io >MIT license</a>.</p>' +
+					'<p>Click the \'i in a circle\' icon for more <a href=index.html#readme.md title="Click here for help and information" >help</a>.</p>' +
+				'</details>' +
+
+				'<hr>' +
+				'<center><a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><h1> &#x2766 <h1></a></center>' +
+				'<div class=popUp id=pop2 style=display:none;bottom:20px; >Pushme-Pullyou - your GitHub exploring happy place.<br>Click here to return to the top of the page</div>' +
+
+			'</div>' +
+
+			'<div id=hamburger onclick=container.style.left=container.style.left===""?"-325px":""; >' +
+				'<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>' +
+			'</div>' +
+
+			'<div id=contents >' +
+				'<h1>Typical contents</h1>' +
+			'</div>' +
+
+		'';
+
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		onWindowResize();
+
+		TOO.init( user );
+	}
+
+
+	function onWindowResize() {
+
+		if ( window.self !== window.top || window.innerWidth < 500 ) { container.style.left = '-325px'; }
+
+		contents.style.width = window.innerWidth - 350;
+
+	}
+
+</script>
+</body>
+</html>
