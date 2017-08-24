@@ -106,7 +106,6 @@ var render = function () {
   if ( animate ) {
     for ( var i=0 ; i < 27 ; i++ ) {
       if ( cubes[i].move == true ) {
-        cubes[i].add( new THREE.Vector3().crossVectors( rotate, cubes[i].position ).multiplyScalar( step ) );
         cubes[i].applyMatrix( matrix );
       }
     }
