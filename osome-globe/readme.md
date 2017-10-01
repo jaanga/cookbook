@@ -7,11 +7,9 @@ oSome Globe Read Me
 
 <iframe src="http://jaanga.github.io/cookbook/osome-globe/r4/index.html" width=100% height=500px class='overview' >
 There is an `iframe` here. It is not visible when viewed on github.com/cookbook. To view, please go to jaanga.github.io.
-</iframe>
+</iframe>  
 
 [oSome Globe]( http://jaanga.github.io/cookbook/osome-globe/r4/index.html )
-
-_Currently broken. ;-(_
 
 ### Mission
 
