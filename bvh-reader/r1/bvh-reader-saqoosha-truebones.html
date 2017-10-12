@@ -16,7 +16,7 @@
 // Thank you, Saqoosha ~ http://saqoo.sh/a/
 
 	requestFile( '../bvh-truebones/7106.bvh' );
-	
+
 	Bvh.info.innerHTML = '<h1>Jaanga BVH Reader - Truebones files</h1>' +
 		'<select id=selBvh onchange=requestFile("../bvh-truebones/"+Bvh.files[this.selectedIndex]) ></select> ' +
 		'<input type=file onchange=readText(this) /> <input type="checkbox" id="play" checked>Play - ' +
@@ -31,98 +31,99 @@
 	}
 	Bvh.play = document.getElementById('play');
 	selBvh.selectedIndex = 3;
-	
+
 
     Bvh.parseNode = function( data) {
 		var name, done, geometry, i, material, n, node, t;
 		name = data.shift();
-		
+
 		if ( name === 'Site' ) {
 			geometry = new THREE.SphereGeometry( 3 );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
-/*			
+			node = new THREE.Mesh(geometry, material);
+/*
 		} else if ( name === 'Head' ) {
 			geometry = new THREE.CubeGeometry( 12, 20, 15 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 8, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
+			node = new THREE.Mesh(geometry, material);
 		} else if ( name === 'Neck' ) {
 			geometry = new THREE.CubeGeometry( 10, 10, 10 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 4, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
-			
+			node = new THREE.Mesh(geometry, material);
+
 		} else if ( name === 'LeftCollar' ) {
 			geometry = new THREE.CubeGeometry( 30, 10, 10 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -10, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);				
+			node = new THREE.Mesh(geometry, material);
 		} else if ( name === 'RightCollar' ) {
 			geometry = new THREE.CubeGeometry( 30, 10, 10 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 10, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
-			
+			node = new THREE.Mesh(geometry, material);
+
 		} else if ( name === 'LeftShoulder' ||  name === 'LeftElbow' ) {
 			geometry = new THREE.CubeGeometry( 35, 8, 8 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 20, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);		
+			node = new THREE.Mesh(geometry, material);
 		} else if ( name === 'RightShoulder' || name === 'RightElbow' ) {
 			geometry = new THREE.CubeGeometry( 35, 8, 8 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -20, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
-			
+			node = new THREE.Mesh(geometry, material);
+
 		} else if ( name === 'LeftWrist' ) {
 			geometry = new THREE.CubeGeometry( 15, 12, 5 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 20, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);		
+			node = new THREE.Mesh(geometry, material);
 		} else if ( name === 'RightWrist' ) {
 			geometry = new THREE.CubeGeometry( 15, 12, 5 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -20, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);				
-			
+			node = new THREE.Mesh(geometry, material);
+
 		} else if ( name === 'Chest' || name === 'Chest2' || name === 'Chest3' || name === 'Chest4' ) {
 			geometry = new THREE.CubeGeometry( 30, 10, 10 );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);				
-			
+			node = new THREE.Mesh(geometry, material);
+
 		} else if ( name === 'RightHip' ||  name === 'LeftHip') {
 			geometry = new THREE.CubeGeometry( 10, 50, 10 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -18, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);				
+			node = new THREE.Mesh(geometry, material);
 
 		} else if ( name === 'LeftKnee' || name === 'RightKnee' ) {
 			geometry = new THREE.CubeGeometry( 10, 45, 10 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -25, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);		
-			
-			
+			node = new THREE.Mesh(geometry, material);
+
+
 		} else if ( name === 'LeftAnkle' || name === 'RightAnkle' ) {
 			geometry = new THREE.CubeGeometry( 8, 8, 8 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, 0 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
+			node = new THREE.Mesh(geometry, material);
 		} else if ( name === 'LeftToe' || name === 'RightToe' ) {
 			geometry = new THREE.CubeGeometry( 10, 5, 20 );
 			geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, -10 ) );
 			material = new THREE.MeshNormalMaterial();
-			node = new THREE.Mesh(geometry, material);	
-*/				
-		} else {	
-	
+			node = new THREE.Mesh(geometry, material);
+*/
+		} else {
+
 			geometry = new THREE.CubeGeometry( 3, 3, 3 );
 			material = new THREE.MeshNormalMaterial();
 			node = new THREE.Mesh(geometry, material);
 		}
+
 		node.name = name; // data.shift();
-console.log( node.name );		
+console.log( node.name );
 		node.rotation.order = 'XYZ';
 		done = false;
 		while ( !done ) {
@@ -148,8 +149,9 @@ console.log( node.name );
 					done = true;
 			}
 		}
+
 		return node;
-    };	
+	};
 
 </script>
 </body>

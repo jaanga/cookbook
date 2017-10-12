@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <title>Rubiks Cube</title>
+</head>
+<body style=margin:0;overflow:hidden; >
+<script src=https://rawgit.com/mrdoob/three.js/r84/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/r84/examples/js/controls/OrbitControls.js ></script>
+<script>
+
+var scene = new THREE.Scene();
+var renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setClearColor( 0x777777 );
+document.body.appendChild( renderer.domElement ); 
+
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 ); 
+camera.position.set( 3, 3, 3 );
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+window.addEventListener( 'resize', function() {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix(); 
+  } 
+);
+
+var F = 'y == 1';
+var B = 'y == -1';
+var U = 'z == 1';
+var D = 'z == -1';
+var L = 'x == 1';
+var R = 'x == -1';
+var M = 'x == 0';
+var E = 'z == 0';
+var S = 'y == 0';
+
+var moves = [ F, B, U, D, L, R, M, E, S ];
+var cubes = [];
+var geometry = new THREE.BoxGeometry( .95, .95, .95 );
+var materials = [];
+for ( var l=0 ; l < 6 ; l++ ) {
+  materials.push( new THREE.MeshBasicMaterial( { color: 0x000000 } ) );
+}
+material = new THREE.MeshFaceMaterial( materials );
+var matrix = new THREE.Matrix4();
+var step = Math.PI / 2 / 150;
+var current = 0;
+var angle = Math.PI / 2;
+
+for ( var i=-1 ; i <= 1 ; i++ ) {
+  for ( var j=-1 ; j <= 1 ; j++ ) {
+    for ( var k=-1 ; k <= 1 ; k++ ) {
+      var cube = new THREE.Mesh( geometry, material.clone() );
+      cube.position.set( i, j, k );
+      if ( cube.position.x ==  1 ) cube.material.materials[0].color.setStyle( 'red' );
+      if ( cube.position.x == -1 ) cube.material.materials[1].color.setStyle( 'orange' );
+      if ( cube.position.y ==  1 ) cube.material.materials[2].color.setStyle( 'green' );
+      if ( cube.position.y == -1 ) cube.material.materials[3].color.setStyle( 'blue' );
+      if ( cube.position.z ==  1 ) cube.material.materials[4].color.setStyle( 'yellow' );
+      if ( cube.position.z == -1 ) cube.material.materials[5].color.setStyle( 'white' );
+      cube.move = false;
+      cubes.push( cube );
+      scene.add( cube );
+    }
+  }
+}
+
+function random() {
+  var index = Math.round( ( moves.length - 1 ) * Math.random() );
+  var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+  var rotate = new THREE.Vector3();
+  for ( var i=0 ; i < 27 ; i++ ) {
+    cubes[i].position.round();
+    cubes[i].rotation.x = Math.round( cubes[i].rotation.x / angle ) * angle;
+    cubes[i].rotation.y = Math.round( cubes[i].rotation.y / angle ) * angle;
+    cubes[i].rotation.z = Math.round( cubes[i].rotation.z / angle ) * angle;
+    cubes[i].move = false;
+    if ( eval( 'cubes[i].position.' + moves[index] ) ) { cubes[i].move = true; }
+  }
+  eval( 'rotate.' + moves[index].substring(0,1) + ' = ' + plusOrMinus );
+  matrix.makeRotationAxis( rotate, step );
+  current = Math.PI / 2;
+}
+
+function render() {
+  requestAnimationFrame( render ); 
+  renderer.render(scene, camera);
+  controls.update();
+  for ( var i=0 ; i < 27 ; i++ ) {
+    if ( cubes[i].move == true ) { cubes[i].applyMatrix( matrix ); }
+  }
+  current -= step;
+  if ( current <= 0 ) { random(); }
+}
+
+render();
+
+</script>
+</body>
+</html>
